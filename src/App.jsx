@@ -1,18 +1,16 @@
 import "./App.css";
-import Navbar from "./components/Navbar/navbar";
-import Hero from "./components/Hero/hero";
-import Features from "./components/feature/feature";
-import About from "./components/about/about";
-import Footer from "./components/footer/footer";
+import LandingPage from "./components/landingPage";
+import AuthPage from "./components/auth/authentication";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
 function App() {
   return (
-    <>
-      <Navbar />
-      <Hero />
-      <Features />
-      <About />
-      <Footer />
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/auth" element={<AuthPage />} />
+      </Routes>
+    </Router>
   );
 }
 

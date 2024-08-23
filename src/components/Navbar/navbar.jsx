@@ -1,7 +1,9 @@
 import React from "react";
 import "./navbar.css";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   return (
     <nav className="navbar">
       <div className="logo">
@@ -22,7 +24,9 @@ const Navbar = () => {
           <a href="#footer">Contact</a>
         </li>
       </ul>
-      <button className="cta-button">Get Started</button>
+      <button className="cta-button" onClick={() => navigate("/auth")}>
+        Get Started
+      </button>
     </nav>
   );
 };
