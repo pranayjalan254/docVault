@@ -46,3 +46,6 @@ button {
   margin: 0 auto;
   padding: 0 15px;
 }
+html {
+  scroll-behavior: smooth;
+}
