@@ -10,7 +10,7 @@ const Hero = () => {
         <button className="cta-button">Explore Now</button>
       </div>
       <div className="hero-animation">
-        <img src="src/assets/hero.webp" alt="Hero Animation" />
+        <img src="/hero.webp" alt="Hero Animation" />
       </div>
     </section>
   );
