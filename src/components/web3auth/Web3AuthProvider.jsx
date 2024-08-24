@@ -70,3 +70,13 @@ export const Web3AuthProvider = ({ children }) => {
     </Web3AuthContext.Provider>
   );
 };
+
+const chainConfig = {
+  chainNamespace: CHAIN_NAMESPACES.EIP155,
+  chainId: "0x1", // Please use 0x1 for Mainnet
+  rpcTarget: "https://rpc.ankr.com/eth",
+  displayName: "Ethereum Mainnet",
+  blockExplorer: "https://etherscan.io/",
+  ticker: "ETH",
+  tickerName: "Ethereum",
+};

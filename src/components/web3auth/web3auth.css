@@ -1,0 +1,105 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card {
+  background-color: #1b263b;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.5);
+  width: 350px;
+  text-align: center;
+  color: #e0e6ed;
+  margin: auto;
+  margin-top: 100px;
+}
+
+.login-title {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+}
+
+.user-toggle {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  border-bottom: 1px solid #2a475e;
+  padding-bottom: 0.5rem;
+}
+
+.user-toggle button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: transparent;
+  color: #829ab1;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  outline: none;
+}
+
+.user-toggle button.active {
+  color: #0066ff;
+  border-bottom: 2px solid #0066ff;
+}
+
+.user-toggle button:hover {
+  color: #0066ff;
+}
+
+.input-field {
+  width: 100%;
+  padding: 0.8rem;
+  margin: 0.5rem 0;
+  background-color: #142a44;
+  border: 1px solid #2a475e;
+  border-radius: 8px;
+  color: #e0e6ed;
+  box-sizing: border-box;
+}
+
+.input-field::placeholder {
+  color: #607080;
+}
+
+.login-button {
+  width: 100%;
+  padding: 0.7rem 0;
+  margin-top: 1rem;
+  background-color: #0066ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: #004db3;
+}
+
+.signup-text {
+  margin-top: 1rem;
+  color: #607080;
+  font-size: 0.9rem;
+}
+
+.signup-text a {
+  color: #0066ff;
+  text-decoration: none;
+}
+
+.signup-text a:hover {
+  text-decoration: underline;
+}
