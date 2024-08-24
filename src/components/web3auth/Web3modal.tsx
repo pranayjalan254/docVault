@@ -1,24 +1,11 @@
-import { useEffect, useState } from "react";
-import { Web3Auth, decodeToken } from "@web3auth/single-factor-auth";
-import {
-  ADAPTER_EVENTS,
-  CHAIN_NAMESPACES,
-  IProvider,
-  WEB3AUTH_NETWORK,
-} from "@web3auth/base";
+import { CHAIN_NAMESPACES, IProvider, WEB3AUTH_NETWORK } from "@web3auth/base";
 import { EthereumPrivateKeyProvider } from "@web3auth/ethereum-provider";
-import { initializeApp } from "firebase/app";
-import {
-  GoogleAuthProvider,
-  getAuth,
-  signInWithPopup,
-  UserCredential,
-} from "firebase/auth";
-import "./web3auth.css"; // Import the external CSS file
+import { Web3Auth } from "@web3auth/modal";
+import { useEffect, useState } from "react";
+import "./web3auth.css";
 
 const clientId =
-  "BPi5PB_UiIZ-cPz1GtV5i1I2iOSOHuimiXBI0e-Oe_u6X3oVAbCiAZOTEBtTXw4tsluTITPqA8zMsfxIKMjiqNQ";
-const verifier = "w3a-firebase-demo";
+  "BJgb0ddQVkAUythfMS7ZcbcvS-drqBdNZRIuk7d4YEzYLjUm2WFKVlFgF3BNO-zhILHAA2LaF0bDhL8rUfuQJ2k";
 
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
@@ -36,33 +23,22 @@ const privateKeyProvider = new EthereumPrivateKeyProvider({
 
 const web3auth = new Web3Auth({
   clientId,
-  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_DEVNET,
   privateKeyProvider,
 });
 
-const firebaseConfig = {
-  apiKey: "AIzaSyB0nd9YsPLu-tpdCrsXn8wgsWVAiYEpQ_E",
-  authDomain: "web3auth-oauth-logins.firebaseapp.com",
-  projectId: "web3auth-oauth-logins",
-  storageBucket: "web3auth-oauth-logins.appspot.com",
-  messagingSenderId: "461819774167",
-  appId: "1:461819774167:web:e74addfb6cc88f3b5b9c92",
-};
-
-function Web3authInit() {
+function Web3modal() {
   const [provider, setProvider] = useState<IProvider | null>(null);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userType, setUserType] = useState("institution");
 
-  const app = initializeApp(firebaseConfig);
-
   useEffect(() => {
     const init = async () => {
       try {
-        await web3auth.init();
+        await web3auth.initModal();
         setProvider(web3auth.provider);
 
-        if (web3auth.status === ADAPTER_EVENTS.CONNECTED) {
+        if (web3auth.connected) {
           setLoggedIn(true);
         }
       } catch (error) {
@@ -73,39 +49,11 @@ function Web3authInit() {
     init();
   }, []);
 
-  const signInWithGoogle = async (): Promise<UserCredential> => {
-    try {
-      const auth = getAuth(app);
-      const googleProvider = new GoogleAuthProvider();
-      const res = await signInWithPopup(auth, googleProvider);
-      console.log(res);
-      return res;
-    } catch (err) {
-      console.error(err);
-      throw err;
-    }
-  };
-
   const login = async () => {
-    if (!web3auth) {
-      uiConsole("web3auth initialised yet");
-      return;
-    }
-
-    const loginRes = await signInWithGoogle();
-
-    const idToken = await loginRes.user.getIdToken(true);
-    const { payload } = decodeToken(idToken);
-
-    const web3authProvider = await web3auth.connect({
-      verifier,
-      verifierId: (payload as any).sub,
-      idToken,
-    });
-
-    if (web3authProvider) {
+    const web3authProvider = await web3auth.connect();
+    setProvider(web3authProvider);
+    if (web3auth.connected) {
       setLoggedIn(true);
-      setProvider(web3authProvider);
     }
   };
 
@@ -114,15 +62,13 @@ function Web3authInit() {
     setProvider(null);
     setLoggedIn(false);
   };
-
   function uiConsole(...args: any[]): void {
     const el = document.querySelector("#console>p");
     if (el) {
       el.innerHTML = JSON.stringify(args || {}, null, 2);
+      console.log(...args);
     }
-    console.log(...args);
   }
-
   const loggedInView = (
     <>
       <div className="flex-container">
@@ -135,7 +81,6 @@ function Web3authInit() {
       </div>
     </>
   );
-
   const unloggedInView = (
     <div className="login-card">
       <h2 className="login-title">Login</h2>
@@ -169,14 +114,10 @@ function Web3authInit() {
       />
       <input type="password" placeholder="Password" className="input-field" />
       <button onClick={login} className="login-button">
-        Login with Google
+        Login
       </button>
-      <p className="signup-text">
-        Don’t have an account? <a href="#">Sign Up</a>
-      </p>
     </div>
   );
-
   return (
     <div className="container">
       <div className="grid">{loggedIn ? loggedInView : unloggedInView}</div>
@@ -187,4 +128,4 @@ function Web3authInit() {
   );
 }
 
-export default Web3authInit;
+export default Web3modal;
