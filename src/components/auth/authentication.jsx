@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./authentication.css";
+import { Web3AuthContext } from "../web3auth/Web3AuthProvider";
 
 const AuthPage = () => {
   const [userType, setUserType] = useState("institution");
   const [isLogin, setIsLogin] = useState(true);
+  const { login } = useContext(Web3AuthContext); // Use Web3Auth context to get the login function
 
   const toggleUserType = (type) => {
     setUserType(type);
@@ -11,6 +13,18 @@ const AuthPage = () => {
 
   const toggleFormType = () => {
     setIsLogin(!isLogin);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await login(); // Call the Web3Auth login function
+      // Handle successful login (e.g., redirect or show a message)
+    } catch (error) {
+      console.error("Login failed", error);
+      // Handle login error
+    }
   };
 
   return (
@@ -32,7 +46,7 @@ const AuthPage = () => {
           </button>
         </div>
 
-        <form className="auth-form">
+        <form className="auth-form" onSubmit={handleSubmit}>
           {userType === "institution" && (
             <>
               <input type="text" placeholder="Institution Name" />
