@@ -27,7 +27,14 @@
     "react-router-dom": "^6.26.1",
     "typescript": "^5.5.4",
     "web-vitals": "^4.2.3",
-    "web3": "^4.12.1"
+    "web3": "^4.12.1",
+    "@tableland/sdk": "^7.2.1",
+    "@web3-storage/w3up-client": "^16.0.0",
+    "axios": "^1.7.5",
+    "dotenv": "^16.4.5",
+    "ethers": "^6.13.2",
+    "ipfs-http-client": "^60.0.1",
+    "web3.storage": "^4.5.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
