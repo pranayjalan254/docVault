@@ -19,14 +19,8 @@ function App() {
             element={
               <ProtectedRoute>
                 <Routes>
-                  <Route
-                    path="/insti-dashboard/*"
-                    element={<Insti_dashboard />}
-                  />
-                  <Route
-                    path="/stud-dashboard/*"
-                    element={<Stud_dashboard />}
-                  />
+                  <Route path="insti-dashboard/*" element={<Insti_dashboard />} />
+                  <Route path="stud-dashboard/*" element={<Stud_dashboard />} />
                 </Routes>
               </ProtectedRoute>
             }

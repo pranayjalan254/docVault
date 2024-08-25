@@ -10,8 +10,8 @@ function Insti_dashboard() {
       <Sidebar />
       <div className="main-content">
         <Routes>
-          <Route path="/issue" element={<IssueCertificateForm />} />
-          <Route path="/certificates" element={<CertificateList />} />
+          <Route path="issue" element={<IssueCertificateForm />} />
+          <Route path="certificates" element={<CertificateList />} />
         </Routes>
       </div>
     </div>
