@@ -4,7 +4,7 @@ import IssueCertificateForm from "../IssueCertificateForm/IssueCertificateForm";
 import CertificateList from "../CertificateList/CertificateList";
 import "./dashboard.css";
 
-function Insti_dashboard() {
+function Stud_dashboard() {
   return (
     <div className="dashboard-container">
       <Sidebar />
@@ -18,4 +18,4 @@ function Insti_dashboard() {
   );
 }
 
-export default Insti_dashboard;
+export default Stud_dashboard;

@@ -4,7 +4,6 @@ import { web3auth } from "../../web3auth/Web3modal";
 
 const Sidebar = () => {
   const navigate = useNavigate();
-
   const handleLogout = async () => {
     try {
       await web3auth.logout();
@@ -17,7 +16,7 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <h2>DocVault</h2>
-      <h2>Institution Dashboard</h2>
+      <h2>Student Dashboard</h2>
       <nav>
         <ul>
           <li>
