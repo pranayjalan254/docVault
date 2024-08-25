@@ -1,4 +1,3 @@
-import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import "./sidebar.css";
 import { web3auth } from "../../web3auth/Web3modal";
