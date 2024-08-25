@@ -1,15 +1,21 @@
-import React from "react";
+import { Route, Routes } from "react-router-dom";
 import Sidebar from "../sidebar/Sidebar";
-import MainContent from "../MainContent/MainContent";
-import "./Dashboard.css";
+import IssueCertificateForm from "../IssueCertificateForm/IssueCertificateForm";
+import CertificateList from "../CertificateList/CertificateList";
+import "./dashboard.css";
 
-const Dashboard = () => {
+function Dashboard() {
   return (
-    <div className="dashboard">
+    <div className="dashboard-container">
       <Sidebar />
-      <MainContent />
+      <div className="main-content">
+        <Routes>
+          <Route path="/issue" element={<IssueCertificateForm />} />
+          <Route path="/certificates" element={<CertificateList />} />
+        </Routes>
+      </div>
     </div>
   );
-};
+}
 
 export default Dashboard;

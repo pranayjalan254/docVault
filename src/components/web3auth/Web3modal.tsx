@@ -1,5 +1,6 @@
 import { CHAIN_NAMESPACES, IProvider, WEB3AUTH_NETWORK } from "@web3auth/base";
 import { EthereumPrivateKeyProvider } from "@web3auth/ethereum-provider";
+import { useNavigate } from "react-router-dom";
 import { Web3Auth } from "@web3auth/modal";
 import { useEffect, useState } from "react";
 import "./web3auth.css";
@@ -21,7 +22,7 @@ const privateKeyProvider = new EthereumPrivateKeyProvider({
   config: { chainConfig },
 });
 
-const web3auth = new Web3Auth({
+export const web3auth = new Web3Auth({
   clientId,
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_DEVNET,
   privateKeyProvider,
@@ -31,6 +32,7 @@ function Web3modal() {
   const [provider, setProvider] = useState<IProvider | null>(null);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userType, setUserType] = useState("institution");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const init = async () => {
@@ -40,35 +42,40 @@ function Web3modal() {
 
         if (web3auth.connected) {
           setLoggedIn(true);
+          navigate("/dashboard");
         }
       } catch (error) {
-        console.error(error);
+        console.error("Error initializing Web3Auth:", error);
       }
     };
 
     init();
-  }, []);
+  }, [navigate]);
 
   const login = async () => {
-    const web3authProvider = await web3auth.connect();
-    setProvider(web3authProvider);
-    if (web3auth.connected) {
-      setLoggedIn(true);
+    try {
+      const web3authProvider = await web3auth.connect();
+      setProvider(web3authProvider);
+      if (web3auth.connected) {
+        setLoggedIn(true);
+        navigate("/dashboard");
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
     }
   };
 
   const logout = async () => {
-    await web3auth.logout();
-    setProvider(null);
-    setLoggedIn(false);
-  };
-  function uiConsole(...args: any[]): void {
-    const el = document.querySelector("#console>p");
-    if (el) {
-      el.innerHTML = JSON.stringify(args || {}, null, 2);
-      console.log(...args);
+    try {
+      await web3auth.logout();
+      setProvider(null);
+      setLoggedIn(false);
+      navigate("/");
+    } catch (error) {
+      console.error("Logout failed:", error);
     }
-  }
+  };
+
   const loggedInView = (
     <>
       <div className="flex-container">
@@ -81,6 +88,7 @@ function Web3modal() {
       </div>
     </>
   );
+
   const unloggedInView = (
     <div className="login-card">
       <h2 className="login-title">Login</h2>
@@ -118,6 +126,7 @@ function Web3modal() {
       </button>
     </div>
   );
+
   return (
     <div className="container">
       <div className="grid">{loggedIn ? loggedInView : unloggedInView}</div>
