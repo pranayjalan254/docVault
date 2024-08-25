@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from 'axios';
 import "./issuecertificateform.css";
 
 const IssueCertificateForm = () => {
@@ -14,10 +15,22 @@ const IssueCertificateForm = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here (e.g., calling the smart contract to issue the certificate)
-    console.log(formData);
+
+    try {
+      // Send the form data to the backend
+      await axios.post('http://localhost:5000/save-metadata', {
+        Studentname: formData.studentName,
+        course: formData.course,
+        date: formData.date,
+        walletaddress: formData.walletAddress,
+      });
+
+      console.log("Form data has been saved to metadata.json");
+    } catch (error) {
+      console.error("There was an error saving the form data", error);
+    }
   };
 
   return (

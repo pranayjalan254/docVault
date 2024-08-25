@@ -35,9 +35,11 @@ export async function createTable(db) {
         const { meta: create } = await db
             .prepare(
                 `CREATE TABLE ${prefix} (
-                    id INTEGER PRIMARY KEY,
-                    cid TEXT NOT NULL,
-                    fileHash TEXT NOT NULL
+
+                    Studentname TEXT NOT NULL,
+                    course TEXT NOT NULL,
+                    date INTEGER PRIMARY KEY,
+                    walletaddress TEXT NOT NULL
                 );`
             )
             .run();
@@ -54,13 +56,13 @@ export async function createTable(db) {
     }
 }
 
-export async function insertMetadata(db, tableName, cid, fileHash) {
+export async function insertMetadata(db, tableName, Studentname, course, date, walletaddress) {
     try {
         const { meta: insert } = await db
             .prepare(
-                `INSERT INTO ${tableName} (cid, fileHash) VALUES (?, ?);`
+                `INSERT INTO ${tableName} (Studentname, course, date, walletaddress) VALUES (?, ?,?,?);`
             )
-            .bind(cid, fileHash)
+            .bind(Studentname, course, date, walletaddress)
             .run();
 
         await insert.txn?.wait();
