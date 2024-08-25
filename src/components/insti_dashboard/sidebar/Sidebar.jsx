@@ -16,8 +16,7 @@ const Sidebar = () => {
 
   return (
     <div className="sidebar">
-      <h2>DocVault</h2>
-      <h2>Institution Dashboard</h2>
+      <h3>Institution Dashboard</h3>
       <nav>
         <ul>
           <li>
@@ -26,7 +25,10 @@ const Sidebar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/insti-dashboard/certificates" activeClassName="active">
+            <NavLink
+              to="/insti-dashboard/certificates"
+              activeClassName="active"
+            >
               View Certificates
             </NavLink>
           </li>

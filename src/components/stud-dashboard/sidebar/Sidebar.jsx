@@ -20,17 +20,17 @@ const Sidebar = () => {
       <nav>
         <ul>
           <li>
-            <NavLink to="/dashboard/issue" activeClassName="active">
+            <NavLink to="/stud-dashboard/issue" activeClassName="active">
               Issue Certificate
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/certificates" activeClassName="active">
+            <NavLink to="/stud-dashboard/certificates" activeClassName="active">
               View Certificates
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/profile" activeClassName="active">
+            <NavLink to="/stud-dashboard/profile" activeClassName="active">
               Manage Profile
             </NavLink>
           </li>
