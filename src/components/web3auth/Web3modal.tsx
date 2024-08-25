@@ -6,8 +6,7 @@ import { useEffect, useState } from "react";
 import "./web3auth.css";
 import { useAuth } from "../../AuthContext";
 
-const clientId =
-  "BJgb0ddQVkAUythfMS7ZcbcvS-drqBdNZRIuk7d4YEzYLjUm2WFKVlFgF3BNO-zhILHAA2LaF0bDhL8rUfuQJ2k";
+const clientId = import.meta.env.VITE_CLIENT_ID ?? "";
 
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
@@ -42,9 +41,8 @@ function Web3modal() {
         setProvider(web3auth.provider);
 
         if (web3auth.connected) {
-          login(); // Update the auth context
-          // Retrieve user type from a stored state or backend
-          const role = await getUserRole(); // Implement this function
+          login();
+          const role = await getUserRole();
           setUserType(role);
           navigate(
             role === "institution" ? "/dashboard" : "/student-dashboard"
@@ -63,8 +61,8 @@ function Web3modal() {
       const web3authProvider = await web3auth.connect();
       setProvider(web3authProvider);
       if (web3auth.connected) {
-        login(); // Update the auth context
-        const role = await getUserRole(); // Implement this function
+        login();
+        const role = await getUserRole();
         setUserType(role);
         navigate(role === "institution" ? "/dashboard" : "/student-dashboard");
       }
@@ -77,18 +75,16 @@ function Web3modal() {
     try {
       await web3auth.logout();
       setProvider(null);
-      logout(); // Update the auth context
+      logout();
       setUserType(null);
-      navigate("/");
+      navigate("/auth");
     } catch (error) {
       console.error("Logout failed:", error);
     }
   };
 
   const getUserRole = async () => {
-    // Fetch user role from a backend service or local storage
-    // Example: return await fetchUserRoleFromBackend();
-    return "institution"; // Placeholder
+    return "institution";
   };
 
   return (

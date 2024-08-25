@@ -20,6 +20,7 @@
     "@web3auth/openlogin-adapter": "^8.12.4",
     "@web3auth/single-factor-auth": "^8.1.1",
     "@web3auth/wallet-services-plugin": "^8.12.4",
+    "dotenv": "^16.4.5",
     "firebase": "^10.13.0",
     "jsonwebtoken": "^9.0.2",
     "react": "^18.3.1",
