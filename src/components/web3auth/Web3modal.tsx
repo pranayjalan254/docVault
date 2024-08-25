@@ -45,7 +45,7 @@ function Web3modal() {
           const role = await getUserRole();
           setUserType(role);
           navigate(
-            role === "institution" ? "/dashboard" : "/student-dashboard"
+            role === "institution" ? "/insti-dashboard" : "/stud-dashboard"
           );
         }
       } catch (error) {
@@ -64,7 +64,9 @@ function Web3modal() {
         login();
         const role = await getUserRole();
         setUserType(role);
-        navigate(role === "institution" ? "/dashboard" : "/student-dashboard");
+        navigate(
+          role === "institution" ? "/insti-dashboard" : "/stud-dashboard"
+        );
       }
     } catch (error) {
       console.error("Login failed:", error);
@@ -84,7 +86,10 @@ function Web3modal() {
   };
 
   const getUserRole = async () => {
-    return "institution";
+    // Replace this with actual logic to determine user role
+    // This might be from a user profile, token, or some other method
+    // Here we assume a default role for demo purposes
+    return userType; // Return the selected userType
   };
 
   return (
