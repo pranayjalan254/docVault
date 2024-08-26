@@ -7,21 +7,16 @@ import Hero from "../hero/Hero";
 import "./dashboard.css";
 
 function Insti_dashboard() {
-  const location = useLocation();
-  const showHeroSection = location.pathname === "/insti-dashboard";
-
   return (
     <div className="dashboard-container-insti">
       <Navbar />
       <div className="dashboard-content-insti">
         <Sidebar />
         <div className="main-content-insti">
-          {showHeroSection && (
-            <Hero
-              title="Welcome to Your Dashboard"
-              subtitle="Manage your credentials effortlessly."
-            />
-          )}
+          <Hero
+            title="Welcome to Your Dashboard"
+            subtitle="Manage your credentials effortlessly."
+          />
           <Routes>
             <Route path="issue" element={<IssueCertificateForm />} />
             <Route path="certificates" element={<CertificateList />} />
