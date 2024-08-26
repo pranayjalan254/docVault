@@ -41,12 +41,14 @@ function Web3modal() {
         setProvider(web3auth.provider);
 
         if (web3auth.connected) {
-          login();
           const role = await getUserRole();
-          setUserType(role);
-          navigate(
-            role === "institution" ? "/insti-dashboard" : "/stud-dashboard"
-          );
+          if (role) {
+            login(); // Log in the user
+            setUserType(role); // Set user role
+            navigate(
+              role === "institution" ? "/insti-dashboard" : "/stud-dashboard"
+            );
+          }
         }
       } catch (error) {
         console.error("Error initializing Web3Auth:", error);
@@ -60,13 +62,16 @@ function Web3modal() {
     try {
       const web3authProvider = await web3auth.connect();
       setProvider(web3authProvider);
+
       if (web3auth.connected) {
-        login();
         const role = await getUserRole();
-        setUserType(role);
-        navigate(
-          role === "institution" ? "/insti-dashboard" : "/stud-dashboard"
-        );
+        if (role) {
+          login(); // Log in the user
+          setUserType(role); // Set user role
+          navigate(
+            role === "institution" ? "/insti-dashboard" : "/stud-dashboard"
+          );
+        }
       }
     } catch (error) {
       console.error("Login failed:", error);
@@ -77,7 +82,7 @@ function Web3modal() {
     try {
       await web3auth.logout();
       setProvider(null);
-      logout();
+      logout(); // Log out the user
       setUserType(null);
       navigate("/auth");
     } catch (error) {
@@ -87,9 +92,8 @@ function Web3modal() {
 
   const getUserRole = async () => {
     // Replace this with actual logic to determine user role
-    // This might be from a user profile, token, or some other method
-    // Here we assume a default role for demo purposes
-    return userType; // Return the selected userType
+    // This could involve fetching data from a backend, decoding a token, etc.
+    return userType; // Currently returns the selected userType (for demo purposes)
   };
 
   return (

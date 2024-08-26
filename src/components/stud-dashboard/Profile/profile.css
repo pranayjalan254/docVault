@@ -1,0 +1,40 @@
+.profile-section {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-section h2 {
+  margin-bottom: 20px;
+}
+
+.profile-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.profile-section label {
+  font-weight: bold;
+}
+
+.profile-section input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.profile-section button {
+  padding: 10px 20px;
+  background-color: #0077b6;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.profile-section button:hover {
+  background-color: #005f8a;
+}

@@ -1,0 +1,18 @@
+.hero-section-insti {
+  background-color: #457b9d;
+  color: white;
+  padding: 30px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.hero-section h1 {
+  margin: 0 0 10px 0;
+  font-size: 32px;
+}
+
+.hero-section p {
+  margin: 0;
+  font-size: 18px;
+}

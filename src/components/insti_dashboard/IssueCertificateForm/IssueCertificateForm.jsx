@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import "./issuecertificateform.css";
 
 
@@ -21,17 +21,25 @@ const IssueCertificateForm = () => {
 
     try {
       // Send the form data to the backend
-      await axios.post('http://localhost:5000/save-metadata', {
-        Studentname: formData.studentName,
+      await axios.post("http://localhost:5000/save-metadata", {
+        studentName: formData.studentName,
         course: formData.course,
         date: formData.date,
-        walletaddress: formData.walletAddress,
+        walletAddress: formData.walletAddress,
       });
 
       console.log("Form data has been saved to metadata.json");
       await axios.post('http://localhost:5001/run-insert-metadata');
 
       console.log("Metadata insertion triggered.");
+
+      // Clear the form fields after successful submission
+      setFormData({
+        studentName: "",
+        course: "",
+        date: "",
+        walletAddress: "",
+      });
     } catch (error) {
       console.error("There was an error saving the form data", error);
     }

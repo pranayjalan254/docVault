@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Web3modal from "./components/web3auth/Web3modal";
 import Insti_dashboard from "./components/insti_dashboard/dashboard/Dashboard";
 import Stud_dashboard from "./components/stud-dashboard/dashboard/Dashboard";
-import ProtectedRoute from "../src/ProtectedRoute";
-import { AuthProvider } from "../src/AuthContext";
+import ProtectedRoute from "./ProtectedRoute";
+import { AuthProvider } from "./AuthContext";
 
 function App() {
   return (
@@ -14,17 +14,10 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/auth" element={<Web3modal />} />
-          <Route
-            path="/*"
-            element={
-              <ProtectedRoute>
-                <Routes>
-                  <Route path="insti-dashboard/*" element={<Insti_dashboard />} />
-                  <Route path="stud-dashboard/*" element={<Stud_dashboard />} />
-                </Routes>
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/*" element={<ProtectedRoute />}>
+            <Route path="insti-dashboard/*" element={<Insti_dashboard />} />
+            <Route path="stud-dashboard/*" element={<Stud_dashboard />} />
+          </Route>
         </Routes>
       </Router>
     </AuthProvider>

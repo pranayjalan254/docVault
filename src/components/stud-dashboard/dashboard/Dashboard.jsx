@@ -1,18 +1,24 @@
 import { Route, Routes } from "react-router-dom";
 import Sidebar from "../sidebar/Sidebar";
-import IssueCertificateForm from "../IssueCertificateForm/IssueCertificateForm";
+import Navbar from "../Navbar/Navbar";
+import HeroSection from "../Hero/Hero";
+import Profile from "../Profile/Profile";
 import CertificateList from "../CertificateList/CertificateList";
 import "./dashboard.css";
 
 function Stud_dashboard() {
   return (
     <div className="dashboard-container">
-      <Sidebar />
-      <div className="main-content">
-        <Routes>
-          <Route path="/issue" element={<IssueCertificateForm />} />
-          <Route path="/certificates" element={<CertificateList />} />
-        </Routes>
+      <Navbar />
+      <div className="dashboard-content">
+        <Sidebar />
+        <div className="main-content">
+          <HeroSection title="Welcome to Your Dashboard" />
+          <Routes>
+            <Route path="/certificates" element={<CertificateList />} />
+            <Route path="/profile" element={<Profile />} />
+          </Routes>
+        </div>
       </div>
     </div>
   );

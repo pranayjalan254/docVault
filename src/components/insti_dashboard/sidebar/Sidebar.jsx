@@ -16,24 +16,24 @@ const Sidebar = () => {
 
   return (
     <div className="sidebar">
-      <h2>DocVault</h2>
-      <h2>Institution Dashboard</h2>
+      <h3>
+        <NavLink to="/insti-dashboard">Institution Dashboard</NavLink>
+      </h3>
       <nav>
         <ul>
           <li>
-            <NavLink to="/insti-dashboard/issue" activeClassName="active">
-              Issue Certificate
-            </NavLink>
+            <NavLink to="/insti-dashboard/issue">Issue Certificate</NavLink>
           </li>
           <li>
-            <NavLink to="/insti-dashboard/certificates" activeClassName="active">
+            <NavLink
+              to="/insti-dashboard/certificates"
+              activeClassName="active"
+            >
               View Certificates
             </NavLink>
           </li>
           <li>
-            <NavLink to="/insti-dashboard/profile" activeClassName="active">
-              Manage Profile
-            </NavLink>
+            <NavLink to="/insti-dashboard/profile">Manage Profile</NavLink>
           </li>
           <li>
             <button onClick={handleLogout} className="logout-button">
