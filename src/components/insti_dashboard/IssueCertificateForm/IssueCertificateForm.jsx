@@ -10,6 +10,8 @@ const IssueCertificateForm = () => {
     walletAddress: "",
   });
 
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -33,16 +35,19 @@ const IssueCertificateForm = () => {
         date: "",
         walletAddress: "",
       });
+      setIsSubmitted(true);
 
       console.log("Form data has been saved to metadata.json");
       await axios.post("http://localhost:5000/run-insert-metadata");
 
       console.log("Metadata insertion triggered.");
-
-      // Clear the form fields after successful submission
     } catch (error) {
       console.error("There was an error saving the form data", error);
     }
+  };
+
+  const handleClosePopup = () => {
+    setIsSubmitted(false); // Close the popup when the user clicks "OK"
   };
 
   return (
@@ -91,6 +96,16 @@ const IssueCertificateForm = () => {
         </div>
         <button type="submit">Issue Certificate</button>
       </form>
+
+      {/* Popup message */}
+      {isSubmitted && (
+        <div className="popup">
+          <div className="popup-content">
+            <h3>Certificate Issued Successfully!</h3>
+            <button onClick={handleClosePopup}>OK</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
