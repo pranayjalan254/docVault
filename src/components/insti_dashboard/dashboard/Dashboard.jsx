@@ -8,16 +8,14 @@ import "./dashboard.css";
 
 function Insti_dashboard() {
   const location = useLocation();
-
-  // Show the hero section only when no specific path is selected (default dashboard view)
   const showHeroSection = location.pathname === "/insti-dashboard";
 
   return (
-    <div className="dashboard-container">
+    <div className="dashboard-container-insti">
       <Navbar />
-      <div className="dashboard-content">
+      <div className="dashboard-content-insti">
         <Sidebar />
-        <div className="main-content">
+        <div className="main-content-insti">
           {showHeroSection && (
             <Hero
               title="Welcome to Your Dashboard"

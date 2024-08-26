@@ -1,27 +1,27 @@
-.sidebar {
+.sidebar-insti {
   width: 250px;
   background-color: #1d3557;
   color: white;
   padding: 20px;
 }
 
-.sidebar h2,
-.sidebar h3 {
+.sidebar-insti h2,
+.sidebar-insti h3 {
   margin: 0 0 20px 0;
   font-weight: 600;
 }
 
-.sidebar nav ul {
+.sidebar-insti nav ul {
   list-style-type: none;
   padding: 0;
 }
 
-.sidebar nav ul li {
+.sidebar-insti nav ul li {
   margin: 10px 0;
 }
 
-.sidebar nav ul li a,
-.sidebar nav ul li button {
+.sidebar-insti nav ul li a,
+.sidebar-insti nav ul li button {
   display: flex;
   align-items: center;
   color: white;
@@ -31,17 +31,17 @@
   transition: background 0.3s;
 }
 
-.sidebar nav ul li a i,
-.sidebar nav ul li button i {
+.sidebar-insti nav ul li a i,
+.sidebar-insti nav ul li button i {
   margin-right: 10px;
 }
 
-.sidebar nav ul li a:hover,
-.sidebar nav ul li button:hover {
+.sidebar-insti nav ul li a:hover,
+.sidebar-insti nav ul li button:hover {
   background-color: #457b9d;
 }
 
-.logout-button {
+.logout-button-insti {
   background: none;
   border: none;
   color: white;

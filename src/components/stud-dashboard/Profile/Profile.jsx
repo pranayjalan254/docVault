@@ -3,7 +3,7 @@ import "./profile.css";
 
 const Profile = () => {
   return (
-    <div className="profile-section">
+    <div className="profile-section-stud">
       <h2>Manage Your Profile</h2>
       <form>
         <label>

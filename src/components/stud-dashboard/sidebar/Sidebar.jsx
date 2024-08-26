@@ -15,19 +15,17 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="sidebar">
+    <div className="sidebar-stud">
       <h3>Student Dashboard</h3>
       <nav>
         <ul>
           <li>
-            <NavLink to="/stud-dashboard/certificates" activeClassName="active">
+            <NavLink to="/stud-dashboard/certificates">
               View Certificates
             </NavLink>
           </li>
           <li>
-            <NavLink to="/stud-dashboard/profile" activeClassName="active">
-              Manage Profile
-            </NavLink>
+            <NavLink to="/stud-dashboard/profile">Manage Profile</NavLink>
           </li>
           <li>
             <button onClick={handleLogout} className="logout-button">

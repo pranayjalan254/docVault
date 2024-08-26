@@ -1,25 +1,25 @@
-.issue-certificate-form {
+.issue-certificate-form-insti {
   background-color: #ffffff;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.issue-certificate-form h2 {
+.issue-certificate-form-insti h2 {
   margin-bottom: 20px;
 }
 
-.issue-certificate-form .form-group {
+.issue-certificate-form-insti .form-group {
   margin-bottom: 15px;
 }
 
-.issue-certificate-form label {
+.issue-certificate-form-insti label {
   display: block;
   margin-bottom: 5px;
   font-weight: 500;
 }
 
-.issue-certificate-form input {
+.issue-certificate-form-insti input {
   width: 100%;
   padding: 8px;
   border: 1px solid #d1d5db;
@@ -27,7 +27,7 @@
   margin-bottom: 10px;
 }
 
-.issue-certificate-form button {
+.issue-certificate-form-insti button {
   padding: 10px 20px;
   background-color: #3b82f6;
   color: #fff;
@@ -36,6 +36,6 @@
   border-radius: 5px;
 }
 
-.issue-certificate-form button:hover {
+.issue-certificate-form-insti button:hover {
   background-color: #1e3a8a;
 }

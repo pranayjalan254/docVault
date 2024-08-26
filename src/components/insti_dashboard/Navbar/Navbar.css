@@ -7,27 +7,27 @@
   align-items: center;
 }
 
-.navbar-brand h1 {
+.navbar-brand-insti h1 {
   margin: 0;
   font-size: 24px;
 }
 
-.navbar-links {
+.navbar-links-insti {
   list-style: none;
   display: flex;
   gap: 20px;
 }
 
-.navbar-links li {
+.navbar-links-insti li {
   display: inline;
 }
 
-.navbar-links li a {
+.navbar-links-insti li a {
   color: white;
   text-decoration: none;
   font-weight: 500;
 }
 
-.navbar-links li a:hover {
+.navbar-links-insti li a:hover {
   text-decoration: underline;
 }

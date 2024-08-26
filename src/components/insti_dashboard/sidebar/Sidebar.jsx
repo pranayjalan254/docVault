@@ -15,7 +15,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="sidebar">
+    <div className="sidebar-insti">
       <h3>
         <NavLink to="/insti-dashboard">Institution Dashboard</NavLink>
       </h3>
@@ -25,10 +25,7 @@ const Sidebar = () => {
             <NavLink to="/insti-dashboard/issue">Issue Certificate</NavLink>
           </li>
           <li>
-            <NavLink
-              to="/insti-dashboard/certificates"
-              activeClassName="active"
-            >
+            <NavLink to="/insti-dashboard/certificates">
               View Certificates
             </NavLink>
           </li>
@@ -36,7 +33,7 @@ const Sidebar = () => {
             <NavLink to="/insti-dashboard/profile">Manage Profile</NavLink>
           </li>
           <li>
-            <button onClick={handleLogout} className="logout-button">
+            <button onClick={handleLogout} className="logout-button-insti">
               Logout
             </button>
           </li>

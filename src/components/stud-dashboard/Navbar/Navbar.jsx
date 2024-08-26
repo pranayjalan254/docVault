@@ -4,16 +4,16 @@ import "./navbar.css";
 
 const Navbar = () => {
   return (
-    <nav className="navbar">
+    <nav className="navbar-stud">
       <h2>DocVault</h2>
       <ul>
         <li>
-          <NavLink to="/stud-dashboard/certificates" activeClassName="active">
+          <NavLink to="/stud-dashboard/certificates" >
             Certificates
           </NavLink>
         </li>
         <li>
-          <NavLink to="/stud-dashboard/profile" activeClassName="active">
+          <NavLink to="/stud-dashboard/profile" >
             Profile
           </NavLink>
         </li>

@@ -46,10 +46,10 @@ const IssueCertificateForm = () => {
   };
 
   return (
-    <div className="issue-certificate-form">
+    <div className="issue-certificate-form-insti">
       <h2>Issue Certificate</h2>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
+        <div className="form-group-insti">
           <label>Student Name</label>
           <input
             type="text"
@@ -59,7 +59,7 @@ const IssueCertificateForm = () => {
             required
           />
         </div>
-        <div className="form-group">
+        <div className="form-group-insti">
           <label>Course</label>
           <input
             type="text"
@@ -69,7 +69,7 @@ const IssueCertificateForm = () => {
             required
           />
         </div>
-        <div className="form-group">
+        <div className="form-group-insti">
           <label>Date</label>
           <input
             type="date"
@@ -79,7 +79,7 @@ const IssueCertificateForm = () => {
             required
           />
         </div>
-        <div className="form-group">
+        <div className="form-group-insti">
           <label>Wallet Address</label>
           <input
             type="text"

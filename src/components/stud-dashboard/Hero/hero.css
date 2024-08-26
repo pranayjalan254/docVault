@@ -1,4 +1,4 @@
-.hero-section {
+.hero-section-stud {
   background-color: #0077b6;
   color: white;
   padding: 30px;
@@ -6,16 +6,16 @@
   text-align: center;
 }
 
-.hero-section h1 {
+.hero-section-stud h1 {
   font-size: 2rem;
   margin-bottom: 10px;
 }
 
-.hero-section p {
+.hero-section-stud p {
   margin-bottom: 20px;
 }
 
-.hero-section button {
+.hero-section-stud button {
   padding: 10px 20px;
   background-color: #ffb703;
   color: #0077b6;
@@ -25,7 +25,7 @@
   font-weight: bold;
 }
 
-.hero-section button:hover {
+.hero-section-stud button:hover {
   background-color: #ffb703;
   color: white;
 }

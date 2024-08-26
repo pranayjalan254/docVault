@@ -1,4 +1,4 @@
-.sidebar {
+.sidebar-stud {
   width: 250px;
   background-color: #023e8a;
   color: white;
@@ -6,24 +6,24 @@
   height: 100vh;
 }
 
-.sidebar h2,
-.sidebar h3 {
+.sidebar-stud h2,
+.sidebar-stud h3 {
   margin: 0 0 20px 0;
   font-size: 1.5rem;
   text-align: center;
 }
 
-.sidebar nav ul {
+.sidebar-stud nav ul {
   list-style: none;
   padding: 0;
 }
 
-.sidebar nav ul li {
+.sidebar-stud nav ul li {
   margin: 20px 0;
 }
 
-.sidebar nav ul li a,
-.sidebar nav ul li button {
+.sidebar-stud nav ul li a,
+.sidebar-stud nav ul li button {
   text-decoration: none;
   color: white;
   font-size: 1rem;
@@ -33,13 +33,13 @@
   transition: background 0.3s;
 }
 
-.sidebar nav ul li a.active,
-.sidebar nav ul li a:hover,
-.sidebar nav ul li button:hover {
+.sidebar-stud nav ul li a.active,
+.sidebar-stud nav ul li a:hover,
+.sidebar-stud nav ul li button:hover {
   background-color: #0077b6;
 }
 
-.sidebar .logout-button {
+.sidebar-stud .logout-button {
   background-color: #ff4d4d;
   border: none;
   cursor: pointer;
@@ -47,6 +47,6 @@
   text-align: left;
 }
 
-.sidebar .logout-button:hover {
+.sidebar-stud .logout-button:hover {
   background-color: #d9534f;
 }
