@@ -28,18 +28,20 @@ const IssueCertificateForm = () => {
         walletAddress: formData.walletAddress,
       });
 
-      console.log("Form data has been saved to metadata.json");
-      await axios.post('http://localhost:5001/run-insert-metadata');
-
-      console.log("Metadata insertion triggered.");
-
-      // Clear the form fields after successful submission
       setFormData({
         studentName: "",
         course: "",
         date: "",
         walletAddress: "",
       });
+
+      console.log("Form data has been saved to metadata.json");
+      await axios.post('http://localhost:5001/run-insert-metadata');
+
+      console.log("Metadata insertion triggered.");
+
+      // Clear the form fields after successful submission
+      
     } catch (error) {
       console.error("There was an error saving the form data", error);
     }
