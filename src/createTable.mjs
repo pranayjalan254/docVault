@@ -1,4 +1,4 @@
-import { connectToTableland } from './tableland.mjs';
+import { connectToTableland } from './tableland/tableland.mjs';
 import fs from 'fs';
 
 async function createTable() {

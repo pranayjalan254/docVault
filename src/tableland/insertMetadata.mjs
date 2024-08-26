@@ -1,7 +1,7 @@
 import { connectToTableland } from './tableland.mjs';
 import fs from 'fs';
 
-async function insertMetadata() {
+export async function insertMetadata() {
     try {
         // Load the table name from file
         const tableName = JSON.parse(fs.readFileSync('tableName.json', 'utf8')).tableName;
@@ -10,7 +10,7 @@ async function insertMetadata() {
         const db = await connectToTableland();
 
         // Load metadata from JSON file
-        const metadata = JSON.parse(fs.readFileSync('metadata.json', 'utf8'));
+        const metadata = JSON.parse(fs.readFileSync('./tableland/metadata.json', 'utf8'));
 
         // Insert metadata into the table
         const { Studentname, course, date, walletaddress } = metadata;
@@ -28,5 +28,3 @@ async function insertMetadata() {
         throw error;
     }
 }
-
-insertMetadata();
