@@ -25,11 +25,6 @@ const Sidebar = () => {
             <NavLink to="/insti-dashboard/issue">Issue Certificate</NavLink>
           </li>
           <li>
-            <NavLink to="/insti-dashboard/certificates">
-              View Certificates
-            </NavLink>
-          </li>
-          <li>
             <NavLink to="/insti-dashboard/profile">Manage Profile</NavLink>
           </li>
           <li>
