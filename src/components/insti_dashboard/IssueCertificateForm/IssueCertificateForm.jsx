@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./issuecertificateform.css";
 
-
 const IssueCertificateForm = () => {
   const [formData, setFormData] = useState({
     studentName: "",
@@ -36,16 +35,14 @@ const IssueCertificateForm = () => {
       });
 
       console.log("Form data has been saved to metadata.json");
-      await axios.post('http://localhost:5001/run-insert-metadata');
+      await axios.post("http://localhost:5000/run-insert-metadata");
 
       console.log("Metadata insertion triggered.");
 
       // Clear the form fields after successful submission
-      
     } catch (error) {
       console.error("There was an error saving the form data", error);
     }
-    
   };
 
   return (
@@ -99,4 +96,3 @@ const IssueCertificateForm = () => {
 };
 
 export default IssueCertificateForm;
-
