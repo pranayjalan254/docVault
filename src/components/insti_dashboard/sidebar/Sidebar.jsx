@@ -16,13 +16,13 @@ const Sidebar = () => {
 
   return (
     <div className="sidebar">
-      <h3>Institution Dashboard</h3>
+      <h3>
+        <NavLink to="/insti-dashboard">Institution Dashboard</NavLink>
+      </h3>
       <nav>
         <ul>
           <li>
-            <NavLink to="/insti-dashboard/issue" activeClassName="active">
-              Issue Certificate
-            </NavLink>
+            <NavLink to="/insti-dashboard/issue">Issue Certificate</NavLink>
           </li>
           <li>
             <NavLink
@@ -33,9 +33,7 @@ const Sidebar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/insti-dashboard/profile" activeClassName="active">
-              Manage Profile
-            </NavLink>
+            <NavLink to="/insti-dashboard/profile">Manage Profile</NavLink>
           </li>
           <li>
             <button onClick={handleLogout} className="logout-button">

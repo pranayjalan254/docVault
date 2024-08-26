@@ -1,6 +1,6 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import Sidebar from "../sidebar/Sidebar";
-import Navbar from "../navbar/Navbar";
+import Navbar from "../Navbar/Navbar";
 import IssueCertificateForm from "../IssueCertificateForm/IssueCertificateForm";
 import CertificateList from "../CertificateList/CertificateList";
 import Hero from "../hero/Hero";
