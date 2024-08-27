@@ -10,6 +10,7 @@
   margin-bottom: 50px;
 }
 
+/* Grid layout for features */
 .features-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -21,7 +22,9 @@
   padding: 30px;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
   text-align: center;
 }
 
@@ -39,4 +42,84 @@
 .feature-card p {
   font-size: 1rem;
   color: #94a3b8;
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .features-section {
+    padding: 60px 40px;
+  }
+
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+
+  .feature-card h3 {
+    font-size: 1.6rem;
+  }
+
+  .feature-card p {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .features-section {
+    padding: 50px 30px;
+  }
+
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .feature-card {
+    padding: 25px;
+  }
+
+  .feature-card h3 {
+    font-size: 1.5rem;
+  }
+
+  .feature-card p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .feature-card {
+    padding: 20px;
+  }
+
+  .feature-card h3 {
+    font-size: 1.4rem;
+  }
+
+  .feature-card p {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .features-section {
+    padding: 40px 20px;
+  }
+
+  .features-section h2 {
+    font-size: 2rem;
+  }
+
+  .feature-card h3 {
+    font-size: 1.3rem;
+  }
+
+  .feature-card p {
+    font-size: 0.8rem;
+  }
 }
