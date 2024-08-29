@@ -43,8 +43,8 @@ function Web3modal() {
         if (web3auth.connected) {
           const role = await getUserRole();
           if (role) {
-            login(); // Log in the user
-            setUserType(role); // Set user role
+            login();
+            setUserType(role);
             navigate(
               role === "institution" ? "/insti-dashboard" : "/stud-dashboard"
             );
@@ -66,8 +66,8 @@ function Web3modal() {
       if (web3auth.connected) {
         const role = await getUserRole();
         if (role) {
-          login(); // Log in the user
-          setUserType(role); // Set user role
+          login();
+          setUserType(role);
           navigate(
             role === "institution" ? "/insti-dashboard" : "/stud-dashboard"
           );
@@ -82,7 +82,7 @@ function Web3modal() {
     try {
       await web3auth.logout();
       setProvider(null);
-      logout(); // Log out the user
+      logout();
       setUserType(null);
       navigate("/auth");
     } catch (error) {
@@ -91,9 +91,7 @@ function Web3modal() {
   };
 
   const getUserRole = async () => {
-    // Replace this with actual logic to determine user role
-    // This could involve fetching data from a backend, decoding a token, etc.
-    return userType; // Currently returns the selected userType (for demo purposes)
+    return userType;
   };
 
   return (
@@ -103,9 +101,7 @@ function Web3modal() {
           <div className="flex-container">
             <div></div>
             <div>
-              <button onClick={handleLogout} className="card">
-                Log Out
-              </button>
+              <h1>Please refresh</h1>
             </div>
           </div>
         ) : (
@@ -125,29 +121,9 @@ function Web3modal() {
                 Credential Holder
               </button>
             </div>
-            <input
-              type="text"
-              placeholder={
-                userType === "institution" ? "Institution Name" : "Student Name"
-              }
-              className="input-field"
-            />
-            <input
-              type="email"
-              placeholder={
-                userType === "institution"
-                  ? "Institution Email"
-                  : "Student Email"
-              }
-              className="input-field"
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              className="input-field"
-            />
+
             <button onClick={handleLogin} className="login-button">
-              Login
+              Login with Web3Auth
             </button>
           </div>
         )}

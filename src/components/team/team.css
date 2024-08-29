@@ -1,0 +1,72 @@
+/* src/components/MeetTheTeam.css */
+
+.meet-the-team {
+  padding: 60px 20px;
+  background-color: #1e293b;
+  color: #ffffff;
+  text-align: center;
+}
+
+.meet-the-team h2 {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+}
+
+.team-cards-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.team-card {
+  background-color: #2d3748;
+  border-radius: 8px;
+  padding: 20px;
+  width: 280px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.team-card:hover {
+  transform: translateY(-10px);
+}
+
+.team-photo {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+.team-info {
+  text-align: center;
+}
+
+.team-info h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.team-position {
+  font-size: 1rem;
+  color: #cbd5e0;
+  margin-bottom: 15px;
+}
+
+.team-description {
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+  color: #a0aec0;
+}
+
+.social-icons a {
+  color: #ffffff;
+  font-size: 1.2rem;
+  margin: 0 10px;
+  transition: color 0.3s;
+}
+
+.social-icons a:hover {
+  color: #63b3ed;
+}
