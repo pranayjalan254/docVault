@@ -25,4 +25,7 @@ export default defineConfig({
   },  define: {
     global: "globalThis",
   },
+  optimizeDeps: {
+    exclude: ["chunk-OL46QLBJ.js"], // Replace with actual dependency names
+  },
 });

@@ -1,5 +1,7 @@
+// saveCertificates.js
 import { connectToTableland } from './tableland/tableland.mjs';
 import fs from 'fs';
+import path from 'path';
 
 async function queryTable() {
     try {
@@ -10,22 +12,22 @@ async function queryTable() {
         const tableNameData = JSON.parse(fs.readFileSync('tableName.json', 'utf8'));
         const tableName = tableNameData.tableName;
 
-        // Query the table to check its contents
+        // Query the table to get all rows
         const result = await db
             .prepare(`SELECT * FROM ${tableName};`)
             .all();
 
-        console.log("Query result:", result);
-
-        // Detailed inspection
-        if (Array.isArray(result)) {
-            console.log("Table contents:");
-            result.forEach(row => {
-                console.log(row);
-            });
-        } else {
-            console.log("No data found or incorrect result format.");
+        // Ensure the public directory exists
+        const publicDir = path.resolve('public');
+        if (!fs.existsSync(publicDir)) {
+            fs.mkdirSync(publicDir);
         }
+
+        // Save result to fetchedCertificates.json
+        const filePath = path.join(publicDir, 'fetchedCertificates.json');
+        fs.writeFileSync(filePath, JSON.stringify(result, null, 2));
+
+        console.log("Data saved to fetchedCertificates.json at:", filePath);
 
     } catch (error) {
         console.error("Failed to query table:", error);

@@ -1,22 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./certificatelist.css";
 
+
 const CertificateList = () => {
-  // Replace with actual data from your system
-  const certificates = [
-    {
-      id: 1,
-      studentName: "John Doe",
-      course: "Blockchain 101",
-      date: "2023-08-01",
-    },
-    {
-      id: 2,
-      studentName: "Jane Smith",
-      course: "Web3 Development",
-      date: "2023-08-15",
-    },
-  ];
+  const [certificates, setCertificates] = useState([]);
+  const userWalletAddress = "WERTYJ"; // Set the wallet address for testing
+
+  useEffect(() => {
+    const fetchCertificates = async () => {
+      try {
+        // Fetch the table data from the JSON file
+        const response = await fetch("/fetchedCertificates.json");
+        const fetchedCertificates = await response.json();
+      
+
+        // Filter certificates based on the user's wallet address
+        const filteredCertificates = fetchedCertificates.filter(
+          (cert) => cert.walletaddress === userWalletAddress
+          
+        );
+        
+
+        setCertificates(filteredCertificates);
+      } catch (error) {
+        console.error("Failed to fetch certificates:", error);
+      }
+    };
+
+    fetchCertificates();
+  }, [userWalletAddress]);
 
   return (
     <div className="certificate-list">
@@ -30,13 +42,19 @@ const CertificateList = () => {
           </tr>
         </thead>
         <tbody>
-          {certificates.map((cert) => (
-            <tr key={cert.id}>
-              <td>{cert.studentName}</td>
-              <td>{cert.course}</td>
-              <td>{cert.date}</td>
+          {certificates.length > 0 ? (
+            certificates.map((cert) => (
+              <tr key={cert.course}>
+                <td>{cert.Studentname}</td>
+                <td>{cert.course}</td>
+                <td>{cert.date}</td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="3">No certificates found for this wallet address.</td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
     </div>
