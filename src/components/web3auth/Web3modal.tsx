@@ -10,12 +10,12 @@ const clientId = import.meta.env.VITE_CLIENT_ID ?? "";
 
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
-  chainId: "0x1",
-  rpcTarget: "https://rpc.ankr.com/eth",
-  displayName: "Ethereum Mainnet",
-  blockExplorer: "https://etherscan.io/",
+  chainId: "0xaa36a7",
+  rpcTarget: "https://rpc.sepolia.org",
+  displayName: "Ethereum Sepolia Testnet",
+  blockExplorer: "https://sepolia.etherscan.io/",
   ticker: "ETH",
-  tickerName: "Ethereum",
+  tickerName: "Sepolia Ether",
 };
 
 const privateKeyProvider = new EthereumPrivateKeyProvider({

@@ -23,6 +23,16 @@ app.post("/save-metadata", (req, res) => {
   });
 });
 
+app.get("/api/metadata", (req, res) => {
+  const filePath = path.join(__dirname, "tableland/metadata.json");
+  res.sendFile(filePath, (err) => {
+    if (err) {
+      console.error("Error sending metadata.json:", err);
+      res.status(500).send("Error loading metadata");
+    }
+  });
+});
+
 app.post("/run-insert-metadata", async (req, res) => {
   try {
     const { insertMetadata } = await import(

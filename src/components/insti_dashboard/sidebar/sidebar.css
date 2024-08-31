@@ -41,9 +41,10 @@
   background-color: #457b9d;
 }
 
-.logout-button-insti {
+.logout-button-insti,
+.metamask-button {
   background: none;
-  border: none;
+  border: #ffffff;
   color: white;
   cursor: pointer;
 }
