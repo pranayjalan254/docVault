@@ -1,7 +1,7 @@
 // parse.js
 export async function loadData() {
   try {
-    const response = await fetch("data.json");
+    const response = await fetch("/data.json");
     const data = await response.json();
 
     const WALLET_ADDRESS = data.walletaddress;
