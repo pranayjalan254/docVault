@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import "./issuecertificateform.css";
+import { issueCredential } from "../../../webr";
 
 const IssueCertificateForm = () => {
   const [formData, setFormData] = useState({
@@ -36,8 +37,13 @@ const IssueCertificateForm = () => {
         walletAddress: "",
       });
       setIsSubmitted(true);
-
       console.log("Form data has been saved to metadata.json");
+      try {
+        await issueCredential();
+        console.log("Credential issued successfully");
+      } catch (error) {
+        console.log(error);
+      }
       await axios.post("http://localhost:5000/run-insert-metadata");
 
       console.log("Metadata insertion triggered.");
@@ -77,7 +83,7 @@ const IssueCertificateForm = () => {
         <div className="form-group-insti">
           <label>Date</label>
           <input
-            type="date"
+            type="number"
             name="date"
             value={formData.date}
             onChange={handleChange}
