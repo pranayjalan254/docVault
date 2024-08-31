@@ -22,10 +22,11 @@ export default defineConfig({
       _stream_transform: "empty-module",
       fs: "empty-module",
     },
-  },  define: {
+  },
+  define: {
     global: "globalThis",
   },
   optimizeDeps: {
-    exclude: ["chunk-OL46QLBJ.js"], // Replace with actual dependency names
+    exclude: ["chunk-OL46QLBJ.js"],
   },
 });
