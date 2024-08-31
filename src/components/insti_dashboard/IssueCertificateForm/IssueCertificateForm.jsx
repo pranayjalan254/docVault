@@ -30,13 +30,6 @@ const IssueCertificateForm = () => {
         walletAddress: formData.walletAddress,
       });
 
-      setFormData({
-        studentName: "",
-        course: "",
-        date: "",
-        walletAddress: "",
-      });
-      setIsSubmitted(true);
       console.log("Form data has been saved to metadata.json");
       try {
         await issueCredential();
@@ -44,6 +37,13 @@ const IssueCertificateForm = () => {
       } catch (error) {
         console.log(error);
       }
+      setFormData({
+        studentName: "",
+        course: "",
+        date: "",
+        walletAddress: "",
+      });
+      setIsSubmitted(true);
       await axios.post("http://localhost:5000/run-insert-metadata");
 
       console.log("Metadata insertion triggered.");
@@ -53,7 +53,7 @@ const IssueCertificateForm = () => {
   };
 
   const handleClosePopup = () => {
-    setIsSubmitted(false); // Close the popup when the user clicks "OK"
+    setIsSubmitted(false);
   };
 
   return (
