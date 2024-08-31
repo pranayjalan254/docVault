@@ -1,0 +1,1059 @@
+{
+  "version": "3.4",
+  "log": [
+    {
+      "@ethsign/sign-protocol-evm/src/interfaces/ISP.sol:ISP": {
+        "src": "@ethsign/sign-protocol-evm/src/interfaces/ISP.sol:13",
+        "inherit": [
+          "@ethsign/sign-protocol-evm/src/interfaces/IVersionable.sol:IVersionable"
+        ],
+        "libraries": [],
+        "methods": [
+          "register((address,bool,uint8,uint64,address,uint64,string),bytes)",
+          "attest((uint64,uint64,uint64,uint64,address,uint64,uint8,bool,bytes[],bytes),string,bytes,bytes)",
+          "attest((uint64,uint64,uint64,uint64,address,uint64,uint8,bool,bytes[],bytes),uint256,string,bytes,bytes)",
+          "attest((uint64,uint64,uint64,uint64,address,uint64,uint8,bool,bytes[],bytes),address,uint256,string,bytes,bytes)",
+          "attestOffchain(string,address,bytes)",
+          "revoke(uint64,string,bytes,bytes)",
+          "revoke(uint64,string,uint256,bytes,bytes)",
+          "revoke(uint64,string,address,uint256,bytes,bytes)",
+          "revokeOffchain(string,string,bytes)",
+          "registerBatch(struct Schema[],bytes)",
+          "attestBatch(struct Attestation[],string[],bytes,bytes)",
+          "attestBatch(struct Attestation[],uint256[],string[],bytes,bytes)",
+          "attestBatch(struct Attestation[],contract IERC20[],uint256[],string[],bytes,bytes)",
+          "attestOffchainBatch(string[],address,bytes)",
+          "revokeBatch(uint64[],string[],bytes,bytes)",
+          "revokeBatch(uint64[],string[],uint256[],bytes,bytes)",
+          "revokeBatch(uint64[],string[],contract IERC20[],uint256[],bytes,bytes)",
+          "revokeOffchainBatch(string[],string[],bytes)",
+          "getSchema(uint64)",
+          "getAttestation(uint64)",
+          "getOffchainAttestation(string)",
+          "getDelegatedRegisterHash((address,bool,uint8,uint64,address,uint64,string))",
+          "getDelegatedRegisterBatchHash(struct Schema[])",
+          "getDelegatedAttestHash((uint64,uint64,uint64,uint64,address,uint64,uint8,bool,bytes[],bytes))",
+          "getDelegatedAttestBatchHash(struct Attestation[])",
+          "getDelegatedOffchainAttestHash(string)",
+          "getDelegatedOffchainAttestBatchHash(string[])",
+          "getDelegatedRevokeHash(uint64,string)",
+          "getDelegatedRevokeBatchHash(uint64[],string[])",
+          "getDelegatedOffchainRevokeHash(string,string)",
+          "getDelegatedOffchainRevokeBatchHash(string[],string[])",
+          "schemaCounter()",
+          "attestationCounter()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.24"
+      },
+      "@ethsign/sign-protocol-evm/src/interfaces/ISPHook.sol:ISPHook": {
+        "src": "@ethsign/sign-protocol-evm/src/interfaces/ISPHook.sol:10",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "didReceiveAttestation(address,uint64,uint64,bytes)",
+          "didReceiveAttestation(address,uint64,uint64,address,uint256,bytes)",
+          "didReceiveRevocation(address,uint64,uint64,bytes)",
+          "didReceiveRevocation(address,uint64,uint64,address,uint256,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.24"
+      },
+      "@ethsign/sign-protocol-evm/src/interfaces/IVersionable.sol:IVersionable": {
+        "src": "@ethsign/sign-protocol-evm/src/interfaces/IVersionable.sol:9",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "version()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.24"
+      },
+      "@openzeppelin/contracts/access/Ownable.sol:Ownable": {
+        "src": "@openzeppelin/contracts/access/Ownable.sol:20",
+        "inherit": [
+          "@openzeppelin/contracts/utils/Context.sol:Context"
+        ],
+        "libraries": [],
+        "methods": [
+          "owner()",
+          "renounceOwnership()",
+          "transferOwnership(address)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "Ownable",
+            "src": "@openzeppelin/contracts/access/Ownable.sol:38"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_owner",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_address",
+              "contract": "Ownable",
+              "src": "@openzeppelin/contracts/access/Ownable.sol:21"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.24"
+      },
+      "@openzeppelin/contracts/token/ERC20/IERC20.sol:IERC20": {
+        "src": "@openzeppelin/contracts/token/ERC20/IERC20.sol:9",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "totalSupply()",
+          "balanceOf(address)",
+          "transfer(address,uint256)",
+          "allowance(address,address)",
+          "approve(address,uint256)",
+          "transferFrom(address,address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.24"
+      },
+      "@openzeppelin/contracts/utils/Context.sol:Context": {
+        "src": "@openzeppelin/contracts/utils/Context.sol:16",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.24"
+      },
+      "contracts/EducationalCredential.sol:EducationalCredential": {
+        "src": "contracts/EducationalCredential.sol:6",
+        "version": {
+          "withMetadata": "5af63abd8ad8464cb597e73d18369fb37c38abdfc71d1d0dc09dee1e4d6f9dcd",
+          "withoutMetadata": "b8c87a4acfdadb99a9e40f53c1a28c318a3716be8d91e4d27395a07d1d4937c0",
+          "linkedWithoutMetadata": "b8c87a4acfdadb99a9e40f53c1a28c318a3716be8d91e4d27395a07d1d4937c0"
+        },
+        "inherit": [
+          "@openzeppelin/contracts/access/Ownable.sol:Ownable",
+          "@openzeppelin/contracts/utils/Context.sol:Context"
+        ],
+        "libraries": [],
+        "methods": [
+          "(address)",
+          "setSPInstance(address)",
+          "issueCredential(address,string,uint256)",
+          "getCredentials(address)",
+          "getLatestCredential(address)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "EducationalCredential",
+            "src": "contracts/EducationalCredential.sol:19"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_owner",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_address",
+              "contract": "Ownable",
+              "src": "@openzeppelin/contracts/access/Ownable.sol:21"
+            },
+            {
+              "label": "spInstance",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_contract(ISP)495",
+              "contract": "EducationalCredential",
+              "src": "contracts/EducationalCredential.sol:12"
+            },
+            {
+              "label": "credentials",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_mapping(t_address,t_array(t_struct(Credential)899_storage)dyn_storage)",
+              "contract": "EducationalCredential",
+              "src": "contracts/EducationalCredential.sol:15"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_array(t_struct(Credential)899_storage)dyn_storage": {
+              "label": "struct EducationalCredential.Credential[]",
+              "numberOfBytes": "32"
+            },
+            "t_contract(ISP)495": {
+              "label": "contract ISP",
+              "numberOfBytes": "20"
+            },
+            "t_mapping(t_address,t_array(t_struct(Credential)899_storage)dyn_storage)": {
+              "label": "mapping(address => struct EducationalCredential.Credential[])",
+              "numberOfBytes": "32"
+            },
+            "t_string_storage": {
+              "label": "string",
+              "numberOfBytes": "32"
+            },
+            "t_struct(Credential)899_storage": {
+              "label": "struct EducationalCredential.Credential",
+              "members": [
+                {
+                  "label": "course",
+                  "type": "t_string_storage",
+                  "offset": 0,
+                  "slot": "0"
+                },
+                {
+                  "label": "issueDate",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "1"
+                }
+              ],
+              "numberOfBytes": "64"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.24"
+      }
+    },
+    {
+      "@ethsign/sign-protocol-evm/src/interfaces/ISP.sol:ISP": {
+        "src": "@ethsign/sign-protocol-evm/src/interfaces/ISP.sol:13",
+        "inherit": [
+          "@ethsign/sign-protocol-evm/src/interfaces/IVersionable.sol:IVersionable"
+        ],
+        "libraries": [],
+        "methods": [
+          "register((address,bool,uint8,uint64,address,uint64,string),bytes)",
+          "attest((uint64,uint64,uint64,uint64,address,uint64,uint8,bool,bytes[],bytes),string,bytes,bytes)",
+          "attest((uint64,uint64,uint64,uint64,address,uint64,uint8,bool,bytes[],bytes),uint256,string,bytes,bytes)",
+          "attest((uint64,uint64,uint64,uint64,address,uint64,uint8,bool,bytes[],bytes),address,uint256,string,bytes,bytes)",
+          "attestOffchain(string,address,bytes)",
+          "revoke(uint64,string,bytes,bytes)",
+          "revoke(uint64,string,uint256,bytes,bytes)",
+          "revoke(uint64,string,address,uint256,bytes,bytes)",
+          "revokeOffchain(string,string,bytes)",
+          "registerBatch(struct Schema[],bytes)",
+          "attestBatch(struct Attestation[],string[],bytes,bytes)",
+          "attestBatch(struct Attestation[],uint256[],string[],bytes,bytes)",
+          "attestBatch(struct Attestation[],contract IERC20[],uint256[],string[],bytes,bytes)",
+          "attestOffchainBatch(string[],address,bytes)",
+          "revokeBatch(uint64[],string[],bytes,bytes)",
+          "revokeBatch(uint64[],string[],uint256[],bytes,bytes)",
+          "revokeBatch(uint64[],string[],contract IERC20[],uint256[],bytes,bytes)",
+          "revokeOffchainBatch(string[],string[],bytes)",
+          "getSchema(uint64)",
+          "getAttestation(uint64)",
+          "getOffchainAttestation(string)",
+          "getDelegatedRegisterHash((address,bool,uint8,uint64,address,uint64,string))",
+          "getDelegatedRegisterBatchHash(struct Schema[])",
+          "getDelegatedAttestHash((uint64,uint64,uint64,uint64,address,uint64,uint8,bool,bytes[],bytes))",
+          "getDelegatedAttestBatchHash(struct Attestation[])",
+          "getDelegatedOffchainAttestHash(string)",
+          "getDelegatedOffchainAttestBatchHash(string[])",
+          "getDelegatedRevokeHash(uint64,string)",
+          "getDelegatedRevokeBatchHash(uint64[],string[])",
+          "getDelegatedOffchainRevokeHash(string,string)",
+          "getDelegatedOffchainRevokeBatchHash(string[],string[])",
+          "schemaCounter()",
+          "attestationCounter()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.24"
+      },
+      "@ethsign/sign-protocol-evm/src/interfaces/ISPHook.sol:ISPHook": {
+        "src": "@ethsign/sign-protocol-evm/src/interfaces/ISPHook.sol:10",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "didReceiveAttestation(address,uint64,uint64,bytes)",
+          "didReceiveAttestation(address,uint64,uint64,address,uint256,bytes)",
+          "didReceiveRevocation(address,uint64,uint64,bytes)",
+          "didReceiveRevocation(address,uint64,uint64,address,uint256,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.24"
+      },
+      "@ethsign/sign-protocol-evm/src/interfaces/IVersionable.sol:IVersionable": {
+        "src": "@ethsign/sign-protocol-evm/src/interfaces/IVersionable.sol:9",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "version()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.24"
+      },
+      "@openzeppelin/contracts/access/Ownable.sol:Ownable": {
+        "src": "@openzeppelin/contracts/access/Ownable.sol:20",
+        "inherit": [
+          "@openzeppelin/contracts/utils/Context.sol:Context"
+        ],
+        "libraries": [],
+        "methods": [
+          "owner()",
+          "renounceOwnership()",
+          "transferOwnership(address)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "Ownable",
+            "src": "@openzeppelin/contracts/access/Ownable.sol:38"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_owner",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_address",
+              "contract": "Ownable",
+              "src": "@openzeppelin/contracts/access/Ownable.sol:21"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.24"
+      },
+      "@openzeppelin/contracts/token/ERC20/IERC20.sol:IERC20": {
+        "src": "@openzeppelin/contracts/token/ERC20/IERC20.sol:9",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "totalSupply()",
+          "balanceOf(address)",
+          "transfer(address,uint256)",
+          "allowance(address,address)",
+          "approve(address,uint256)",
+          "transferFrom(address,address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.24"
+      },
+      "@openzeppelin/contracts/utils/Context.sol:Context": {
+        "src": "@openzeppelin/contracts/utils/Context.sol:16",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.24"
+      },
+      "contracts/EducationalCredential.sol:EducationalCredential": {
+        "src": "contracts/EducationalCredential.sol:7",
+        "version": {
+          "withMetadata": "0fdfe388d42b9da0195c7f5eef4063f73f9f2cb1ee2249c5c3b2db6ecb262f60",
+          "withoutMetadata": "b8c87a4acfdadb99a9e40f53c1a28c318a3716be8d91e4d27395a07d1d4937c0",
+          "linkedWithoutMetadata": "b8c87a4acfdadb99a9e40f53c1a28c318a3716be8d91e4d27395a07d1d4937c0"
+        },
+        "inherit": [
+          "@openzeppelin/contracts/access/Ownable.sol:Ownable",
+          "@openzeppelin/contracts/utils/Context.sol:Context"
+        ],
+        "libraries": [],
+        "methods": [
+          "(address)",
+          "setSPInstance(address)",
+          "issueCredential(address,string,uint256)",
+          "getCredentials(address)",
+          "getLatestCredential(address)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "EducationalCredential",
+            "src": "contracts/EducationalCredential.sol:20"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_owner",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_address",
+              "contract": "Ownable",
+              "src": "@openzeppelin/contracts/access/Ownable.sol:21"
+            },
+            {
+              "label": "spInstance",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_contract(ISP)495",
+              "contract": "EducationalCredential",
+              "src": "contracts/EducationalCredential.sol:13"
+            },
+            {
+              "label": "credentials",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_mapping(t_address,t_array(t_struct(Credential)899_storage)dyn_storage)",
+              "contract": "EducationalCredential",
+              "src": "contracts/EducationalCredential.sol:16"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_array(t_struct(Credential)899_storage)dyn_storage": {
+              "label": "struct EducationalCredential.Credential[]",
+              "numberOfBytes": "32"
+            },
+            "t_contract(ISP)495": {
+              "label": "contract ISP",
+              "numberOfBytes": "20"
+            },
+            "t_mapping(t_address,t_array(t_struct(Credential)899_storage)dyn_storage)": {
+              "label": "mapping(address => struct EducationalCredential.Credential[])",
+              "numberOfBytes": "32"
+            },
+            "t_string_storage": {
+              "label": "string",
+              "numberOfBytes": "32"
+            },
+            "t_struct(Credential)899_storage": {
+              "label": "struct EducationalCredential.Credential",
+              "members": [
+                {
+                  "label": "course",
+                  "type": "t_string_storage",
+                  "offset": 0,
+                  "slot": "0"
+                },
+                {
+                  "label": "issueDate",
+                  "type": "t_uint256",
+                  "offset": 0,
+                  "slot": "1"
+                }
+              ],
+              "numberOfBytes": "64"
+            },
+            "t_uint256": {
+              "label": "uint256",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.24"
+      }
+    },
+    {
+      "@ethsign/sign-protocol-evm/src/interfaces/ISP.sol:ISP": {
+        "src": "@ethsign/sign-protocol-evm/src/interfaces/ISP.sol:13",
+        "inherit": [
+          "@ethsign/sign-protocol-evm/src/interfaces/IVersionable.sol:IVersionable"
+        ],
+        "libraries": [],
+        "methods": [
+          "register((address,bool,uint8,uint64,address,uint64,string),bytes)",
+          "attest((uint64,uint64,uint64,uint64,address,uint64,uint8,bool,bytes[],bytes),string,bytes,bytes)",
+          "attest((uint64,uint64,uint64,uint64,address,uint64,uint8,bool,bytes[],bytes),uint256,string,bytes,bytes)",
+          "attest((uint64,uint64,uint64,uint64,address,uint64,uint8,bool,bytes[],bytes),address,uint256,string,bytes,bytes)",
+          "attestOffchain(string,address,bytes)",
+          "revoke(uint64,string,bytes,bytes)",
+          "revoke(uint64,string,uint256,bytes,bytes)",
+          "revoke(uint64,string,address,uint256,bytes,bytes)",
+          "revokeOffchain(string,string,bytes)",
+          "registerBatch(struct Schema[],bytes)",
+          "attestBatch(struct Attestation[],string[],bytes,bytes)",
+          "attestBatch(struct Attestation[],uint256[],string[],bytes,bytes)",
+          "attestBatch(struct Attestation[],contract IERC20[],uint256[],string[],bytes,bytes)",
+          "attestOffchainBatch(string[],address,bytes)",
+          "revokeBatch(uint64[],string[],bytes,bytes)",
+          "revokeBatch(uint64[],string[],uint256[],bytes,bytes)",
+          "revokeBatch(uint64[],string[],contract IERC20[],uint256[],bytes,bytes)",
+          "revokeOffchainBatch(string[],string[],bytes)",
+          "getSchema(uint64)",
+          "getAttestation(uint64)",
+          "getOffchainAttestation(string)",
+          "getDelegatedRegisterHash((address,bool,uint8,uint64,address,uint64,string))",
+          "getDelegatedRegisterBatchHash(struct Schema[])",
+          "getDelegatedAttestHash((uint64,uint64,uint64,uint64,address,uint64,uint8,bool,bytes[],bytes))",
+          "getDelegatedAttestBatchHash(struct Attestation[])",
+          "getDelegatedOffchainAttestHash(string)",
+          "getDelegatedOffchainAttestBatchHash(string[])",
+          "getDelegatedRevokeHash(uint64,string)",
+          "getDelegatedRevokeBatchHash(uint64[],string[])",
+          "getDelegatedOffchainRevokeHash(string,string)",
+          "getDelegatedOffchainRevokeBatchHash(string[],string[])",
+          "schemaCounter()",
+          "attestationCounter()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.24"
+      },
+      "@ethsign/sign-protocol-evm/src/interfaces/ISPHook.sol:ISPHook": {
+        "src": "@ethsign/sign-protocol-evm/src/interfaces/ISPHook.sol:10",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "didReceiveAttestation(address,uint64,uint64,bytes)",
+          "didReceiveAttestation(address,uint64,uint64,address,uint256,bytes)",
+          "didReceiveRevocation(address,uint64,uint64,bytes)",
+          "didReceiveRevocation(address,uint64,uint64,address,uint256,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.24"
+      },
+      "@ethsign/sign-protocol-evm/src/interfaces/IVersionable.sol:IVersionable": {
+        "src": "@ethsign/sign-protocol-evm/src/interfaces/IVersionable.sol:9",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "version()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.24"
+      },
+      "@openzeppelin/contracts/access/Ownable.sol:Ownable": {
+        "src": "@openzeppelin/contracts/access/Ownable.sol:20",
+        "inherit": [
+          "@openzeppelin/contracts/utils/Context.sol:Context"
+        ],
+        "libraries": [],
+        "methods": [
+          "owner()",
+          "renounceOwnership()",
+          "transferOwnership(address)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "Ownable",
+            "src": "@openzeppelin/contracts/access/Ownable.sol:38"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_owner",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_address",
+              "contract": "Ownable",
+              "src": "@openzeppelin/contracts/access/Ownable.sol:21"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.24"
+      },
+      "@openzeppelin/contracts/token/ERC20/IERC20.sol:IERC20": {
+        "src": "@openzeppelin/contracts/token/ERC20/IERC20.sol:9",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "totalSupply()",
+          "balanceOf(address)",
+          "transfer(address,uint256)",
+          "allowance(address,address)",
+          "approve(address,uint256)",
+          "transferFrom(address,address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.24"
+      },
+      "@openzeppelin/contracts/utils/Context.sol:Context": {
+        "src": "@openzeppelin/contracts/utils/Context.sol:16",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.24"
+      },
+      "contracts/EducationalCredential.sol:EducationalCredential": {
+        "src": "contracts/EducationalCredential.sol:9",
+        "version": {
+          "withMetadata": "28bb8dc8d895789e46bd9b871ba5d5b4df8ee90afe9a050829682d4c551a2689",
+          "withoutMetadata": "fe20af0dcd62a03c57c12ffc7d1977475f40d484de39a4d8d2929b86d965c769",
+          "linkedWithoutMetadata": "fe20af0dcd62a03c57c12ffc7d1977475f40d484de39a4d8d2929b86d965c769"
+        },
+        "inherit": [
+          "@openzeppelin/contracts/access/Ownable.sol:Ownable",
+          "@openzeppelin/contracts/utils/Context.sol:Context"
+        ],
+        "libraries": [],
+        "methods": [
+          "()",
+          "setSPInstance(address)",
+          "setCredentialSchemaID(uint64)",
+          "issueCredential(address,string,uint256)",
+          "verifyCredential(address)",
+          "schemaHook(uint64,bytes,bytes[])"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "EducationalCredential",
+            "src": "contracts/EducationalCredential.sol:15"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_owner",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_address",
+              "contract": "Ownable",
+              "src": "@openzeppelin/contracts/access/Ownable.sol:21"
+            },
+            {
+              "label": "spInstance",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_contract(ISP)495",
+              "contract": "EducationalCredential",
+              "src": "contracts/EducationalCredential.sol:10"
+            },
+            {
+              "label": "credentialSchemaId",
+              "offset": 20,
+              "slot": "1",
+              "type": "t_uint64",
+              "contract": "EducationalCredential",
+              "src": "contracts/EducationalCredential.sol:11"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_contract(ISP)495": {
+              "label": "contract ISP",
+              "numberOfBytes": "20"
+            },
+            "t_uint64": {
+              "label": "uint64",
+              "numberOfBytes": "8"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.24"
+      }
+    },
+    {
+      "@ethsign/sign-protocol-evm/src/interfaces/ISP.sol:ISP": {
+        "src": "@ethsign/sign-protocol-evm/src/interfaces/ISP.sol:13",
+        "inherit": [
+          "@ethsign/sign-protocol-evm/src/interfaces/IVersionable.sol:IVersionable"
+        ],
+        "libraries": [],
+        "methods": [
+          "register((address,bool,uint8,uint64,address,uint64,string),bytes)",
+          "attest((uint64,uint64,uint64,uint64,address,uint64,uint8,bool,bytes[],bytes),string,bytes,bytes)",
+          "attest((uint64,uint64,uint64,uint64,address,uint64,uint8,bool,bytes[],bytes),uint256,string,bytes,bytes)",
+          "attest((uint64,uint64,uint64,uint64,address,uint64,uint8,bool,bytes[],bytes),address,uint256,string,bytes,bytes)",
+          "attestOffchain(string,address,bytes)",
+          "revoke(uint64,string,bytes,bytes)",
+          "revoke(uint64,string,uint256,bytes,bytes)",
+          "revoke(uint64,string,address,uint256,bytes,bytes)",
+          "revokeOffchain(string,string,bytes)",
+          "registerBatch(struct Schema[],bytes)",
+          "attestBatch(struct Attestation[],string[],bytes,bytes)",
+          "attestBatch(struct Attestation[],uint256[],string[],bytes,bytes)",
+          "attestBatch(struct Attestation[],contract IERC20[],uint256[],string[],bytes,bytes)",
+          "attestOffchainBatch(string[],address,bytes)",
+          "revokeBatch(uint64[],string[],bytes,bytes)",
+          "revokeBatch(uint64[],string[],uint256[],bytes,bytes)",
+          "revokeBatch(uint64[],string[],contract IERC20[],uint256[],bytes,bytes)",
+          "revokeOffchainBatch(string[],string[],bytes)",
+          "getSchema(uint64)",
+          "getAttestation(uint64)",
+          "getOffchainAttestation(string)",
+          "getDelegatedRegisterHash((address,bool,uint8,uint64,address,uint64,string))",
+          "getDelegatedRegisterBatchHash(struct Schema[])",
+          "getDelegatedAttestHash((uint64,uint64,uint64,uint64,address,uint64,uint8,bool,bytes[],bytes))",
+          "getDelegatedAttestBatchHash(struct Attestation[])",
+          "getDelegatedOffchainAttestHash(string)",
+          "getDelegatedOffchainAttestBatchHash(string[])",
+          "getDelegatedRevokeHash(uint64,string)",
+          "getDelegatedRevokeBatchHash(uint64[],string[])",
+          "getDelegatedOffchainRevokeHash(string,string)",
+          "getDelegatedOffchainRevokeBatchHash(string[],string[])",
+          "schemaCounter()",
+          "attestationCounter()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.24"
+      },
+      "@ethsign/sign-protocol-evm/src/interfaces/ISPHook.sol:ISPHook": {
+        "src": "@ethsign/sign-protocol-evm/src/interfaces/ISPHook.sol:10",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "didReceiveAttestation(address,uint64,uint64,bytes)",
+          "didReceiveAttestation(address,uint64,uint64,address,uint256,bytes)",
+          "didReceiveRevocation(address,uint64,uint64,bytes)",
+          "didReceiveRevocation(address,uint64,uint64,address,uint256,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.24"
+      },
+      "@ethsign/sign-protocol-evm/src/interfaces/IVersionable.sol:IVersionable": {
+        "src": "@ethsign/sign-protocol-evm/src/interfaces/IVersionable.sol:9",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "version()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.24"
+      },
+      "@openzeppelin/contracts/access/Ownable.sol:Ownable": {
+        "src": "@openzeppelin/contracts/access/Ownable.sol:20",
+        "inherit": [
+          "@openzeppelin/contracts/utils/Context.sol:Context"
+        ],
+        "libraries": [],
+        "methods": [
+          "owner()",
+          "renounceOwnership()",
+          "transferOwnership(address)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "Ownable",
+            "src": "@openzeppelin/contracts/access/Ownable.sol:38"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_owner",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_address",
+              "contract": "Ownable",
+              "src": "@openzeppelin/contracts/access/Ownable.sol:21"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.24"
+      },
+      "@openzeppelin/contracts/token/ERC20/IERC20.sol:IERC20": {
+        "src": "@openzeppelin/contracts/token/ERC20/IERC20.sol:9",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "totalSupply()",
+          "balanceOf(address)",
+          "transfer(address,uint256)",
+          "allowance(address,address)",
+          "approve(address,uint256)",
+          "transferFrom(address,address,uint256)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.24"
+      },
+      "@openzeppelin/contracts/utils/Context.sol:Context": {
+        "src": "@openzeppelin/contracts/utils/Context.sol:16",
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.24"
+      },
+      "contracts/FundMe.sol:EducationalCredential": {
+        "src": "contracts/FundMe.sol:9",
+        "version": {
+          "withMetadata": "e0483e06a4bd4bb1b9664a36c0d331db1f73b4722dd62e0ee32ff8053b3ff252",
+          "withoutMetadata": "fe20af0dcd62a03c57c12ffc7d1977475f40d484de39a4d8d2929b86d965c769",
+          "linkedWithoutMetadata": "fe20af0dcd62a03c57c12ffc7d1977475f40d484de39a4d8d2929b86d965c769"
+        },
+        "inherit": [
+          "@openzeppelin/contracts/access/Ownable.sol:Ownable",
+          "@openzeppelin/contracts/utils/Context.sol:Context"
+        ],
+        "libraries": [],
+        "methods": [
+          "()",
+          "setSPInstance(address)",
+          "setCredentialSchemaID(uint64)",
+          "issueCredential(address,string,uint256)",
+          "verifyCredential(address)",
+          "schemaHook(uint64,bytes,bytes[])"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "EducationalCredential",
+            "src": "contracts/FundMe.sol:15"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "_owner",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_address",
+              "contract": "Ownable",
+              "src": "@openzeppelin/contracts/access/Ownable.sol:21"
+            },
+            {
+              "label": "spInstance",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_contract(ISP)495",
+              "contract": "EducationalCredential",
+              "src": "contracts/FundMe.sol:10"
+            },
+            {
+              "label": "credentialSchemaId",
+              "offset": 20,
+              "slot": "1",
+              "type": "t_uint64",
+              "contract": "EducationalCredential",
+              "src": "contracts/FundMe.sol:11"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_contract(ISP)495": {
+              "label": "contract ISP",
+              "numberOfBytes": "20"
+            },
+            "t_uint64": {
+              "label": "uint64",
+              "numberOfBytes": "8"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true,
+          "namespaces": {}
+        },
+        "solcVersion": "0.8.24"
+      }
+    }
+  ]
+}

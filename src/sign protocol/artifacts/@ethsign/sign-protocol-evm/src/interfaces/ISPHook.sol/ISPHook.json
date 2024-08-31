@@ -1,0 +1,143 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "ISPHook",
+  "sourceName": "@ethsign/sign-protocol-evm/src/interfaces/ISPHook.sol",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "attester",
+          "type": "address"
+        },
+        {
+          "internalType": "uint64",
+          "name": "schemaId",
+          "type": "uint64"
+        },
+        {
+          "internalType": "uint64",
+          "name": "attestationId",
+          "type": "uint64"
+        },
+        {
+          "internalType": "bytes",
+          "name": "extraData",
+          "type": "bytes"
+        }
+      ],
+      "name": "didReceiveAttestation",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "attester",
+          "type": "address"
+        },
+        {
+          "internalType": "uint64",
+          "name": "schemaId",
+          "type": "uint64"
+        },
+        {
+          "internalType": "uint64",
+          "name": "attestationId",
+          "type": "uint64"
+        },
+        {
+          "internalType": "contract IERC20",
+          "name": "resolverFeeERC20Token",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "resolverFeeERC20Amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "extraData",
+          "type": "bytes"
+        }
+      ],
+      "name": "didReceiveAttestation",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "attester",
+          "type": "address"
+        },
+        {
+          "internalType": "uint64",
+          "name": "schemaId",
+          "type": "uint64"
+        },
+        {
+          "internalType": "uint64",
+          "name": "attestationId",
+          "type": "uint64"
+        },
+        {
+          "internalType": "bytes",
+          "name": "extraData",
+          "type": "bytes"
+        }
+      ],
+      "name": "didReceiveRevocation",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "attester",
+          "type": "address"
+        },
+        {
+          "internalType": "uint64",
+          "name": "schemaId",
+          "type": "uint64"
+        },
+        {
+          "internalType": "uint64",
+          "name": "attestationId",
+          "type": "uint64"
+        },
+        {
+          "internalType": "contract IERC20",
+          "name": "resolverFeeERC20Token",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "resolverFeeERC20Amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "extraData",
+          "type": "bytes"
+        }
+      ],
+      "name": "didReceiveRevocation",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
