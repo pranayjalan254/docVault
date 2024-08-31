@@ -31,22 +31,30 @@ const IssueCertificateForm = () => {
       });
 
       console.log("Form data has been saved to metadata.json");
+
       try {
         await issueCredential();
         console.log("Credential issued successfully");
       } catch (error) {
         console.log(error);
       }
+
       setFormData({
         studentName: "",
         course: "",
         date: "",
         walletAddress: "",
       });
-      setIsSubmitted(true);
-      await axios.post("http://localhost:5000/run-insert-metadata");
 
+      setIsSubmitted(true);
+
+      // Trigger metadata insertion
+      await axios.post("http://localhost:5000/run-insert-metadata");
       console.log("Metadata insertion triggered.");
+
+      // Trigger the queryTable function via API
+      await axios.post("http://localhost:5000/run-query-table");
+      console.log("Table queried successfully.");
     } catch (error) {
       console.error("There was an error saving the form data", error);
     }

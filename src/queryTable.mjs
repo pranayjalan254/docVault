@@ -3,10 +3,11 @@ import { connectToTableland } from "./tableland/tableland.mjs";
 import fs from "fs";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-async function queryTable() {
+export async function queryTable() {
   try {
     // Connect to Tableland
     const db = await connectToTableland();
@@ -17,12 +18,6 @@ async function queryTable() {
 
     // Query the table to get all rows
     const result = await db.prepare(`SELECT * FROM ${tableName};`).all();
-
-    // Ensure the public directory exists
-    const publicDir = path.resolve("public");
-    if (!fs.existsSync(publicDir)) {
-      fs.mkdirSync(publicDir);
-    }
 
     // Save result to fetchedCertificates.json
     const filePath = path.resolve(
@@ -37,5 +32,3 @@ async function queryTable() {
     throw error;
   }
 }
-
-queryTable();

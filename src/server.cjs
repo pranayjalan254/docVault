@@ -46,5 +46,20 @@ app.post("/run-insert-metadata", async (req, res) => {
   }
 });
 
+(async () => {
+  const { queryTable } = await import("./queryTable.mjs");
+
+  // Now you can use queryTable as needed
+  app.post("/run-query-table", async (req, res) => {
+    try {
+      await queryTable();
+      res.status(200).send("Table queried successfully and data saved.");
+    } catch (error) {
+      console.error("Error querying table:", error);
+      res.status(500).send("Failed to query table.");
+    }
+  });
+})();
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
