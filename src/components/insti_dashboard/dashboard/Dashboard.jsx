@@ -1,10 +1,10 @@
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Sidebar from "../sidebar/Sidebar";
 import Navbar from "../Navbar/Navbar";
 import IssueCertificateForm from "../IssueCertificateForm/IssueCertificateForm";
 import Hero from "../hero/Hero";
-import Profile from "../Profile/Profile";
 import "./dashboard.css";
+import GetWalletAddress from "../wallet/wallet";
 
 function Insti_dashboard() {
   return (
@@ -18,8 +18,8 @@ function Insti_dashboard() {
             subtitle="Manage your credentials effortlessly."
           />
           <Routes>
-            <Route path="issue" element={<IssueCertificateForm />} />
-            <Route path="profile" element={<Profile />} />
+            <Route path="/walletaddress" element={<GetWalletAddress />} />
+            <Route path="/issue" element={<IssueCertificateForm />} />
           </Routes>
         </div>
       </div>

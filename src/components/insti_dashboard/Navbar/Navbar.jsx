@@ -13,7 +13,7 @@ const Navbar = () => {
         </li>
 
         <li>
-          <NavLink to="/insti-dashboard/profile">Manage Profile</NavLink>
+          <NavLink to="/insti-dashboard/walletaddress">Profile</NavLink>
         </li>
       </ul>
     </nav>

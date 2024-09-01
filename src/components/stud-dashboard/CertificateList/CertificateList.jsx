@@ -1,28 +1,62 @@
 import { useEffect, useState } from "react";
+import { web3auth } from "../../web3auth/Web3modal";
+import { ethers } from "../../../ethers-5.6.esm.min.js";
 import "./certificatelist.css";
 
 const CertificateList = () => {
   const [certificates, setCertificates] = useState([]);
-  const userWalletAddress = "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266";
+  const [userWalletAddress, setUserWalletAddress] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
+    const fetchWalletAddress = async () => {
+      try {
+        const web3authProvider = await web3auth.connect();
+        const ethersProvider = new ethers.providers.Web3Provider(
+          web3authProvider
+        );
+        const signer = ethersProvider.getSigner();
+        const address = await signer.getAddress();
+        setUserWalletAddress(address);
+      } catch (error) {
+        setError("Failed to connect to Web3Auth.");
+        console.error("Error fetching wallet address:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchWalletAddress();
+  }, []);
+
+  useEffect(() => {
+    if (!userWalletAddress) return;
+
     const fetchCertificates = async () => {
       try {
         const response = await fetch("/fetchedCertificates.json");
+        if (!response.ok) throw new Error("Failed to fetch certificates.");
+
         const data = await response.json();
-        const fetchedCertificates = data.results;
+        const fetchedCertificates = data.results || [];
         const filteredCertificates = fetchedCertificates.filter(
-          (cert) => cert.walletaddress === userWalletAddress
+          (cert) =>
+            cert.walletaddress.toLowerCase() === userWalletAddress.toLowerCase()
         );
 
         setCertificates(filteredCertificates);
       } catch (error) {
-        console.error("Failed to fetch certificates:", error);
+        setError("Failed to fetch certificates.");
+        console.error(error);
       }
     };
 
     fetchCertificates();
   }, [userWalletAddress]);
+
+  if (loading) return <p>Loading wallet address...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <div className="certificate-list">

@@ -3,15 +3,18 @@ import { EthereumPrivateKeyProvider } from "@web3auth/ethereum-provider";
 import { useNavigate } from "react-router-dom";
 import { Web3Auth } from "@web3auth/modal";
 import { useEffect, useState } from "react";
-import "./web3auth.css";
+import { MetamaskAdapter } from "@web3auth/metamask-adapter";
 import { useAuth } from "../../AuthContext";
+import { ethers } from "../../ethers-5.6.esm.min.js";
+import "./web3auth.css";
 
 const clientId = import.meta.env.VITE_CLIENT_ID ?? "";
 
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
   chainId: "0xaa36a7",
-  rpcTarget: "https://rpc.sepolia.org",
+  rpcTarget:
+    "https://eth-sepolia.g.alchemy.com/v2/fNr3TwzXGZWEmV13p3mCxDAhHYj1fgKP",
   displayName: "Ethereum Sepolia Testnet",
   blockExplorer: "https://sepolia.etherscan.io/",
   ticker: "ETH",
@@ -20,6 +23,13 @@ const chainConfig = {
 
 const privateKeyProvider = new EthereumPrivateKeyProvider({
   config: { chainConfig },
+});
+
+const metamaskAdapter = new MetamaskAdapter({
+  clientId,
+  sessionTime: 86400,
+  web3AuthNetwork: "sapphire_devnet",
+  chainConfig: chainConfig,
 });
 
 export const web3auth = new Web3Auth({
@@ -32,14 +42,21 @@ function Web3modal() {
   const [provider, setProvider] = useState<IProvider | null>(null);
   const [userType, setUserType] = useState<string | null>(null);
   const navigate = useNavigate();
-  const { isAuthenticated, login, logout } = useAuth();
+  const { isAuthenticated, login } = useAuth();
 
   useEffect(() => {
     const init = async () => {
       try {
+        // Configure the Metamask adapter
+        web3auth.configureAdapter(metamaskAdapter);
+
+        // Initialize Web3Auth modal
         await web3auth.initModal();
+
+        // Set the provider if already connected
         setProvider(web3auth.provider);
 
+        // Check if already connected and navigate based on user role
         if (web3auth.connected) {
           const role = await getUserRole();
           if (role) {
@@ -60,9 +77,22 @@ function Web3modal() {
 
   const handleLogin = async () => {
     try {
+      // Connect using Web3Auth modal
       const web3authProvider = await web3auth.connect();
       setProvider(web3authProvider);
 
+      const ethersProvider = new ethers.providers.Web3Provider(
+        web3authProvider
+      );
+
+      const signer = ethersProvider.getSigner();
+
+      const address = await signer.getAddress();
+
+      const balance = await ethersProvider.getBalance(address);
+      console.log("Wallet Balance:", ethers.utils.formatEther(balance));
+
+      // Navigate based on the user role after successful login
       if (web3auth.connected) {
         const role = await getUserRole();
         if (role) {
@@ -79,6 +109,7 @@ function Web3modal() {
   };
 
   const getUserRole = async () => {
+    // Fetch user role based on your app logic
     return userType;
   };
 
