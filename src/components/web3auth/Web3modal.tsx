@@ -78,18 +78,6 @@ function Web3modal() {
     }
   };
 
-  const handleLogout = async () => {
-    try {
-      await web3auth.logout();
-      setProvider(null);
-      logout();
-      setUserType(null);
-      navigate("/auth");
-    } catch (error) {
-      console.error("Logout failed:", error);
-    }
-  };
-
   const getUserRole = async () => {
     return userType;
   };

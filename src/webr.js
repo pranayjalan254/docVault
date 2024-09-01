@@ -2,27 +2,6 @@ import { ethers } from "./ethers-5.6.esm.min.js";
 import { abi, contractAddress } from "./constants.js";
 import { loadData } from "./parse.js";
 
-const connectButton = document.getElementById("connectButton");
-const issueButton = document.getElementById("balanceButton");
-const verifyButton = document.getElementById("withdrawButton");
-
-async function connect() {
-  if (typeof window.ethereum !== "undefined") {
-    try {
-      await window.ethereum.request({ method: "eth_requestAccounts" });
-      console.log("Connected");
-      const accounts = await window.ethereum.request({
-        method: "eth_accounts",
-      });
-      console.log(accounts);
-    } catch (error) {
-      console.log(error);
-    }
-  } else {
-    console.log("Please install MetaMask");
-  }
-}
-
 export async function issueCredential() {
   console.log(`Issuing credential...`);
   if (typeof window.ethereum !== "undefined") {
@@ -90,6 +69,3 @@ export function listenForTransactionMine(transactionResponse, provider) {
     }
   });
 }
-
-// Initial connection attempt
-connect();
