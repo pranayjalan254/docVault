@@ -31,7 +31,7 @@ const IssueCertificateForm = () => {
       });
 
       console.log("Form data has been saved to metadata.json");
-
+      //issue credential
       try {
         await issueCredential();
         console.log("Credential issued successfully");
@@ -111,7 +111,6 @@ const IssueCertificateForm = () => {
         <button type="submit">Issue Certificate</button>
       </form>
 
-      {/* Popup message */}
       {isSubmitted && (
         <div className="popup">
           <div className="popup-content">

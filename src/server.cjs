@@ -48,8 +48,6 @@ app.post("/run-insert-metadata", async (req, res) => {
 
 (async () => {
   const { queryTable } = await import("./queryTable.mjs");
-
-  // Now you can use queryTable as needed
   app.post("/run-query-table", async (req, res) => {
     try {
       await queryTable();

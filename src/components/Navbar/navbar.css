@@ -1,4 +1,3 @@
-/* Base Navbar Styles */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -89,7 +88,6 @@
   transform: translateY(-8px) rotate(-45deg);
 }
 
-/* Responsive Styles */
 @media (max-width: 1200px) {
   .nav-links {
     gap: 15px;

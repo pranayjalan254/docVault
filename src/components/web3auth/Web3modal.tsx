@@ -49,13 +49,10 @@ function Web3modal() {
       try {
         // Configure the Metamask adapter
         web3auth.configureAdapter(metamaskAdapter);
-
         // Initialize Web3Auth modal
         await web3auth.initModal();
-
         // Set the provider if already connected
         setProvider(web3auth.provider);
-
         // Check if already connected and navigate based on user role
         if (web3auth.connected) {
           const role = await getUserRole();
@@ -109,7 +106,6 @@ function Web3modal() {
   };
 
   const getUserRole = async () => {
-    // Fetch user role based on your app logic
     return userType;
   };
 

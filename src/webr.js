@@ -28,7 +28,7 @@ export async function issueCredential() {
     const transactionResponse = await contract.issueCredential(
       WALLET_ADDRESS,
       COURSE,
-      ethers.BigNumber.from(DATE) // Ensure DATE is in a valid format
+      ethers.BigNumber.from(DATE)
     );
 
     // Wait for the transaction to be mined

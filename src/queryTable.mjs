@@ -1,4 +1,3 @@
-// saveCertificates.js
 import { connectToTableland } from "./tableland/tableland.mjs";
 import fs from "fs";
 import path, { dirname } from "path";

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { web3auth } from "../../web3auth/Web3modal";
 import { ethers } from "../../../ethers-5.6.esm.min.js";
-import "./wallet.css"; // Import the CSS file
+import "./wallet.css";
 
 const GetWalletAddress = () => {
   const [address, setAddress] = useState("");
