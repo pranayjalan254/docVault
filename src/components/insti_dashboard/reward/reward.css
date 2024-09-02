@@ -1,0 +1,80 @@
+.payment-form-card {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #e3f2fd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.payment-form-card h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  color: #0d47a1;
+}
+
+.payment-form-card input,
+.payment-form-card button {
+  width: calc(100% - 20px);
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #90caf9;
+  border-radius: 4px;
+}
+
+.payment-form-card input {
+  border-color: #81d4fa;
+}
+
+.payment-form-card button {
+  background-color: #2196f3;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.payment-form-card button:disabled {
+  background-color: #b3e5fc;
+}
+
+.modal {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  background: #e3f2fd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+}
+
+.modal-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.transaction-details {
+  margin-top: 20px;
+}
+
+.transaction-details p {
+  margin: 5px 0;
+  font-size: small;
+  padding-bottom: 5px;
+}
+
+.transaction-details strong {
+  display: inline-block;
+  width: 150px;
+  color: #0d47a1;
+}

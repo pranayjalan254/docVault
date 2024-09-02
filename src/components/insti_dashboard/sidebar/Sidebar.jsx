@@ -28,7 +28,7 @@ const Sidebar = () => {
             <NavLink to="/insti-dashboard/issue">Issue Certificate</NavLink>
           </li>
           <li>
-            <NavLink to="/insti-dashboard/profile">Manage Profile</NavLink>
+            <NavLink to="/insti-dashboard/reward">Reward Students</NavLink>
           </li>
           <li>
             <button onClick={handleLogout} className="logout-button-insti">
