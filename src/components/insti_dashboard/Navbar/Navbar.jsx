@@ -11,7 +11,9 @@ const Navbar = () => {
         <li>
           <NavLink to="/insti-dashboard/issue">Issue Certificate</NavLink>
         </li>
-
+        <li>
+          <NavLink to="/insti-dashboard/reward">Reward Students</NavLink>
+        </li>
         <li>
           <NavLink to="/insti-dashboard/walletaddress">Profile</NavLink>
         </li>

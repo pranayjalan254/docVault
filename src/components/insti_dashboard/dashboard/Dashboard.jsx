@@ -6,6 +6,7 @@ import Hero from "../hero/Hero";
 import "./dashboard.css";
 import GetWalletAddress from "../wallet/wallet";
 import PaymentForm from "../reward/Reward";
+import Money from "../money/Money";
 
 function Insti_dashboard() {
   return (
@@ -22,6 +23,7 @@ function Insti_dashboard() {
             <Route path="/walletaddress" element={<GetWalletAddress />} />
             <Route path="/issue" element={<IssueCertificateForm />} />
             <Route path="/reward" element={<PaymentForm />} />
+            <Route path="/money" element={<Money />} />
           </Routes>
         </div>
       </div>

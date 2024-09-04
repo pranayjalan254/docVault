@@ -26,6 +26,7 @@
     "@web3auth/openlogin-adapter": "^8.12.4",
     "@web3auth/single-factor-auth": "^8.1.1",
     "@web3auth/wallet-services-plugin": "^8.12.5",
+    "@web3auth/wallet-services-plugin-react-hooks": "^8.12.5",
     "axios": "^1.7.5",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",

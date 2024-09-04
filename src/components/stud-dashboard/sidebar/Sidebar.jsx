@@ -20,13 +20,11 @@ const Sidebar = () => {
       <nav>
         <ul>
           <li>
-            <NavLink to="/stud-dashboard/walletaddress">Profile</NavLink>
-          </li>
-          <li>
             <NavLink to="/stud-dashboard/certificates">
               View Certificates
             </NavLink>
           </li>
+
           <li>
             <button onClick={handleLogout} className="logout-button">
               Logout
