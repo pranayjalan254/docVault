@@ -15,8 +15,8 @@ export async function insertMetadata() {
         console.log('Loaded metadata:', metadata);
 
         // Validate required fields
-        const { studentName, course, date, walletAddress } = metadata;
-        if (!studentName || !course || !date || !walletAddress) {
+        const { ciphertext, dataToEncryptHash, accessControlConditions } = metadata;
+        if (!ciphertext || !dataToEncryptHash || !accessControlConditions) {
             throw new Error('Metadata fields are missing or invalid');
         }
 
@@ -26,9 +26,9 @@ export async function insertMetadata() {
         // Insert metadata into the table
         const { meta: insert } = await db
             .prepare(
-                `INSERT INTO ${tableName} (Studentname, course, date, walletaddress) VALUES (?, ?, ?, ?);`
+                `INSERT INTO ${tableName} (ciphertext, dataToEncryptHash, accessControlConditions) VALUES (?, ?, ?);`
             )
-            .bind(studentName, course, date, walletAddress)
+            .bind(ciphertext, dataToEncryptHash, JSON.stringify(accessControlConditions))
             .run();
 
         await insert.txn?.wait();
