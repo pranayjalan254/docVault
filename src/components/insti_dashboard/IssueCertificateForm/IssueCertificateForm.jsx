@@ -16,6 +16,7 @@ const IssueCertificateForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState("");
   const [isCsvMode, setIsCsvMode] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // Loading state
 
   // Handle CSV file upload
   const handleFileChange = (e) => {
@@ -39,6 +40,7 @@ const IssueCertificateForm = () => {
 
   // Function to issue certificates from CSV data
   const issueCertificatesFromCsv = async () => {
+    setIsLoading(true); // Start loading
     try {
       for (const row of csvData) {
         const { studentName, course, date, walletAddress } = row;
@@ -67,7 +69,10 @@ const IssueCertificateForm = () => {
       }
 
       setIsSubmitted(true);
+      setIsLoading(false); // End loading
     } catch (error) {
+      setError("There was an error processing the CSV data");
+      setIsLoading(false); // End loading on error
       console.error("There was an error processing the CSV data", error);
     }
   };
@@ -95,6 +100,7 @@ const IssueCertificateForm = () => {
       await axios.post("http://localhost:5000/run-query-table");
       console.log("Table queried successfully.");
     } catch (error) {
+      setError("There was an error saving the form data");
       console.error("There was an error saving the form data", error);
     }
   };
@@ -143,7 +149,11 @@ const IssueCertificateForm = () => {
         <div className="csv-upload-section">
           <label>Upload CSV File</label>
           <input type="file" accept=".csv" onChange={handleFileChange} />
-          <button onClick={handleCsvSubmit}>Issue Certificates from CSV</button>
+          <button onClick={handleCsvSubmit} disabled={isLoading}>
+            {isLoading
+              ? "Issuing Certificates..."
+              : "Issue Certificates from CSV"}
+          </button>
         </div>
       ) : (
         <form onSubmit={handleManualSubmit}>
@@ -195,7 +205,9 @@ const IssueCertificateForm = () => {
               required
             />
           </div>
-          <button type="submit">Issue Single Certificate</button>
+          <button type="submit" disabled={isLoading}>
+            {isLoading ? "Issuing Certificate..." : "Issue Single Certificate"}
+          </button>
         </form>
       )}
 
