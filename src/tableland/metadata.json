@@ -1,6 +1,19 @@
 {
-  "studentName": "Jalan",
-  "course": "eni",
-  "date": "34568910",
-  "walletAddress": "0x24CCE2d0c9EdE31AC9498d4eB2f9bd68608137B5"
+  "ciphertext": "rl14mnavxhALV9Y4egxJsIjRNM9ObY1qBm8dcfukyolot7vgrJgZBjJfL9fyhi3/FpvlORuC5uDT9ftpw8jsHKuW79o63rtw1HWjcs8Z2BJqzDYH4rQs+L9ZsmlB0Y1YkFaHCxZr8LUQGssMxZpK5uW8ldH2nYEIg1QIXj/TJi8fp39N8WNK+x7fPVbg6LktyRJGpCgHzLETsu/pY+agHnjd5U2ohkt/pBcFS9OzO1Hrtb3y1S8auofz8wI=",
+  "dataToEncryptHash": "4bcc536fc2437d6417a59a195ddbfed3ba04596a63357e3513bf4f2440e7e86b",
+  "accessControlConditions": [
+    {
+      "contractAddress": "",
+      "standardContractType": "",
+      "chain": "sepolia",
+      "method": "",
+      "parameters": [
+        ":userAddress"
+      ],
+      "returnValueTest": {
+        "comparator": "=",
+        "value": "0x92a83F98AD680792995060793F2F79ae0E7b786b"
+      }
+    }
+  ]
 }

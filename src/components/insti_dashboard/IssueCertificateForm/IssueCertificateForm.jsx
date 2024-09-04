@@ -3,15 +3,12 @@ import axios from "axios";
 import "./issuecertificateform.css";
 import { issueCredential } from "../../../webr";
 import Papa from "papaparse";
+import { useFormData } from "./FormData";
+import { useEncryptData } from "../../../lit protocol/lit_protocol.jsx";
 
 const IssueCertificateForm = () => {
-  const [formData, setFormData] = useState({
-    studentName: "",
-    course: "",
-    date: "",
-    walletAddress: "",
-  });
-
+  const { formData, setFormData } = useFormData();
+  const { encryptData } = useEncryptData();
   const [csvData, setCsvData] = useState([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState("");
@@ -49,12 +46,14 @@ const IssueCertificateForm = () => {
           continue;
         }
 
-        await axios.post("http://localhost:5000/save-metadata", {
-          studentName,
-          course,
-          date,
-          walletAddress,
-        });
+        const { ciphertext, dataToEncryptHash, accessControlConditions } =
+          await encryptData();
+        const encryptedData = {
+          ciphertext,
+          dataToEncryptHash,
+          accessControlConditions,
+        };
+        await axios.post("http://localhost:5000/save-metadata", encryptedData);
 
         console.log(`Form data for ${studentName} saved to metadata.json`);
 
@@ -80,10 +79,17 @@ const IssueCertificateForm = () => {
   // Function to issue a single certificate
   const issueSingleCertificate = async () => {
     try {
-      await axios.post("http://localhost:5000/save-metadata", formData);
+      const { ciphertext, dataToEncryptHash, accessControlConditions } =
+        await encryptData();
+      const encryptedData = {
+        ciphertext,
+        dataToEncryptHash,
+        accessControlConditions,
+      };
+      await axios.post("http://localhost:5000/save-metadata", encryptedData);
       console.log("Form data has been saved to metadata.json");
 
-      await issueCredential();
+      await issueCredential(formData);
       console.log("Credential issued successfully");
 
       setIsSubmitted(true);
@@ -184,7 +190,7 @@ const IssueCertificateForm = () => {
           <div className="form-group-insti">
             <label>Date</label>
             <input
-              type="number"
+              type="date"
               name="date"
               value={formData.date}
               onChange={(e) =>

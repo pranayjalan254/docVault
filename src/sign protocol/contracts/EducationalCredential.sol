@@ -5,17 +5,16 @@ import { ISP } from "@ethsign/sign-protocol-evm/src/interfaces/ISP.sol";
 
 contract EducationalCredential is Ownable {
     struct Credential {
-        string course;
-        uint256 issueDate;
+        string ciphertext;
+        string dataToEncryptHash;
     }
 
     ISP public spInstance;
-    uint64 public constant CREDENTIAL_SCHEMA_ID = 1; // Set your schema ID here
+    uint64 public constant CREDENTIAL_SCHEMA_ID = 1;
 
     mapping(address => Credential[]) private credentials;
 
-    event CredentialIssued(address indexed institution, address indexed recipient, string course, uint256 issueDate);
-
+    event CredentialIssued(address indexed institution, address indexed recipient, string ciphertext , string dataToEncryptHash );
     constructor(address spInstanceAddress) Ownable(_msgSender()) {
         require(spInstanceAddress != address(0), "Invalid SP instance address");
         spInstance = ISP(spInstanceAddress);
@@ -28,59 +27,49 @@ contract EducationalCredential is Ownable {
 
     function issueCredential(
         address recipient,
-        string memory course,
-        uint256 issueDate
-    ) external onlyOwner {
+        string memory ciphertext,
+        string memory dataToEncryptHash
+    ) external  {
         require(recipient != address(0), "Invalid recipient address");
-        require(bytes(course).length > 0, "Course name cannot be empty");
-        require(issueDate <= block.timestamp, "Issue date cannot be in the future");
+        require(bytes(ciphertext).length > 0, "ciphertext name cannot be empty");
+        require(bytes(dataToEncryptHash).length > 0, "Hash name cannot be empty");
 
         // Validate with schemaHook
-        bool isValid = schemaHook(CREDENTIAL_SCHEMA_ID, abi.encode(course, issueDate), recipient);
+        bool isValid = schemaHook(CREDENTIAL_SCHEMA_ID, abi.encode(ciphertext, dataToEncryptHash), recipient);
         require(isValid, "Data validation failed");
 
-        credentials[recipient].push(Credential(course, issueDate));
-        emit CredentialIssued(_msgSender(), recipient, course, issueDate);
+        credentials[recipient].push(Credential(ciphertext, dataToEncryptHash));
+        emit CredentialIssued(_msgSender(), recipient, ciphertext, dataToEncryptHash);
     }
 
-    function getCredentials(address wallet) external view returns (string[] memory courses, uint256[] memory issueDates) {
+    function getCredentials(address wallet) external view returns (string[] memory ciphertexts, string[] memory dataToEncryptHashs) {
         Credential[] memory userCredentials = credentials[wallet];
         uint256 credentialCount = userCredentials.length;
 
-        courses = new string[](credentialCount);
-        issueDates = new uint256[](credentialCount);
+        ciphertexts = new string[](credentialCount);
+        dataToEncryptHashs = new string[](credentialCount);
 
         for (uint256 i = 0; i < credentialCount; i++) {
-            courses[i] = userCredentials[i].course;
-            issueDates[i] = userCredentials[i].issueDate;
+            ciphertexts[i] = userCredentials[i].ciphertext;
+            dataToEncryptHashs[i] = userCredentials[i].dataToEncryptHash;
         }
 
-        return (courses, issueDates);
+        return (ciphertexts, dataToEncryptHashs);
     }
 
-    function getLatestCredential(address wallet) external view returns (bool found, string memory course, uint256 issueDate) {
-        Credential[] memory userCredentials = credentials[wallet];
-        
-        if (userCredentials.length == 0) {
-            return (false, "", 0);
-        }
-
-        Credential memory latestCredential = userCredentials[userCredentials.length - 1];
-        return (true, latestCredential.course, latestCredential.issueDate);
-    }
 
     function schemaHook(
         uint64 schemaId,
         bytes memory data,
         address recipient
-    ) internal view returns (bool) {
+    ) internal pure returns (bool) {
         require(schemaId == CREDENTIAL_SCHEMA_ID, "Invalid schema ID");
         require(recipient != address(0), "Invalid recipient address");
 
-        (string memory course, uint256 issueDate) = abi.decode(data, (string, uint256));
+        (string memory ciphertext, string memory dataToEncryptHash) = abi.decode(data, (string, string));
 
-        require(bytes(course).length > 0, "Course name cannot be empty");
-        require(issueDate <= block.timestamp, "Issue date cannot be in the future");
+        require(bytes(ciphertext).length > 0, "ciphertext name cannot be empty");
+        require(bytes(dataToEncryptHash).length > 0, "Hash cannot be empty");
 
         return true;
     }

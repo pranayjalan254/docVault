@@ -11,6 +11,9 @@
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
   "dependencies": {
+    "@lit-protocol/lit-node-client": "^6.4.8",
+    "ethers": "6.6.0",
+    "siwe": "^2.3.2",
     "@ethsign/sign-protocol-evm": "^1.1.1",
     "@fortawesome/fontawesome-free": "^6.6.0",
     "@tableland/sdk": "^7.2.1",
@@ -74,7 +77,7 @@
     "eslint-plugin-react": "^7.35.0",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
-    "ethers": "^6.13.2",
+    "ethers": "6.6.0",
     "globals": "^15.9.0",
     "hardhat": "^2.22.9",
     "hardhat-deploy": "^0.12.4",

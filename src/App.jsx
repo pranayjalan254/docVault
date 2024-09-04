@@ -6,21 +6,24 @@ import Insti_dashboard from "./components/insti_dashboard/dashboard/Dashboard";
 import Stud_dashboard from "./components/stud-dashboard/dashboard/Dashboard";
 import ProtectedRoute from "./ProtectedRoute";
 import { AuthProvider } from "./AuthContext";
+import { FormDataProvider } from "./components/insti_dashboard/IssueCertificateForm/FormData";
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/auth" element={<Web3modal />} />
-          <Route path="/*" element={<ProtectedRoute />}>
-            <Route path="insti-dashboard/*" element={<Insti_dashboard />} />
-            <Route path="stud-dashboard/*" element={<Stud_dashboard />} />
-          </Route>
-        </Routes>
-      </Router>
-    </AuthProvider>
+    <FormDataProvider>
+      <AuthProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/auth" element={<Web3modal />} />
+            <Route path="/*" element={<ProtectedRoute />}>
+              <Route path="insti-dashboard/*" element={<Insti_dashboard />} />
+              <Route path="stud-dashboard/*" element={<Stud_dashboard />} />
+            </Route>
+          </Routes>
+        </Router>
+      </AuthProvider>
+    </FormDataProvider>
   );
 }
 
