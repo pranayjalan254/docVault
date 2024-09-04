@@ -1,13 +1,16 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import "./sidebar.css";
 import { web3auth } from "../../web3auth/Web3modal";
+import { useAuth } from "../../../AuthContext";
 
 const Sidebar = () => {
   const navigate = useNavigate();
+  const { logout } = useAuth();
 
   const handleLogout = async () => {
     try {
       await web3auth.logout();
+      logout();
       navigate("/auth");
     } catch (error) {
       console.error("Logout failed:", error);

@@ -9,11 +9,15 @@ export const AuthProvider = ({ children }) => {
   const login = (type) => {
     setIsAuthenticated(true);
     setUserType(type);
+    localStorage.setItem("isAuthenticated", true);
+    localStorage.setItem("userType", type);
   };
 
   const logout = () => {
     setIsAuthenticated(false);
     setUserType(null);
+    localStorage.removeItem("isAuthenticated");
+    localStorage.removeItem("userType");
   };
 
   return (
