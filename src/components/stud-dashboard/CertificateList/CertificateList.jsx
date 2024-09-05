@@ -32,29 +32,38 @@ const CertificateList = () => {
 
   useEffect(() => {
     if (!userWalletAddress) return;
-
+  
     const fetchCertificates = async () => {
       try {
         const response = await fetch("/fetchedCertificates.json");
         if (!response.ok) throw new Error("Failed to fetch certificates.");
-
+  
         const data = await response.json();
         const fetchedCertificates = data.results || [];
-        const filteredCertificates = fetchedCertificates.filter(
-          (cert) =>
-            cert.walletaddress.toLowerCase() === userWalletAddress.toLowerCase()
-        );
-
+    
+  
+        // Filter certificates only if the structure is correct
+        const filteredCertificates = fetchedCertificates.filter((cert) => {
+          return (
+            cert &&
+            cert.accessControlConditions &&
+            cert.accessControlConditions[0] &&
+            cert.accessControlConditions[0].returnValueTest &&
+            cert.accessControlConditions[0].returnValueTest.value ===
+              userWalletAddress
+          );  
+        });
+  
         setCertificates(filteredCertificates);
       } catch (error) {
         setError("Failed to fetch certificates.");
         console.error(error);
       }
     };
-
+  
     fetchCertificates();
   }, [userWalletAddress]);
-
+  
   if (loading) return <p>Loading wallet address...</p>;
   if (error) return <p>{error}</p>;
 
@@ -65,17 +74,15 @@ const CertificateList = () => {
         <thead>
           <tr>
             <th>Student Name</th>
-            <th>Course</th>
-            <th>Date</th>
+            
           </tr>
         </thead>
         <tbody>
           {certificates.length > 0 ? (
             certificates.map((cert, index) => (
               <tr key={index}>
-                <td>{cert.Studentname}</td>
-                <td>{cert.course}</td>
-                <td>{cert.date}</td>
+                <td>{cert.ciphertext}</td>
+              
               </tr>
             ))
           ) : (
