@@ -1,11 +1,13 @@
 // parse.jsx
-export async function loadData({ walletAddress, course, date }) {
+export async function loadData({ walletAddress, course, date, contact, add }) {
   const stdData = {
     WALLET_ADDRESS: walletAddress,
     COURSE: course,
     DATE: date,
+    CONTACT: contact,
+    ADD: add, 
   };
-  return [stdData.WALLET_ADDRESS, stdData.COURSE, stdData.DATE];
+  return [stdData.WALLET_ADDRESS, stdData.COURSE, stdData.DATE, stdData.CONTACT, stdData.ADD];
 }
 // parse.jsx
 export async function loadEncryptedData({ ciphertext, dataToEncryptHash }) {

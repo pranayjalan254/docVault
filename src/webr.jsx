@@ -17,13 +17,13 @@ export async function issueCredential(formData) {
     // Load the contract using the signer
     const contract = new ethers.Contract(contractAddress, abi, signer);
 
-    // Load data from your data parsing function
-    const [WALLET_ADDRESS, COURSE, DATE] = await loadData(formData);
+    // Load data from your data parsing function 
+    const [WALLET_ADDRESS, COURSE, DATE, CONTACT, ADD] = await loadData(formData);
     const response = await fetch("http://localhost:5000/api/metadata");
     const encryptedData = await response.json();
     const [CIPHERTEXT, DATA_TO_ENCRYPT_HASH] =
-      await loadEncryptedData(encryptedData);
-console.log(`contract ${contract}`)
+      await loadEncryptedData(encryptedData); 
+      console.log(`contract ${contract}`)
       console.log(`Issuing credential for ${WALLET_ADDRESS}... with ciphertext ${CIPHERTEXT} and dataToEncryptHash ${DATA_TO_ENCRYPT_HASH}`
       
       );
@@ -31,7 +31,6 @@ console.log(`contract ${contract}`)
     if (!ethers.utils.isAddress(WALLET_ADDRESS)) {
       throw new Error(`Invalid Ethereum address: ${WALLET_ADDRESS}`);
     }
-
     // Issue credential by calling the contract method
     const transactionResponse = await contract.issueCredential(
       WALLET_ADDRESS,

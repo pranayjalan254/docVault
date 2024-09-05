@@ -13,7 +13,7 @@ const IssueCertificateForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState("");
   const [isCsvMode, setIsCsvMode] = useState(false);
-  const [isLoading, setIsLoading] = useState(false); // Loading state
+  const [isLoading, setIsLoading] = useState(false); 
 
   // Handle CSV file upload
   const handleFileChange = (e) => {
@@ -40,10 +40,19 @@ const IssueCertificateForm = () => {
     setIsLoading(true); // Start loading
     try {
       for (const row of csvData) {
-        const { studentName, course, date, walletAddress } = row;
-        if (!studentName || !course || !date || !walletAddress) {
+        const { studentName, course, date, walletAddress, contact, add } = row;
+        if (!studentName || !course || !date || !walletAddress || !contact || !add) {
           setError("CSV is missing required fields.");
           continue;
+        }
+        const formData = {
+          studentName, 
+          course,
+          date,
+          walletAddress,
+          contact,    
+          add,
+          
         }
 
         const { ciphertext, dataToEncryptHash, accessControlConditions } =
@@ -57,7 +66,7 @@ const IssueCertificateForm = () => {
 
         console.log(`Form data for ${studentName} saved to metadata.json`);
 
-        await issueCredential();
+        await issueCredential(formData);
         console.log(`Credential issued successfully for ${studentName}`);
 
         await axios.post("http://localhost:5000/run-insert-metadata");
@@ -97,6 +106,8 @@ const IssueCertificateForm = () => {
         studentName: "",
         course: "",
         date: "",
+        contact: "",
+        add: "",
         walletAddress: "",
       });
 
@@ -160,6 +171,7 @@ const IssueCertificateForm = () => {
               ? "Issuing Certificates..."
               : "Issue Certificates from CSV"}
           </button>
+          <h4>Note: Please add enough ETH to issue all certificates</h4>
         </div>
       ) : (
         <form onSubmit={handleManualSubmit}>
@@ -168,7 +180,7 @@ const IssueCertificateForm = () => {
             <input
               type="text"
               name="studentName"
-              value={formData.studentName}
+              value={formData.studentName || ""}
               onChange={(e) =>
                 setFormData({ ...formData, studentName: e.target.value })
               }
@@ -180,7 +192,7 @@ const IssueCertificateForm = () => {
             <input
               type="text"
               name="course"
-              value={formData.course}
+              value={formData.course || ""}
               onChange={(e) =>
                 setFormData({ ...formData, course: e.target.value })
               }
@@ -188,13 +200,37 @@ const IssueCertificateForm = () => {
             />
           </div>
           <div className="form-group-insti">
-            <label>Date</label>
+            <label>Date of Issuance</label>
             <input
               type="date"
               name="date"
-              value={formData.date}
+              value={formData.date || ""}
               onChange={(e) =>
                 setFormData({ ...formData, date: e.target.value })
+              }
+              required
+            />
+          </div>
+          <div className="form-group-insti">
+            <label>Contact</label>
+            <input
+              type="number"
+              name="contact"
+              value={formData.contact || ""}
+              onChange={(e) =>
+                setFormData({ ...formData, contact: e.target.value })
+              }
+              required
+            />
+          </div>
+          <div className="form-group-insti">
+            <label>Residential Address</label> 
+            <input
+              type="text" 
+              name="add"
+              value={formData.add || ""}
+              onChange={(e) =>
+                setFormData({ ...formData, add: e.target.value })
               }
               required
             />
@@ -204,7 +240,7 @@ const IssueCertificateForm = () => {
             <input
               type="text"
               name="walletAddress"
-              value={formData.walletAddress}
+              value={formData.walletAddress || ""}
               onChange={(e) =>
                 setFormData({ ...formData, walletAddress: e.target.value })
               }

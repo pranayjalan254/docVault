@@ -1,0 +1,41 @@
+.money-card {
+  background-color: #1e293b; /* Dark background */
+  color: #f1f5f9; /* Light text color for readability */
+  border: 1px solid #334155; /* Subtle border matching the dark theme */
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 600px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  transition: transform 0.2s ease-in-out;
+}
+
+.money-card:hover {
+  transform: translateY(-5px); /* Slight lift effect on hover */
+}
+
+.money-title {
+  font-size: 24px;
+  margin-bottom: 16px;
+  color: #38bdf8; /* Accent color for the title */
+  text-align: center;
+}
+
+.money-steps {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.money-steps h3 {
+  margin: 10px 0;
+}
+
+.money-steps a {
+  color: #60a5fa;
+  text-decoration: underline;
+}
+
+.money-steps a:hover {
+  color: #38bdf8;
+  text-decoration: none;
+}

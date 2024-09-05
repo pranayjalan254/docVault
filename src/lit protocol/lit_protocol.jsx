@@ -7,6 +7,7 @@ import {
 } from "@lit-protocol/auth-helpers";
 import { LitNetwork } from "@lit-protocol/constants";
 import { useFormData } from "../components/insti_dashboard/IssueCertificateForm/FormData.jsx";
+import {web3auth} from "../components/web3auth/Web3modal"
 
 export class Lit {
   litNodeClient;
@@ -16,40 +17,32 @@ export class Lit {
   currentAccount;
 
   async connect() {
-    console.log("Connecting to Lit Protocol and MetaMask...");
+    console.log("Connecting to Lit Protocol and Web3Auth...");
     try {
-      //Connect to Lit Protocol
+      // Connect to Lit Protocol
       const litNodeClient = new LitJsSdk.LitNodeClientNodeJs({
         alertWhenUnauthorized: false,
-
         litNetwork: LitNetwork.DatilTest,
         checkNodeAttestation: true,
         debug: true,
-
         connectTimeout: 30000,
       });
       await litNodeClient.connect();
+      this.litNodeClient = litNodeClient;
       console.log("Successfully connected to Lit Protocol");
-      console.log("LitNodeClient:", this.litNodeClient);
-      // Connect to MetaMask
-      if (typeof window.ethereum !== "undefined") {
-        await window.ethereum.request({ method: "eth_requestAccounts" });
-        this.provider = new ethers.providers.Web3Provider(window.ethereum);
-        this.signer = this.provider.getSigner();
-        this.currentAccount = await this.signer.getAddress();
-        console.log(
-          "Connected to MetaMask. Current account:",
-          this.currentAccount
-        );
-      } else {
-        throw new Error("MetaMask not detected");
-      }
+
+      // Check if Web3Auth is connected
+      const web3authProvider = await web3auth.connect();
+      // Extract provider and signer from Web3Auth
+      this.provider = new ethers.providers.Web3Provider(web3authProvider);
+      this.signer = this.provider.getSigner();
+      this.currentAccount = await this.signer.getAddress();
+      console.log("Connected to Web3Auth. Current account:", this.currentAccount);
     } catch (error) {
       console.error("Error during connection:", error);
       throw error;
     }
   }
-
   async getCurrentAccount() {
     if (!this.currentAccount) {
       throw new Error(
@@ -200,6 +193,8 @@ export function useEncryptData() {
       name: formData.studentName,
       course: formData.course,
       date: formData.date,
+      contact: formData.contact,
+      resaddress: formData.address,
     };
 
     return await lit.encrypt(studentData, studentData.address);

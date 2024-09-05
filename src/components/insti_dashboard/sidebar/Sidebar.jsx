@@ -15,17 +15,17 @@ const Sidebar = () => {
     } catch (error) {
       console.error("Logout failed:", error);
     }
-  };
+  }; 
 
   return (
-    <div className="sidebar-insti">
+    <div className="sidebar-insti"> 
       <h3>
         <NavLink to="/insti-dashboard">Institution Dashboard</NavLink>
       </h3>
       <nav>
         <ul>
           <li>
-            <NavLink to="/insti-dashboard/walletaddress">Profile</NavLink>
+            <NavLink to="/insti-dashboard/money">Add Money</NavLink>
           </li>
           <li>
             <NavLink to="/insti-dashboard/issue">Issue Certificate</NavLink>

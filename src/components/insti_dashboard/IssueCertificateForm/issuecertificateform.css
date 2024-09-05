@@ -171,6 +171,10 @@ form button:disabled {
   cursor: pointer;
 }
 
-.popup-content button:hover {
+.popup-content button:hover { 
   background-color: #45a049;
+} 
+
+h4 {
+  padding-top: 15px;
 }

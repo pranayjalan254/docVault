@@ -1,6 +1,6 @@
 {
-  "ciphertext": "jH56ITk0jMJio8ZBulpyBMKAhvAyu1L6sBSjbNb3ZEFQnf2F6UShSeGNF/gahCZxSJHvTml7ZSnT1EetmBiJ6NQJP5T2Tn/x7TlbQSmyRldqxc5+1jZ3BgbnC3N71yhexctEVUQ5qZjKbUHF37CkK5XKOlOcNyypdb6PpwAv0zVIzggYrNOvHvTS/EqyiX9SyhbtQ3tEkEqRGm6E4PK80uTrGPx7LSJJDXF1jQ50YhZfqq8bVQ17tsi6KAI=",
-  "dataToEncryptHash": "a6b57be47c7c5843c3260689285a2a18a1daf91fd3391a84bbdac1376d7578bb",
+  "ciphertext": "jqXXJmVxM3peH9k95y0Li69+RqbW1DuNRjrX0yhqmOzcczqOR7yey6Pa8xQJaNj2+rdkTclGevW1cQQ46od//4Yq9/5Excsz9PQcYllza0A89M2SnmQniJeXG692Jsre5tigGhNXcKcNeeckM7dRojAZWNAdyFdXxQLgx9kxyH9kfybyxAYWgmtz6hBVAg==",
+  "dataToEncryptHash": "e59d209b33cc04915aa3ccc6b65c5a477fe08e71d80c7368a8cae09c172e3fba",
   "accessControlConditions": [
     {
       "contractAddress": "",
@@ -12,7 +12,7 @@
       ],
       "returnValueTest": {
         "comparator": "=",
-        "value": "0x92a83F98AD680792995060793F2F79ae0E7b786b"
+        "value": ""
       }
     }
   ]
