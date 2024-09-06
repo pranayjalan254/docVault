@@ -14,18 +14,3 @@
 .hero-section-stud p {
   margin-bottom: 20px;
 }
-
-.hero-section-stud button {
-  padding: 10px 20px;
-  background-color: #ffb703;
-  color: #0077b6;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.hero-section-stud button:hover {
-  background-color: #ffb703;
-  color: white;
-}

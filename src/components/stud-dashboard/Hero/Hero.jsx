@@ -5,7 +5,7 @@ const HeroSection = ({ title }) => {
     <div className="hero-section-stud">
       <h1>{title}</h1>
       <p>Your secure platform for managing certificates.</p>
-      <button>Verify and Retrieve Certificates</button>
+
     </div>
   );
 };

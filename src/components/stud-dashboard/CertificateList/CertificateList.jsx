@@ -77,17 +77,16 @@ const CertificateList = () => {
       const decryptedCert = await lit.decrypt(cert);
       setCertificates((prevCerts) => {
         const newCerts = [...prevCerts];
-        newCerts[index] = { ...newCerts[index], decryptedCert }; // Update the certificate with decrypted data
+        newCerts[index] = { ...newCerts[index], decryptedCert };
         return newCerts;
       });
     } catch (error) {
       console.error("Failed to decrypt certificate:", error);
-      setSelectedCertIndex(index); // Set index of certificate with decryption failure
-      setDecryptionError("Failed to decrypt this certificate."); // Set error message
+      setSelectedCertIndex(index);
+      setDecryptionError("Failed to decrypt this certificate.");
     }
   };
 
-  // Handle closing of popup
   const closePopup = () => {
     setSelectedCertIndex(null);
     setDecryptionError(null);
@@ -107,6 +106,7 @@ const CertificateList = () => {
             <th>Course</th>
             <th>Date</th>
             <th>Contact</th>
+            <th>Address</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -121,9 +121,7 @@ const CertificateList = () => {
                     : "Encrypted"}
                 </td>
                 <td>
-                  {cert.decryptedCert
-                    ? cert.decryptedCert.name
-                    : "Encrypted"}
+                  {cert.decryptedCert ? cert.decryptedCert.name : "Encrypted"}
                 </td>
                 <td>
                   {cert.decryptedCert ? cert.decryptedCert.course : "Encrypted"}
@@ -135,6 +133,9 @@ const CertificateList = () => {
                   {cert.decryptedCert
                     ? cert.decryptedCert.contact
                     : "Encrypted"}
+                </td>
+                <td>
+                  {cert.decryptedCert ? cert.decryptedCert.add : "Encrypted"}
                 </td>
                 <td>
                   <button onClick={() => decryptCertificate(cert, index)}>
