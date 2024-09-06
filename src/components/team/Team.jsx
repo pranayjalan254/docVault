@@ -17,7 +17,7 @@ const teamMembers = [
     name: "Anmol Agrawal",
     position: "Blockchain Developer",
     description: "Expert in smart contracts and blockchain infrastructure.",
-    photo: "/images/bob.jpg",
+    photo: "./anmol.jpg",
     socialLinks: {
       twitter: "https://twitter.com/bobsmith",
       linkedin: "https://linkedin.com/in/bobsmith",
@@ -28,7 +28,7 @@ const teamMembers = [
     name: "Ansh Nohria",
     position: "Smart Contract Developer",
     description: "Expert in smart contracts and blockchain infrastructure.",
-    photo: "/images/carol.jpg",
+    photo: "./ansh.jpg",
     socialLinks: {
       twitter: "https://twitter.com/caroldavis",
       linkedin: "https://linkedin.com/in/caroldavis",
