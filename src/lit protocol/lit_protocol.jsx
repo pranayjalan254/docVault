@@ -176,7 +176,7 @@ export class Lit {
         standardContractType: "",
         chain: "sepolia",
         method: "",
-        parameters: [":userWalletAddress"],
+        parameters: [walletAddress],
         returnValueTest: {
           comparator: "=",
           value: walletAddress,

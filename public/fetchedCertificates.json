@@ -1,6 +1,6 @@
 {
   "meta": {
-    "duration": 1362.3579410000239
+    "duration": 1392.8365090000443
   },
   "success": true,
   "results": [
@@ -877,6 +877,82 @@
       ],
       "ciphertext": "rJtXu2B/VJAgzRdYowB9pa0MpzQaSM6EYtUKfXugH2cjOhYFjRFkfPR5/AFT0zBYfFAnv0QLkKJWutEnbkUqRLbZOtAw4rhymmhKvPmyQyCQAT4UKtGNwx3i7QVqKCmjtGcfmAqqF69QdjGkT2poOTUQHbCgngFURjw1IIGr5tfTUKn4bw9HsQ0BPNnDNnqazFHH4jaDJEGLGkl1w9zCwwcgpul0tBekEsSMODyl+pgyCqF5f+PXNqkx7iSRQNtA/vVhLAoE/8mY/CWr8iaDuGDVtz/WJk72CffGQMfmpkYS1gI=",
       "dataToEncryptHash": "e99047c60bcd5f904c546a4ab7ce9a516650f7f43b072fc4fa46cd4284a660db"
+    },
+    {
+      "accessControlConditions": [
+        {
+          "contractAddress": "",
+          "standardContractType": "",
+          "chain": "sepolia",
+          "method": "",
+          "parameters": [
+            ":userWalletAddress"
+          ],
+          "returnValueTest": {
+            "comparator": "=",
+            "value": "0x91150034A9a5D4C1C2755cf7bFC6F53890805D5f"
+          }
+        }
+      ],
+      "ciphertext": "pEur9LdIELRcz6KUtcVlKkyIKsyyD/INrUL3hgvBgaMsqoq1w98Tt3xE1thZOzLv5GSBgQSsf29LTMqbvBBYZ8Qrvy/450RsIqd7+vHJvjKJAXfcpH2dhec6aeAmIzpxRIf4R3XVzNp7jf00jYdBfcJTf21CQKjr+e1KlnQ5yUL3l7l6x7ANjNEoQAlgVJGVkbJeKk1mjm94XQN82yfD6F4/ut2MdlAsvQfKc4xQNTnnt4stLtXWwxY4E0YJjrYLA925zsWr+25CAjogx5Q0bzDSc/7PH4/hlxhxAg==",
+      "dataToEncryptHash": "c88b3fa2d4fda30de972b8da7f70e2df5d1b067f67738b193e808998dce15916"
+    },
+    {
+      "accessControlConditions": [
+        {
+          "contractAddress": "",
+          "standardContractType": "",
+          "chain": "sepolia",
+          "method": "",
+          "parameters": [
+            ""
+          ],
+          "returnValueTest": {
+            "comparator": "=",
+            "value": ""
+          }
+        }
+      ],
+      "ciphertext": "gFnqSAnloo7/47EI96Wuife84SopsOfqrqbi9pRbjtqtjCgKitKKNnEQxEAO7CJhKaW6EoD8RhwngetCojgO8soWNwg7ZkVmyJnc0EjDaLk8pV35PYEcrZQ0qc9bRTg/fVzROPtnMRCWWShpij9RRekFDtlyrMJLVL+2JYCLSohX16euAdUQDyuXpcZZAg==",
+      "dataToEncryptHash": "e59d209b33cc04915aa3ccc6b65c5a477fe08e71d80c7368a8cae09c172e3fba"
+    },
+    {
+      "accessControlConditions": [
+        {
+          "contractAddress": "",
+          "standardContractType": "",
+          "chain": "sepolia",
+          "method": "",
+          "parameters": [
+            ""
+          ],
+          "returnValueTest": {
+            "comparator": "=",
+            "value": ""
+          }
+        }
+      ],
+      "ciphertext": "gVnYqDXiSsweoAQO7ef4zRjmPETmf7EogRnKZDZ5GT6M2mXCxtWm+cd6dOvEbIW976LbzI4/5r/pGtLJbtv5jlGVZ7CXozjSBBhJ3gZBQlE8bSLRBTvUTPUwh3g561zbZHiHGoLZF6kgZ7Em/hxkpOSV6ElRGNbBTM9hmMzyjbzobkA8GdA0/O2VgOHPAg==",
+      "dataToEncryptHash": "e59d209b33cc04915aa3ccc6b65c5a477fe08e71d80c7368a8cae09c172e3fba"
+    },
+    {
+      "accessControlConditions": [
+        {
+          "contractAddress": "",
+          "standardContractType": "",
+          "chain": "sepolia",
+          "method": "",
+          "parameters": [
+            "0x91150034A9a5D4C1C2755cf7bFC6F53890805D5f"
+          ],
+          "returnValueTest": {
+            "comparator": "=",
+            "value": "0x91150034A9a5D4C1C2755cf7bFC6F53890805D5f"
+          }
+        }
+      ],
+      "ciphertext": "sFfDojwZqs1mKWKX2OABDLTZeFWBgTXD2lPJVCjSCXTOKH+XQxfc4Wtd0F6UrdJJ2QBzjQQ0+dbkeDE5FdnNS5aO1Pxxf4mMxuCtKmZW546OAVRynVPPfNw5UmrBv/wwl7vvOeTPC5bm7McyMj8mF2VnsvXKCSezYnUq4ydg5ykldgjFGDP6RbORBusjCxjhDlr06YwYLeNpSacfoRjHJNXgT3TxBOkTTDWmzAeSN0zESlBSaePzqcGfAFNp2JNvbdEPsO9KhG6HyZhBnFgeJou0d2ANL/f2uZIs91+R/KEC",
+      "dataToEncryptHash": "dfe3b8e2ddc0a7a6ee6b424ceb43a8a9f12a8e8dfa0966a508e3a9033f437e15"
     }
   ]
 }
