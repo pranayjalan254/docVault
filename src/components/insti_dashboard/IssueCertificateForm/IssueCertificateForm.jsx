@@ -4,12 +4,10 @@ import "./issuecertificateform.css";
 import { issueCredential } from "../../../webr";
 import Papa from "papaparse";
 import { useFormData } from "./FormData";
-import { useEncryptData } from "../../../lit protocol/lit_protocol.jsx";
 import { Lit } from "../../../lit protocol/lit_protocol.jsx";
 
 const IssueCertificateForm = () => {
   const { formData, setFormData } = useFormData();
-  const { encryptData } = useEncryptData();
   const [csvData, setCsvData] = useState([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState("");
@@ -114,13 +112,9 @@ const IssueCertificateForm = () => {
   const issueSingleCertificate = async () => {
     setIsLoading(true);
     try {
-      const { ciphertext, dataToEncryptHash, accessControlConditions } =
-        await encryptData();
-      const encryptedData = {
-        ciphertext,
-        dataToEncryptHash,
-        accessControlConditions,
-      };
+      const lit = new Lit();
+      await lit.connect();
+      const encryptedData = await lit.encrypt(formData, formData.walletAddress);
 
       // Save metadata
       const saveMetadataResponse = await axios.post(

@@ -10,10 +10,11 @@ const CertificateList = () => {
   const [userWalletAddress, setUserWalletAddress] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [decryptionError, setDecryptionError] = useState(null); // State to track decryption error
-  const [selectedCertIndex, setSelectedCertIndex] = useState(null); // Track certificate index for popup
+  const [decryptionError, setDecryptionError] = useState(null);
+  const [selectedCertIndex, setSelectedCertIndex] = useState(null);
+  const [decryptingIndex, setDecryptingIndex] = useState(null);
+  const [loadingCertificates, setLoadingCertificates] = useState(false);
 
-  // Fetch wallet address on component load
   useEffect(() => {
     const fetchWalletAddress = async () => {
       try {
@@ -35,11 +36,11 @@ const CertificateList = () => {
     fetchWalletAddress();
   }, []);
 
-  // Fetch certificates after wallet address is loaded
   useEffect(() => {
     if (!userWalletAddress) return;
 
     const fetchCertificates = async () => {
+      setLoadingCertificates(true);
       try {
         await axios.post("http://localhost:5000/run-query-table");
         const response = await fetch("/fetchedCertificates.json");
@@ -48,7 +49,6 @@ const CertificateList = () => {
         const data = await response.json();
         const fetchedCertificates = data.results || [];
 
-        // Filter certificates for the user's wallet address
         const filteredCertificates = fetchedCertificates.filter((cert) => {
           return (
             cert &&
@@ -64,6 +64,8 @@ const CertificateList = () => {
       } catch (error) {
         setError("Failed to fetch certificates.");
         console.error(error);
+      } finally {
+        setLoadingCertificates(false);
       }
     };
 
@@ -71,6 +73,7 @@ const CertificateList = () => {
   }, [userWalletAddress]);
 
   const decryptCertificate = async (cert, index) => {
+    setDecryptingIndex(index);
     try {
       const lit = new Lit();
       await lit.connect();
@@ -80,10 +83,14 @@ const CertificateList = () => {
         newCerts[index] = { ...newCerts[index], decryptedCert };
         return newCerts;
       });
+
+      setDecryptionError(null);
     } catch (error) {
       console.error("Failed to decrypt certificate:", error);
-      setSelectedCertIndex(index);
       setDecryptionError("Failed to decrypt this certificate.");
+    } finally {
+      setDecryptingIndex(null);
+      setSelectedCertIndex(index);
     }
   };
 
@@ -98,65 +105,74 @@ const CertificateList = () => {
   return (
     <div className="certificate-list">
       <h2>Issued Certificates</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Wallet Address</th>
-            <th>Student Name</th>
-            <th>Course</th>
-            <th>Date</th>
-            <th>Contact</th>
-            <th>Address</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {certificates.length > 0 ? (
-            certificates.map((cert, index) => (
-              <tr key={index}>
-                {/* Before decryption, show placeholders */}
-                <td>
-                  {cert.decryptedCert
-                    ? `${cert.decryptedCert.walletAddress.slice(0, 4)}....`
-                    : "Encrypted"}
-                </td>
-                <td>
-                  {cert.decryptedCert
-                    ? cert.decryptedCert.studentName
-                    : "Encrypted"}
-                </td>
-                <td>
-                  {cert.decryptedCert ? cert.decryptedCert.course : "Encrypted"}
-                </td>
-                <td>
-                  {cert.decryptedCert ? cert.decryptedCert.date : "Encrypted"}
-                </td>
-                <td>
-                  {cert.decryptedCert
-                    ? cert.decryptedCert.contact
-                    : "Encrypted"}
-                </td>
-                <td>
-                  {cert.decryptedCert ? cert.decryptedCert.add : "Encrypted"}
-                </td>
-                <td>
-                  <button onClick={() => decryptCertificate(cert, index)}>
-                    Decrypt Certificate
-                  </button>
+      {loadingCertificates ? (
+        <p>Loading certificates...</p>
+      ) : (
+        <table>
+          <thead>
+            <tr>
+              <th>Wallet Address</th>
+              <th>Student Name</th>
+              <th>Course</th>
+              <th>Date</th>
+              <th>Contact</th>
+              <th>Address</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {certificates.length > 0 ? (
+              certificates.map((cert, index) => (
+                <tr key={index}>
+                  <td>
+                    {cert.decryptedCert
+                      ? `${cert.decryptedCert.walletAddress.slice(0, 4)}....`
+                      : "Encrypted"}
+                  </td>
+                  <td>
+                    {cert.decryptedCert
+                      ? cert.decryptedCert.studentName
+                      : "Encrypted"}
+                  </td>
+                  <td>
+                    {cert.decryptedCert
+                      ? cert.decryptedCert.course
+                      : "Encrypted"}
+                  </td>
+                  <td>
+                    {cert.decryptedCert ? cert.decryptedCert.date : "Encrypted"}
+                  </td>
+                  <td>
+                    {cert.decryptedCert
+                      ? cert.decryptedCert.contact
+                      : "Encrypted"}
+                  </td>
+                  <td>
+                    {cert.decryptedCert ? cert.decryptedCert.add : "Encrypted"}
+                  </td>
+                  <td>
+                    <button
+                      onClick={() => decryptCertificate(cert, index)}
+                      disabled={decryptingIndex === index}
+                    >
+                      {decryptingIndex === index
+                        ? "Decrypting..."
+                        : "Decrypt Certificate"}
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="7">
+                  No certificates found for this wallet address.
                 </td>
               </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="6">
-                No certificates found for this wallet address.
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+            )}
+          </tbody>
+        </table>
+      )}
 
-      {/* Popup for decryption error */}
       {selectedCertIndex !== null && decryptionError && (
         <div className="popup">
           <div className="popup-content">

@@ -23,6 +23,9 @@ const Sidebar = () => {
       <nav>
         <ul>
           <li>
+            <NavLink to="/stud-dashboard/money">Add Money</NavLink>
+          </li>
+          <li>
             <NavLink to="/stud-dashboard/certificates">
               View Certificates
             </NavLink>

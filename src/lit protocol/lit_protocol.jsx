@@ -8,7 +8,6 @@ import {
 } from "@lit-protocol/auth-helpers";
 import { LitNetwork } from "@lit-protocol/constants";
 import { web3auth } from "../components/web3auth/Web3modal";
-import { useFormData } from "../components/insti_dashboard/IssueCertificateForm/FormData.jsx";
 import { chainConfig, datilConfig } from "../components/web3auth/Web3modal.tsx";
 export class Lit {
   litNodeClient;
@@ -191,21 +190,4 @@ export class Lit {
       throw error;
     }
   }
-}
-export function useEncryptData() {
-  const { formData } = useFormData();
-  const encryptData = async () => {
-    const lit = new Lit();
-    await lit.connect();
-    const studentData = {
-      walletAddress: formData.walletAddress,
-      studentName: formData.studentName,
-      course: formData.course,
-      date: formData.date,
-      contact: formData.contact,
-      add: formData.add,
-    };
-    return await lit.encrypt(studentData, studentData.address);
-  };
-  return { encryptData };
 }

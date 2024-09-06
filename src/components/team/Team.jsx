@@ -6,11 +6,11 @@ const teamMembers = [
     position: "Full Stack Developer",
     description:
       "Passionate about building real-world full-stack applications.",
-    photo: "./profile.jpg",
+    photo: "./pranay.jpg",
     socialLinks: {
-      twitter: "https://twitter.com/alicejohnson",
-      linkedin: "https://linkedin.com/in/alicejohnson",
-      github: "https://github.com/alicejohnson",
+      twitter: "https://x.com/pranaytwts",
+      linkedin: "https://www.linkedin.com/in/pranay-jalan254/",
+      github: "https://github.com/pranayjalan254",
     },
   },
   {
@@ -19,9 +19,9 @@ const teamMembers = [
     description: "Expert in smart contracts and blockchain infrastructure.",
     photo: "./anmol.jpg",
     socialLinks: {
-      twitter: "https://twitter.com/bobsmith",
-      linkedin: "https://linkedin.com/in/bobsmith",
-      github: "https://github.com/bobsmith",
+      twitter: "",
+      linkedin: "",
+      github: "https://github.com/anmolagr39",
     },
   },
   {
@@ -30,9 +30,9 @@ const teamMembers = [
     description: "Expert in smart contracts and blockchain infrastructure.",
     photo: "./ansh.jpg",
     socialLinks: {
-      twitter: "https://twitter.com/caroldavis",
-      linkedin: "https://linkedin.com/in/caroldavis",
-      github: "https://github.com/caroldavis",
+      twitter: "",
+      linkedin: "",
+      github: "https://github.com/AnshNohria",
     },
   },
 ];
