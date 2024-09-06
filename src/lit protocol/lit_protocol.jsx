@@ -9,7 +9,7 @@ import {
 import { LitNetwork } from "@lit-protocol/constants";
 import { web3auth } from "../components/web3auth/Web3modal";
 import { useFormData } from "../components/insti_dashboard/IssueCertificateForm/FormData.jsx";
-import { chainConfig, datilConfig } from "../components/web3auth/Web3modal.tsx"; 
+import { chainConfig, datilConfig } from "../components/web3auth/Web3modal.tsx";
 export class Lit {
   litNodeClient;
   chain = "sepolia";
@@ -23,6 +23,7 @@ export class Lit {
       // Connect to Lit Protocol
       const litNodeClient = new LitJsSdk.LitNodeClientNodeJs({
         alertWhenUnauthorized: false,
+        checkNodeAttestation: true,
         litNetwork: LitNetwork.Datil, // Use a specific testnet
         debug: true,
         connectTimeout: 60000, // Increase timeout
@@ -34,11 +35,15 @@ export class Lit {
       console.log("Successfully connected to Lit Protocol");
 
       // Connect to Ethereum
-     // await window.ethereum.request({ method: "eth_requestAccounts" });
+      //   await window.ethereum.request({ method: "eth_requestAccounts" });
       this.provider = new ethers.providers.Web3Provider(web3auth.provider);
       this.signer = this.provider.getSigner();
       this.currentAccount = await this.signer.getAddress();
-      console.log("Connected to Ethereum. Current account:", this.currentAccount);
+
+      console.log(
+        "Connected to Ethereum. Current account:",
+        this.currentAccount
+      );
     } catch (error) {
       console.error("Error during connection:", error);
       throw error;
@@ -47,7 +52,7 @@ export class Lit {
   async switchNetwork(network) {
     try {
       let newChainConfig;
-  
+
       if (network === "sepolia") {
         newChainConfig = chainConfig;
       } else if (network === "datil") {
@@ -55,11 +60,11 @@ export class Lit {
       } else {
         throw new Error("Unsupported network!");
       }
-  
+
       await web3auth.configureAdapter({
         chainConfig: newChainConfig,
       });
-  console.log("Switched to", chainConfig);
+      console.log("Switched to", chainConfig);
 
       console.log(`Switched to ${network} network.`);
     } catch (error) {
@@ -74,7 +79,11 @@ export class Lit {
     const authNeededCallback = async (params) => {
       const latestBlockhash = await this.litNodeClient.getLatestBlockhash();
 
-      if (!params.uri || !params.expiration || !params.resourceAbilityRequests) {
+      if (
+        !params.uri ||
+        !params.expiration ||
+        !params.resourceAbilityRequests
+      ) {
         throw new Error("Missing required parameters for session signature.");
       }
 
@@ -147,7 +156,6 @@ export class Lit {
         this.litNodeClient
       );
 
-
       console.log("Data decrypted successfully");
       console.log("Decrypted data:", decryptedString);
       return JSON.parse(decryptedString);
@@ -168,7 +176,7 @@ export class Lit {
         standardContractType: "",
         chain: "sepolia",
         method: "",
-        parameters: [":userAddress"],
+        parameters: [":userWalletAddress"],
         returnValueTest: {
           comparator: "=",
           value: walletAddress,
@@ -217,30 +225,4 @@ export function useEncryptData() {
     return await lit.encrypt(studentData, studentData.address);
   };
   return { encryptData };
-}
-
-export async function decryptData() {
-  const encryptedData = {
-    ciphertext:
-      "l+iMsJqBoevB8jJ2dpk2uX5YT9LxaYCvvEulzOLblGmTj7SkyuPRdKTg54+eOwNZ/e85/mmrbKOLpLFpeZ/hinb5+aln3UoHZXhZ+AxPvaZ4m7KP74S028iXGUFJ4hHnmdKURioGEboJ2EPV0EjdKKSAQXCsbFAYEAXRlJaJf7+49lKsc9vf38/nyhCCXiPMkJfxTCJEnsDMA6yKgJQ4n1U3r8KeZri7A+f4Gpw3l+oCMIndzylqG9W3zrSuAu7Oae95nBmMErdwAg==",
-    dataToEncryptHash:
-      "7a8b45c2501618b55263f2952f2e68ad726c22b3ce5cc6549beb20123adddf97",
-    accessControlConditions: [
-      {
-        contractAddress: "",
-        standardContractType: "",
-        chain: "sepolia",
-        method: "",
-        parameters: [":userAddress"],
-        returnValueTest: {
-          comparator: "=",
-          value: "0xf1dd037c04c2973b10203259821B02e204ccaaA9",
-        },
-      },
-    ],
-  };
- 
-  const lit = new Lit();
-  await lit.connect();
-  return await lit.decrypt(encryptedData);
 }

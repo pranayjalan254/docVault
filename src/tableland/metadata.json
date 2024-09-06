@@ -1,6 +1,6 @@
 {
-  "ciphertext": "kA9/VGc60wOT8vhswKxYigPlUMtoS9GJkZGFBuYPXyrEt8spd8tg01cYzsuVPnyKVg0Q6UgrfyItUYSR1BRqKe5RalvqobwxfvJpV95t3WSYAawIiROSYzJRjHNxs6vAi2Q55f8asTqVoIBpoxM6UJb5LxuLNLZzhzUrNM7icuDTVf4ioxoMAawWSEw2OWLr7jVP26aJf0+KQo2bUp0a/EwW1NZs7VO9F0Kn+Idy6Klgdt+lMqiccQ8ouiDdzqADFmNzxSHJ0UvxLCcOkgwJzcFIgM1UZzsiN891VipVxhTpglL+gTgy3piwAg==",
-  "dataToEncryptHash": "7e31f4d03a1f71c20131edc368e7e73285f1f918351e90151a48755c2226eba9",
+  "ciphertext": "rJtXu2B/VJAgzRdYowB9pa0MpzQaSM6EYtUKfXugH2cjOhYFjRFkfPR5/AFT0zBYfFAnv0QLkKJWutEnbkUqRLbZOtAw4rhymmhKvPmyQyCQAT4UKtGNwx3i7QVqKCmjtGcfmAqqF69QdjGkT2poOTUQHbCgngFURjw1IIGr5tfTUKn4bw9HsQ0BPNnDNnqazFHH4jaDJEGLGkl1w9zCwwcgpul0tBekEsSMODyl+pgyCqF5f+PXNqkx7iSRQNtA/vVhLAoE/8mY/CWr8iaDuGDVtz/WJk72CffGQMfmpkYS1gI=",
+  "dataToEncryptHash": "e99047c60bcd5f904c546a4ab7ce9a516650f7f43b072fc4fa46cd4284a660db",
   "accessControlConditions": [
     {
       "contractAddress": "",
@@ -8,11 +8,11 @@
       "chain": "sepolia",
       "method": "",
       "parameters": [
-        ":userAddress"
+        "0x91150034A9a5D4C1C2755cf7bFC6F53890805D5f"
       ],
       "returnValueTest": {
         "comparator": "=",
-        "value": "0x24CCE2d0c9EdE31AC9498d4eB2f9bd68608137B5"
+        "value": "0x91150034A9a5D4C1C2755cf7bFC6F53890805D5f"
       }
     }
   ]

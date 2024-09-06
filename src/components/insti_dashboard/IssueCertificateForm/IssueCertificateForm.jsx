@@ -71,9 +71,6 @@ const IssueCertificateForm = () => {
 
         await axios.post("http://localhost:5000/run-insert-metadata");
         console.log(`Metadata insertion triggered for ${studentName}.`);
-
-        await axios.post("http://localhost:5000/run-query-table");
-        console.log(`Table queried successfully for ${studentName}.`);
       }
 
       setIsSubmitted(true);
@@ -114,8 +111,7 @@ const IssueCertificateForm = () => {
       await axios.post("http://localhost:5000/run-insert-metadata");
       console.log("Metadata insertion triggered.");
 
-      await axios.post("http://localhost:5000/run-query-table");
-      console.log("Table queried successfully.");
+
     } catch (error) {
       setError("There was an error saving the form data");
       console.error("There was an error saving the form data", error);
