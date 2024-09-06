@@ -9,7 +9,7 @@ import {
 import { LitNetwork } from "@lit-protocol/constants";
 import { web3auth } from "../components/web3auth/Web3modal";
 import { useFormData } from "../components/insti_dashboard/IssueCertificateForm/FormData.jsx";
-
+import { chainConfig, datilConfig } from "../components/web3auth/Web3modal.tsx"; 
 export class Lit {
   litNodeClient;
   chain = "sepolia";
@@ -18,39 +18,55 @@ export class Lit {
   currentAccount;
 
   async connect() {
-    console.log("Connecting to Lit Protocol and Web3Auth...");
+    console.log("Connecting to Lit Protocol...");
     try {
       // Connect to Lit Protocol
       const litNodeClient = new LitJsSdk.LitNodeClientNodeJs({
         alertWhenUnauthorized: false,
-        litNetwork: LitNetwork.DatilTest,
-        checkNodeAttestation: true,
+        litNetwork: LitNetwork.Datil, // Use a specific testnet
         debug: true,
-        connectTimeout: 30000,
+        connectTimeout: 60000, // Increase timeout
+        retryTimeout: 5000, // Add retry timeout
+        maxRetries: 3, // Add max retries
       });
       await litNodeClient.connect();
       this.litNodeClient = litNodeClient;
       console.log("Successfully connected to Lit Protocol");
 
-      // Check if Web3Auth is connected
-      // const web3authProvider = await web3auth.connect();
-      // Extract provider and signer from Web3Auth
-      await window.ethereum.request({ method: "eth_requestAccounts" });
-      this.provider = new ethers.providers.Web3Provider(window.ethereum);
+      // Connect to Ethereum
+     // await window.ethereum.request({ method: "eth_requestAccounts" });
+      this.provider = new ethers.providers.Web3Provider(web3auth.provider);
       this.signer = this.provider.getSigner();
       this.currentAccount = await this.signer.getAddress();
-      console.log(
-        "Connected to Web3Auth. Current account:",
-        this.currentAccount
-      );
+      console.log("Connected to Ethereum. Current account:", this.currentAccount);
     } catch (error) {
       console.error("Error during connection:", error);
       throw error;
     }
   }
+  async switchNetwork(network) {
+    try {
+      let newChainConfig;
+  
+      if (network === "sepolia") {
+        newChainConfig = chainConfig;
+      } else if (network === "datil") {
+        newChainConfig = datilConfig;
+      } else {
+        throw new Error("Unsupported network!");
+      }
+  
+      await web3auth.configureAdapter({
+        chainConfig: newChainConfig,
+      });
+  console.log("Switched to", chainConfig);
 
+      console.log(`Switched to ${network} network.`);
+    } catch (error) {
+      console.error("Failed to switch network:", error);
+    }
+  }
   async getSessionSignatures() {
-    // Ensure connection to Lit Protocol
     if (!this.litNodeClient) {
       await this.connect();
     }
@@ -58,16 +74,10 @@ export class Lit {
     const authNeededCallback = async (params) => {
       const latestBlockhash = await this.litNodeClient.getLatestBlockhash();
 
-      // Validate required parameters
-      if (
-        !params.uri ||
-        !params.expiration ||
-        !params.resourceAbilityRequests
-      ) {
+      if (!params.uri || !params.expiration || !params.resourceAbilityRequests) {
         throw new Error("Missing required parameters for session signature.");
       }
 
-      // Create the SIWE message
       const siweMessage = await createSiweMessageWithRecaps({
         uri: params.uri,
         expiration: params.expiration,
@@ -76,9 +86,7 @@ export class Lit {
         nonce: latestBlockhash,
         litNodeClient: this.litNodeClient,
       });
-      console.log("SIWE message:", siweMessage);
 
-      // Generate the authSig
       const authSig = await generateAuthSig({
         signer: this.signer,
         toSign: siweMessage,
@@ -101,7 +109,7 @@ export class Lit {
         resourceAbilityRequests,
         authNeededCallback,
       });
-      console.log(sessionSigs);
+      console.log("Session signatures obtained successfully");
       return sessionSigs;
     } catch (error) {
       console.error("Error getting session signatures:", error);
@@ -231,6 +239,7 @@ export async function decryptData() {
       },
     ],
   };
+ 
   const lit = new Lit();
   await lit.connect();
   return await lit.decrypt(encryptedData);

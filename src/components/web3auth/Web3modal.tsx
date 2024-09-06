@@ -10,7 +10,7 @@ import "./web3auth.css";
 
 const clientId = import.meta.env.VITE_CLIENT_ID ?? "";
 
-const chainConfig = {
+export const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
   chainId: "0xaa36a7",
   rpcTarget:
@@ -19,6 +19,16 @@ const chainConfig = {
   blockExplorer: "https://sepolia.etherscan.io/",
   ticker: "ETH",
   tickerName: "Sepolia Ether",
+};
+
+export const datilConfig = {
+  chainNamespace: "eip155",
+  chainId: "0x2AC54", 
+  rpcTarget: "https://yellowstone-rpc.litprotocol.com/", 
+  displayName: "Chronicle Yellowstone",
+  blockExplorer: "https://yellowstone-explorer.litprotocol.com/",
+  ticker: "tstLPX",
+  tickerName: "Datil",
 };
 
 const privateKeyProvider = new EthereumPrivateKeyProvider({
