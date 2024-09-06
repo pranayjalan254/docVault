@@ -207,8 +207,6 @@ export class Lit {
     }
   }
 }
-
-// Example usage
 export function useEncryptData() {
   const { formData } = useFormData();
   const encryptData = async () => {
@@ -220,7 +218,7 @@ export function useEncryptData() {
       course: formData.course,
       date: formData.date,
       contact: formData.contact,
-      resaddress: formData.address,
+      resaddress: formData.add,
     };
     return await lit.encrypt(studentData, studentData.address);
   };

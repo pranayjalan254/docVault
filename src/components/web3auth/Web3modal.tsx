@@ -91,13 +91,6 @@ function Web3modal() {
       const ethersProvider = new ethers.providers.Web3Provider(
         web3authProvider
       );
-      if (web3authProvider) {
-        const privateKey = await web3authProvider.request({
-          method: "private_key",
-        });
-        console.log(privateKey);
-      }
-
       const signer = ethersProvider.getSigner();
 
       const address = await signer.getAddress();

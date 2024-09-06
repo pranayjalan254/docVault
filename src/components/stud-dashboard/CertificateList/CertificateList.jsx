@@ -135,7 +135,9 @@ const CertificateList = () => {
                     : "Encrypted"}
                 </td>
                 <td>
-                  {cert.decryptedCert ? cert.decryptedCert.add : "Encrypted"}
+                  {cert.decryptedCert
+                    ? cert.decryptedCert.resaddress
+                    : "Encrypted"}
                 </td>
                 <td>
                   <button onClick={() => decryptCertificate(cert, index)}>
