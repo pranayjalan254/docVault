@@ -24,17 +24,16 @@ export class Lit {
       const litNodeClient = new LitJsSdk.LitNodeClientNodeJs({
         alertWhenUnauthorized: false,
         checkNodeAttestation: true,
-        litNetwork: LitNetwork.Datil, // Use a specific testnet
+        litNetwork: LitNetwork.Datil,
         debug: true,
-        connectTimeout: 60000, // Increase timeout
-        retryTimeout: 5000, // Add retry timeout
-        maxRetries: 3, // Add max retries
+        connectTimeout: 60000,
+        retryTimeout: 5000,
+        maxRetries: 3,
       });
       await litNodeClient.connect();
       this.litNodeClient = litNodeClient;
       console.log("Successfully connected to Lit Protocol");
 
-      // Connect to Ethereum
       //   await window.ethereum.request({ method: "eth_requestAccounts" });
       this.provider = new ethers.providers.Web3Provider(web3auth.provider);
       this.signer = this.provider.getSigner();
@@ -60,17 +59,14 @@ export class Lit {
       } else {
         throw new Error("Unsupported network!");
       }
-
       await web3auth.configureAdapter({
         chainConfig: newChainConfig,
       });
-      console.log("Switched to", chainConfig);
-
-      console.log(`Switched to ${network} network.`);
     } catch (error) {
       console.error("Failed to switch network:", error);
     }
   }
+
   async getSessionSignatures() {
     if (!this.litNodeClient) {
       await this.connect();
@@ -132,19 +128,13 @@ export class Lit {
     }
 
     try {
-      // Get session signatures
       const sessionSigs = await this.getSessionSignatures();
-      console.log("Session signatures:", sessionSigs);
 
       if (!sessionSigs) {
         throw new Error("Failed to get valid session signatures.");
       }
-
-      console.log("Encrypted data:", encryptedData);
-
       console.log("Decrypting data...");
 
-      // Decrypt the data using Lit Protocol
       const decryptedString = await LitJsSdk.decryptToString(
         {
           accessControlConditions: encryptedData.accessControlConditions,
@@ -155,7 +145,6 @@ export class Lit {
         },
         this.litNodeClient
       );
-
       console.log("Data decrypted successfully");
       console.log("Decrypted data:", decryptedString);
       return JSON.parse(decryptedString);
@@ -164,7 +153,7 @@ export class Lit {
       throw error;
     }
   }
-  // Encrypt function as requested
+
   async encrypt(studentData, walletAddress) {
     if (!this.litNodeClient) {
       await this.connect();
@@ -195,11 +184,7 @@ export class Lit {
         },
         this.litNodeClient
       );
-
       console.log("Data encrypted successfully");
-      console.log("ciphertext:", ciphertext);
-      console.log("dataToEncryptHash:", dataToEncryptHash);
-      console.log("accessControlConditions:", accessControlConditions);
       return { ciphertext, dataToEncryptHash, accessControlConditions };
     } catch (error) {
       console.error("Error during encryption:", error);
@@ -213,12 +198,12 @@ export function useEncryptData() {
     const lit = new Lit();
     await lit.connect();
     const studentData = {
-      address: formData.walletAddress,
-      name: formData.studentName,
+      walletAddress: formData.walletAddress,
+      studentName: formData.studentName,
       course: formData.course,
       date: formData.date,
       contact: formData.contact,
-      resaddress: formData.add,
+      add: formData.add,
     };
     return await lit.encrypt(studentData, studentData.address);
   };

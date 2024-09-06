@@ -4,6 +4,7 @@ import { abi, contractAddress } from "./constants.js";
 import { loadData } from "./parse.jsx";
 import { web3auth } from "./components/web3auth/Web3modal.tsx";
 import { loadEncryptedData } from "./parse.jsx";
+
 // Function to issue a credential using Web3Auth
 export async function issueCredential(formData) {
   console.log(`Issuing credential...`);
@@ -17,31 +18,38 @@ export async function issueCredential(formData) {
     // Load the contract using the signer
     const contract = new ethers.Contract(contractAddress, abi, signer);
 
-    // Load data from your data parsing function 
-    const [WALLET_ADDRESS, COURSE, DATE, CONTACT, ADD] = await loadData(formData);
+    // Load data from your data parsing function
+    const [WALLET_ADDRESS, COURSE, DATE, CONTACT, ADD] =
+      await loadData(formData);
+
+    // Fetch encrypted metadata from the backend
     const response = await fetch("http://localhost:5000/api/metadata");
     const encryptedData = await response.json();
-    const [CIPHERTEXT, DATA_TO_ENCRYPT_HASH] =
-      await loadEncryptedData(encryptedData); 
-      console.log(`contract ${contract}`)
-      console.log(`Issuing credential for ${WALLET_ADDRESS}... with ciphertext ${CIPHERTEXT} and dataToEncryptHash ${DATA_TO_ENCRYPT_HASH}`
-      
-      );
 
+    // Load encrypted data details
+    const [CIPHERTEXT, DATA_TO_ENCRYPT_HASH] =
+      await loadEncryptedData(encryptedData);
+
+    // Check if the Ethereum address is valid
     if (!ethers.utils.isAddress(WALLET_ADDRESS)) {
       throw new Error(`Invalid Ethereum address: ${WALLET_ADDRESS}`);
     }
+
     // Issue credential by calling the contract method
     const transactionResponse = await contract.issueCredential(
       WALLET_ADDRESS,
       CIPHERTEXT,
       DATA_TO_ENCRYPT_HASH
     );
-    console.log(`contract ${transactionResponse}`)
     // Wait for the transaction to be mined
     await listenForTransactionMine(transactionResponse, ethersProvider);
+    return { success: true, message: "Credential issued successfully" };
   } catch (error) {
-    console.log("Error issuing credential:", error);
+    console.error("Error issuing credential:", error);
+    return {
+      success: false,
+      message: `Error issuing credential: ${error.message}`,
+    };
   }
 }
 

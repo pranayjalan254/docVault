@@ -5,6 +5,7 @@ import { issueCredential } from "../../../webr";
 import Papa from "papaparse";
 import { useFormData } from "./FormData";
 import { useEncryptData } from "../../../lit protocol/lit_protocol.jsx";
+import { Lit } from "../../../lit protocol/lit_protocol.jsx";
 
 const IssueCertificateForm = () => {
   const { formData, setFormData } = useFormData();
@@ -13,7 +14,7 @@ const IssueCertificateForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState("");
   const [isCsvMode, setIsCsvMode] = useState(false);
-  const [isLoading, setIsLoading] = useState(false); 
+  const [isLoading, setIsLoading] = useState(false);
 
   // Handle CSV file upload
   const handleFileChange = (e) => {
@@ -37,53 +38,81 @@ const IssueCertificateForm = () => {
 
   // Function to issue certificates from CSV data
   const issueCertificatesFromCsv = async () => {
-    setIsLoading(true); // Start loading
+    setIsLoading(true);
     try {
       for (const row of csvData) {
         const { studentName, course, date, walletAddress, contact, add } = row;
-        if (!studentName || !course || !date || !walletAddress || !contact || !add) {
+        if (
+          !studentName ||
+          !course ||
+          !date ||
+          !walletAddress ||
+          !contact ||
+          !add
+        ) {
           setError("CSV is missing required fields.");
           continue;
         }
+
         const formData = {
-          studentName, 
+          studentName,
           course,
           date,
-          walletAddress,
-          contact,    
+          contact,
           add,
-          
-        }
-
-        const { ciphertext, dataToEncryptHash, accessControlConditions } =
-          await encryptData();
-        const encryptedData = {
-          ciphertext,
-          dataToEncryptHash,
-          accessControlConditions,
+          walletAddress,
         };
-        await axios.post("http://localhost:5000/save-metadata", encryptedData);
 
+        // Encrypt data
+        const lit = new Lit();
+        await lit.connect();
+        const encryptedData = await lit.encrypt(
+          formData,
+          formData.walletAddress
+        );
+
+        // Save metadata
+        const saveMetadataResponse = await axios.post(
+          "http://localhost:5000/save-metadata",
+          encryptedData
+        );
+        if (!saveMetadataResponse.data.success) {
+          setError(`Failed to save metadata for ${studentName}.`);
+          continue;
+        }
         console.log(`Form data for ${studentName} saved to metadata.json`);
 
-        await issueCredential(formData);
+        // Issue credential
+        const issueCredentialResponse = await issueCredential(formData);
+        if (!issueCredentialResponse.success) {
+          setError(`Failed to issue credential for ${studentName}.`);
+          continue;
+        }
         console.log(`Credential issued successfully for ${studentName}`);
 
-        await axios.post("http://localhost:5000/run-insert-metadata");
+        // Insert metadata to tableland
+        const insertMetadataResponse = await axios.post(
+          "http://localhost:5000/run-insert-metadata"
+        );
+        if (!insertMetadataResponse.data.success) {
+          setError(`Failed to insert metadata for ${studentName}.`);
+          continue;
+        }
         console.log(`Metadata insertion triggered for ${studentName}.`);
       }
 
       setIsSubmitted(true);
-      setIsLoading(false); // End loading
     } catch (error) {
       setError("There was an error processing the CSV data");
-      setIsLoading(false); // End loading on error
       console.error("There was an error processing the CSV data", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   // Function to issue a single certificate
   const issueSingleCertificate = async () => {
+    setIsLoading(true);
     try {
       const { ciphertext, dataToEncryptHash, accessControlConditions } =
         await encryptData();
@@ -92,11 +121,36 @@ const IssueCertificateForm = () => {
         dataToEncryptHash,
         accessControlConditions,
       };
-      await axios.post("http://localhost:5000/save-metadata", encryptedData);
+
+      // Save metadata
+      const saveMetadataResponse = await axios.post(
+        "http://localhost:5000/save-metadata",
+        encryptedData
+      );
+      console.log(saveMetadataResponse.data.success);
+      if (!saveMetadataResponse.data.success) {
+        setError("Failed to save metadata.");
+        return;
+      }
       console.log("Form data has been saved to metadata.json");
 
-      await issueCredential(formData);
+      // Issue credential
+      const issueCredentialResponse = await issueCredential(formData);
+      if (!issueCredentialResponse.success) {
+        setError("Failed to issue credential.");
+        return;
+      }
       console.log("Credential issued successfully");
+
+      // Insert metadata
+      const insertMetadataResponse = await axios.post(
+        "http://localhost:5000/run-insert-metadata"
+      );
+      if (!insertMetadataResponse.data.success) {
+        setError("Failed to insert metadata.");
+        return;
+      }
+      console.log("Metadata insertion triggered.");
 
       setIsSubmitted(true);
       setFormData({
@@ -107,14 +161,11 @@ const IssueCertificateForm = () => {
         add: "",
         walletAddress: "",
       });
-
-      await axios.post("http://localhost:5000/run-insert-metadata");
-      console.log("Metadata insertion triggered.");
-
-
     } catch (error) {
       setError("There was an error saving the form data");
       console.error("There was an error saving the form data", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -220,9 +271,9 @@ const IssueCertificateForm = () => {
             />
           </div>
           <div className="form-group-insti">
-            <label>Residential Address</label> 
+            <label>Residential Address</label>
             <input
-              type="text" 
+              type="text"
               name="add"
               value={formData.add || ""}
               onChange={(e) =>
@@ -244,16 +295,17 @@ const IssueCertificateForm = () => {
             />
           </div>
           <button type="submit" disabled={isLoading}>
-            {isLoading ? "Issuing Certificate..." : "Issue Single Certificate"}
+            {isLoading ? "Issuing Certificate..." : "Issue Certificate"}
           </button>
+          <h4>Note: Please add enough ETH to issue the certificate</h4>
         </form>
       )}
 
       {isSubmitted && (
         <div className="popup">
           <div className="popup-content">
-            <h3>Certificates Issued Successfully!</h3>
-            <button onClick={handleClosePopup}>OK</button>
+            <h3>Certificate issued successfully</h3>
+            <button onClick={handleClosePopup}>Close</button>
           </div>
         </div>
       )}
@@ -262,3 +314,5 @@ const IssueCertificateForm = () => {
 };
 
 export default IssueCertificateForm;
+
+// Decrypted data: {"studentName":"Pranay","course":"eni","date":"2/5/2004","contact":"123","add":"bits","walletAddress":"0x24CCE2d0c9EdE31AC9498d4eB2f9bd68608137B5"}

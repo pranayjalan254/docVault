@@ -117,11 +117,13 @@ const CertificateList = () => {
                 {/* Before decryption, show placeholders */}
                 <td>
                   {cert.decryptedCert
-                    ? `${cert.decryptedCert.address.slice(0, 4)}....`
+                    ? `${cert.decryptedCert.walletAddress.slice(0, 4)}....`
                     : "Encrypted"}
                 </td>
                 <td>
-                  {cert.decryptedCert ? cert.decryptedCert.name : "Encrypted"}
+                  {cert.decryptedCert
+                    ? cert.decryptedCert.studentName
+                    : "Encrypted"}
                 </td>
                 <td>
                   {cert.decryptedCert ? cert.decryptedCert.course : "Encrypted"}
@@ -135,9 +137,7 @@ const CertificateList = () => {
                     : "Encrypted"}
                 </td>
                 <td>
-                  {cert.decryptedCert
-                    ? cert.decryptedCert.resaddress
-                    : "Encrypted"}
+                  {cert.decryptedCert ? cert.decryptedCert.add : "Encrypted"}
                 </td>
                 <td>
                   <button onClick={() => decryptCertificate(cert, index)}>
