@@ -145,7 +145,6 @@ export class Lit {
         this.litNodeClient
       );
       console.log("Data decrypted successfully");
-      console.log("Decrypted data:", decryptedString);
       return JSON.parse(decryptedString);
     } catch (error) {
       console.error("Error during decryption:", error.message);

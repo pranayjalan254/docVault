@@ -1,6 +1,6 @@
 {
-  "ciphertext": "tLbcXQNQR4bQ1cffnvfuDNCJdVIFR6a/mTtf2PPwD3iY4GdTSkw6MoxnK2rr7n9pEJBiKska2hfvNkuLAXC/ihynpcL+VviSh/dRJ77/+GeVASoctQ0Xz9KMXqbmyKcaLPY6hl4Kna+eqHDp91q+xdm+ok8qs1OVy86SWERBmGfYd+sKWy25g9XEMDJDAsECvLxNm49+Nn6TWsl7Z+hiPaK0+eXUNVkS3rpp4T95LBE9RLbJFRn/iKlRHZW4OUgGTTHwpOmQGm7Q6kDz4+9cMuyYA0N5R6fJSwggQr3NoJRKyNGNJ255Ag==",
-  "dataToEncryptHash": "1bbe7d1f693aa65dfcaa273786ac3a6e747262d74f203ae12b3e6383f9bcfb4d",
+  "ciphertext": "kproQ+Xnb494b0MTvHUN/j5PCEt3nUazh6tK3/wRJkppppGD2vG59zMMv/64Rilnk8EZkkbVHgcZWjBXmg9oMhd+26UifwqeAxHzZDbDHIuVAWewHLkqQVXVnyCYIj8fja/Z1u0gmkJKsLdw0POwST29EC8eD0uu/8L9srMNOfsiDA1fmfS2vduqDnc/BBsuVFSgwAh2KLuU6D4ZSqJV6vbjtbqF4U5+9PHoZPGhBA1Tyv4wd84syx+C3RFCdAiQGnmDbwvhWaFlmkM5NJo9LfNF+C+opyCBp6GTgtZ7nO+KyFjfH+tzAg==",
+  "dataToEncryptHash": "38a8f07c208d80a4d70ffb79d3c59a0fc76ecd70a7fcf1e42e563038f83b8901",
   "accessControlConditions": [
     {
       "contractAddress": "",
@@ -13,7 +13,7 @@
       ],
       "returnValueTest": {
         "comparator": "=",
-        "value": "0x24CCE2d0c9EdE31AC9498d4eB2f9bd68608137B5"
+        "value": "0xE0cc415a466E4473882E8fc3E20A788CAd571Cb8"
       }
     }
   ]

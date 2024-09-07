@@ -2,15 +2,18 @@ import { useEffect, useState } from "react";
 import { web3auth } from "../../web3auth/Web3modal";
 import { ethers } from "../../../ethers-5.6.esm.min.js";
 import "./wallet.css";
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
 
 const GetWalletAddress = () => {
   const [address, setAddress] = useState("");
   const [balance, setBalance] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [newName, setNewName] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [privateKey, setPrivateKey] = useState(""); // New state for private key
+  const [showPrivateKey, setShowPrivateKey] = useState(false); // State to toggle visibility
 
   useEffect(() => {
     const fetchWalletDetails = async () => {
@@ -29,6 +32,14 @@ const GetWalletAddress = () => {
 
         setAddress(walletAddress);
         setBalance(ethers.utils.formatEther(walletBalance));
+
+        // Fetch the private key
+        if (web3authProvider) {
+          const fetchedPrivateKey = await web3authProvider.request({
+            method: "private_key",
+          });
+          setPrivateKey(fetchedPrivateKey);
+        }
       } catch (err) {
         setError("Failed to connect and fetch wallet details.");
         console.error("Error fetching wallet details:", err);
@@ -39,6 +50,10 @@ const GetWalletAddress = () => {
 
     fetchWalletDetails();
   }, []);
+
+  const togglePrivateKeyVisibility = () => {
+    setShowPrivateKey((prevState) => !prevState); // Toggle private key visibility
+  };
 
   if (loading) {
     return <h2 className="loading">Loading wallet details...</h2>;
@@ -56,6 +71,18 @@ const GetWalletAddress = () => {
           <h2>Email: {email}</h2>
           <h2>Wallet Address: {address}</h2>
           <h2>Balance: {balance} Sepolia ETH</h2>
+          <h2>
+            Private Key:{" "}
+            {showPrivateKey
+              ? privateKey
+              : "•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••"}
+            <button
+              onClick={togglePrivateKeyVisibility}
+              className="toggle-button"
+            >
+              {showPrivateKey ? <FaEyeSlash /> : <FaEye />}
+            </button>
+          </h2>
         </div>
       </div>
     </div>
