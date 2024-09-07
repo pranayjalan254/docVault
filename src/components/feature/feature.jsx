@@ -14,8 +14,8 @@ const Features = () => {
           </p>
         </article>
         <article className="feature-card">
-          <h3>Trustless Verification</h3>
-          <p>Verify credentials without relying on a centralized authority.</p>
+          <h3>Secured Credentials</h3>
+          <p>Only authorized personnel can decrypt certificates</p>
         </article>
         <article className="feature-card">
           <h3>Seamless Integration</h3>

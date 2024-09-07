@@ -43,8 +43,8 @@
 }
 
 .hero-animation img {
-  max-width: 100%;
-  height: auto;
+  height: 400px;
+  width: 600px;
   animation: float 6s ease-in-out infinite;
 }
 

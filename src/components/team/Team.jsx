@@ -16,7 +16,8 @@ const teamMembers = [
   {
     name: "Anmol Agrawal",
     position: "Blockchain Developer",
-    description: "Expert in smart contracts and blockchain infrastructure.",
+    description:
+      "Enthusiatic about blockchain technology and its applications.",
     photo: "./anmol.jpg",
     socialLinks: {
       twitter: "",
