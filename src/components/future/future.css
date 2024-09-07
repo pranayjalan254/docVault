@@ -1,0 +1,27 @@
+.future-prospects {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 50px;
+  background-color: #1e293b;
+  min-height: 60vh;
+  text-align: center;
+}
+
+.future-content {
+  max-width: 100%;
+}
+
+.future-content h2 {
+  font-size: 2.5rem;
+  color: #e5e7eb;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.future-content p {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  color: #94a3b8;
+  max-width: 100%;
+}

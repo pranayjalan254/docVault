@@ -4,6 +4,7 @@ import Features from "./feature/feature";
 import About from "./about/about";
 import Footer from "./footer/footer";
 import Team from "./team/Team";
+import FutureProspects from "./future/Future";
 function LandingPage() {
   return (
     <>
@@ -12,6 +13,7 @@ function LandingPage() {
       <Features />
       <About />
       <Team />
+      <FutureProspects />
       <Footer />
     </>
   );
