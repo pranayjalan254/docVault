@@ -308,5 +308,3 @@ const IssueCertificateForm = () => {
 };
 
 export default IssueCertificateForm;
-
-// Decrypted data: {"studentName":"Pranay","course":"eni","date":"2/5/2004","contact":"123","add":"bits","walletAddress":"0x24CCE2d0c9EdE31AC9498d4eB2f9bd68608137B5"}
