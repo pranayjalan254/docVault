@@ -150,6 +150,9 @@ function Web3modal() {
             <button onClick={handleLogin} className="login-button">
               Login with Web3Auth
             </button>
+            <button className="back" onClick={() => navigate("/")}>
+              Go to website
+            </button>
           </div>
         )}
       </div>
