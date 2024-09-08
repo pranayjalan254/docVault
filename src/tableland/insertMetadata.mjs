@@ -9,13 +9,6 @@ export async function insertMetadata() {
     const docRef = doc(collecRef, "1");
     const encryptedDataraw = await getDoc(docRef);
 
-    if (encryptedDataraw.exists()) {
-      console.log("Document data:", encryptedDataraw.data());
-    } else {
-      console.log("No such document!");
-      throw new Error("No such document in Firestore.");
-    }
-
     const [ciphertext, dataToEncryptHash, accessControlConditions] =
       await insertintotable(encryptedDataraw.data());
     console.log(ciphertext, dataToEncryptHash, accessControlConditions);

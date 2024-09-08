@@ -35,7 +35,6 @@ export async function issueCredential(formData) {
     if (!ethers.utils.isAddress(WALLET_ADDRESS)) {
       throw new Error(`Invalid Ethereum address: ${WALLET_ADDRESS}`);
     }
-    console.log(CIPHERTEXT, DATA_TO_ENCRYPT_HASH);
 
     // Issue credential by calling the contract method
     const transactionResponse = await contract.issueCredential(

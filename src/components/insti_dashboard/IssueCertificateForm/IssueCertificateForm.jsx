@@ -90,6 +90,7 @@ const IssueCertificateForm = () => {
           continue;
         }
         console.log(`Credential issued successfully for ${studentName}`);
+
         await insertMetadata();
         console.log(`Metadata inserted for ${studentName}`);
       }
@@ -128,7 +129,6 @@ const IssueCertificateForm = () => {
         setError("Failed to issue credential.");
         return;
       }
-      console.log("Credential issued successfully");
     
       await insertMetadata();
       console.log(`Metadata inserted`);
