@@ -1,4 +1,4 @@
-export const contractAddress = "0x4ff6317C3639e9335d16aF30F84444E6F4F64804";
+export const contractAddress = "0xe369bDE999A935a5613121984b8C5f5f0793BBe7";
 export const abi =  
 [
   {
@@ -11,6 +11,16 @@ export const abi =
     ],
     "stateMutability": "nonpayable",
     "type": "constructor"
+  },
+  {
+    "inputs": [],
+    "name": "EmptyString",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidAddress",
+    "type": "error"
   },
   {
     "inputs": [
@@ -32,6 +42,11 @@ export const abi =
       }
     ],
     "name": "OwnableUnauthorizedAccount",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "ValidationFailed",
     "type": "error"
   },
   {
@@ -114,7 +129,7 @@ export const abi =
       },
       {
         "internalType": "string[]",
-        "name": "dataToEncryptHashs",
+        "name": "dataToEncryptHashes",
         "type": "string[]"
       }
     ],
@@ -165,19 +180,6 @@ export const abi =
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "instance",
-        "type": "address"
-      }
-    ],
-    "name": "setSPInstance",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "inputs": [],
     "name": "spInstance",
     "outputs": [
@@ -203,4 +205,4 @@ export const abi =
     "stateMutability": "nonpayable",
     "type": "function"
   }
-];
+]

@@ -35,7 +35,7 @@
     "dotenv": "^16.4.5",
     "ethers": "6.6.0",
     "express": "^4.19.2",
-    "firebase": "^10.13.0",
+    "firebase": "^10.13.1",
     "fs": "^0.0.1-security",
     "ipfs-http-client": "^60.0.1",
     "jsonwebtoken": "^9.0.2",
