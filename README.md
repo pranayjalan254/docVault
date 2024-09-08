@@ -1,4 +1,5 @@
-#DocVault-Web3 Credential Verification Platform
+#DocVault
+Web3 Credential Verification Platform
 This project is a decentralized credential verification platform built using Web3 technologies. It allows institutions to issue, verify, and encrypt academic and employment certificates using blockchain protocols. The project integrates Tableland for metadata storage, Lit Protocol for encryption, and Web3Auth for wallet management.
 
 Features:
