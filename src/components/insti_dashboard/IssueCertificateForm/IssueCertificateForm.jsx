@@ -129,7 +129,9 @@ const IssueCertificateForm = () => {
         return;
       }
       console.log("Credential issued successfully");
-      console.log("Metadata inserted");
+    
+      await insertMetadata();
+      console.log(`Metadata inserted`);
 
       setIsSubmitted(true);
       setFormData({

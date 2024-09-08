@@ -40,6 +40,7 @@ export async function insertMetadata() {
       .run();
 
     await insert.txn?.wait();
+    console.log(insert.txn?.wait());
     console.log("Metadata inserted:", insert.txn?.transactionHash);
   } catch (error) {
     console.error("Failed to insert metadata:", error);

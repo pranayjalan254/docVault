@@ -1,31 +1,18 @@
 import { connectToTableland } from "./tableland/tableland.mjs";
-import fs from "fs";
-import path, { dirname } from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 export async function queryTable() {
   try {
     // Connect to Tableland
     const db = await connectToTableland();
 
-    // Load table name from the file
-    const tableNameData = JSON.parse(fs.readFileSync("tableName.json", "utf8"));
-    const tableName = tableNameData.tableName;
+    // Load the table name from a variable (assuming you have it defined somewhere)
+    const tableName = "certificates_11155111_1801"; // Replace with your actual table name
 
     // Query the table to get all rows
     const result = await db.prepare(`SELECT * FROM ${tableName};`).all();
 
-    // Save result to fetchedCertificates.json
-    const filePath = path.resolve(
-      __dirname,
-      "../public/fetchedCertificates.json"
-    );
-    fs.writeFileSync(filePath, JSON.stringify(result, null, 2));
-
-    console.log("Data saved to fetchedCertificates.json at:", filePath);
+    // Return the fetched result directly
+    return result;
   } catch (error) {
     console.error("Failed to query table:", error);
     throw error;

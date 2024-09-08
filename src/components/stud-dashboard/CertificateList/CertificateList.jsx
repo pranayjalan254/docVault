@@ -3,7 +3,7 @@ import { web3auth } from "../../web3auth/Web3modal";
 import { ethers } from "../../../ethers-5.6.esm.min.js";
 import "./certificatelist.css";
 import { Lit } from "../../../lit protocol/lit_protocol";
-import axios from "axios";
+import { queryTable } from "../../../queryTable.mjs"; // Import your updated query function
 
 const CertificateList = () => {
   const [certificates, setCertificates] = useState([]);
@@ -15,6 +15,7 @@ const CertificateList = () => {
   const [decryptingIndex, setDecryptingIndex] = useState(null);
   const [loadingCertificates, setLoadingCertificates] = useState(false);
 
+  // Fetch wallet address on component load
   useEffect(() => {
     const fetchWalletAddress = async () => {
       try {
@@ -36,27 +37,24 @@ const CertificateList = () => {
     fetchWalletAddress();
   }, []);
 
+  // Fetch certificates after wallet address is loaded
   useEffect(() => {
     if (!userWalletAddress) return;
 
     const fetchCertificates = async () => {
       setLoadingCertificates(true);
       try {
-        await axios.post("http://localhost:5000/run-query-table");
-        const response = await fetch("/fetchedCertificates.json");
-        if (!response.ok) throw new Error("Failed to fetch certificates.");
-
-        const data = await response.json();
-        const fetchedCertificates = data.results || [];
-
-        const filteredCertificates = fetchedCertificates.filter((cert) => {
+        // Fetch certificates directly from queryTable (no more JSON file)
+        const fetchedCertificates = await queryTable();
+        
+        // Filter certificates for the user's wallet address
+        const filteredCertificates = fetchedCertificates.results.filter((cert) => {
           return (
             cert &&
             cert.accessControlConditions &&
             cert.accessControlConditions[0] &&
             cert.accessControlConditions[0].returnValueTest &&
-            cert.accessControlConditions[0].returnValueTest.value ===
-              userWalletAddress
+            cert.accessControlConditions[0].returnValueTest.value === userWalletAddress
           );
         });
 
