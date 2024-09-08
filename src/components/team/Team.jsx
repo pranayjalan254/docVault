@@ -8,7 +8,7 @@ const teamMembers = [
       "Passionate about building real-world full-stack applications.",
     photo: "./pranay.jpg",
     socialLinks: {
-      twitter: "https://x.com/pranaytwts",
+      instagram: "",
       linkedin: "https://www.linkedin.com/in/pranay-jalan254/",
       github: "https://github.com/pranayjalan254",
     },
@@ -16,11 +16,13 @@ const teamMembers = [
   {
     name: "Anmol Agrawal",
     position: "Blockchain Developer",
-    description: "Expert in smart contracts and blockchain infrastructure.",
+    description:
+      "Enthusiatic about blockchain technology and its applications.",
     photo: "./anmol.jpg",
     socialLinks: {
-      twitter: "",
-      linkedin: "",
+      instagram: "",
+      linkedin:
+        "https://www.linkedin.com/in/anmol-agrawal-2a767a229?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app ",
       github: "https://github.com/anmolagr39",
     },
   },
@@ -30,7 +32,7 @@ const teamMembers = [
     description: "Expert in smart contracts and blockchain infrastructure.",
     photo: "./ansh.jpg",
     socialLinks: {
-      twitter: "",
+      instagram: "",
       linkedin: "",
       github: "https://github.com/AnshNohria",
     },
@@ -55,7 +57,7 @@ const Team = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <i className="fab fa-twitter"></i>
+                  <i className="fab fa-instagram"></i>
                 </a>
                 <a
                   href={member.socialLinks.linkedin}

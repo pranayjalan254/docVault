@@ -2,13 +2,13 @@ import "./money.css";
 
 const Money = () => {
   return (
-    <div className="money-card">
-      <h3 className="money-title">Add Test Sepolia ETH</h3>
+    <div className="money-container">
+      <h2 className="money-title">Add Test Sepolia ETH</h2>
       <div className="money-steps">
-      <h4>1. Go to your profile and get your wallet address.</h4>
+        <h4>1. Go to your profile and get your wallet address.</h4>
         <h4>
-          2. Go to{" "} 
-          <a 
+          2. Go to{" "}
+          <a
             href="https://www.sepoliafaucet.io/"
             target="_blank"
             rel="noopener noreferrer"
@@ -17,7 +17,6 @@ const Money = () => {
           </a>
           .
         </h4>
-        
         <h4>
           3. Paste the wallet address on the website and click on "Get Tokens".
         </h4>

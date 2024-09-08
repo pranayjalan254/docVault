@@ -38,6 +38,11 @@ const Navbar = () => {
               Contact
             </a>
           </li>
+          <li>
+            <a href="#footer" onClick={toggleMenu}>
+              Future Prospects
+            </a>
+          </li>
         </ul>
       </div>
       <button className="cta-button" onClick={() => navigate("/auth")}>

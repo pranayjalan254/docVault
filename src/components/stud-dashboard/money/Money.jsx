@@ -2,7 +2,7 @@ import "./money.css";
 
 const Money = () => {
   return (
-    <div className="money-card">
+    <div className="money-container">
       <h3 className="money-title">Mint Datil Credits to Decrypt</h3>
       <div className="money-steps">
         <h4>1. Download the metamask extension</h4>
