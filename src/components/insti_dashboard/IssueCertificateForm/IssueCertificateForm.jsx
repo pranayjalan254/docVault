@@ -1,12 +1,16 @@
 import { useState } from "react";
-import axios from "axios";
 import "./issuecertificateform.css";
 import { issueCredential } from "../../../webr";
 import Papa from "papaparse";
 import { useFormData } from "./FormData";
 import { Lit } from "../../../lit protocol/lit_protocol.jsx";
+import { app, database } from "../../../firebaseConfig";
+import { collection, doc, setDoc } from "firebase/firestore";
+import { insertMetadata } from "../../../tableland/insertMetadata.mjs";
 
 const IssueCertificateForm = () => {
+  const id = "1";
+  const collecRef = collection(database, "credential");
   const { formData, setFormData } = useFormData();
   const [csvData, setCsvData] = useState([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -70,15 +74,15 @@ const IssueCertificateForm = () => {
         );
 
         // Save metadata
-        const saveMetadataResponse = await axios.post(
-          "http://localhost:5000/save-metadata",
-          encryptedData
-        );
-        if (!saveMetadataResponse.data.success) {
-          setError(`Failed to save metadata for ${studentName}.`);
-          continue;
-        }
-        console.log(`Form data for ${studentName} saved to metadata.json`);
+        const certDocRef = doc(collecRef, id); // Create a document reference within the "credential" collection
+
+        // Save encrypted data to Firestore
+        await setDoc(certDocRef, {
+          ciphertext: encryptedData.ciphertext,
+          datatoEncryptHash: encryptedData.dataToEncryptHash,
+          accessControlConditions: encryptedData.accessControlConditions,
+        });
+        console.log("Data saved to Firebase");
 
         // Issue credential
         const issueCredentialResponse = await issueCredential(formData);
@@ -87,16 +91,18 @@ const IssueCertificateForm = () => {
           continue;
         }
         console.log(`Credential issued successfully for ${studentName}`);
+        await insertMetadata();
+        console.log(`Metadata inserted for ${studentName}`);  
 
         // Insert metadata to tableland
-        const insertMetadataResponse = await axios.post(
-          "http://localhost:5000/run-insert-metadata"
-        );
-        if (!insertMetadataResponse.data.success) {
-          setError(`Failed to insert metadata for ${studentName}.`);
-          continue;
-        }
-        console.log(`Metadata insertion triggered for ${studentName}.`);
+        // const insertMetadataResponse = await axios.post(
+        //   "http://localhost:5000/run-insert-metadata"
+        // );
+        // if (!insertMetadataResponse.data.success) {
+        //   setError(`Failed to insert metadata for ${studentName}.`);
+        //   continue;
+        // }
+        // console.log(`Metadata insertion triggered for ${studentName}.`);
       }
 
       setIsSubmitted(true);
@@ -117,16 +123,15 @@ const IssueCertificateForm = () => {
       const encryptedData = await lit.encrypt(formData, formData.walletAddress);
 
       // Save metadata
-      const saveMetadataResponse = await axios.post(
-        "http://localhost:5000/save-metadata",
-        encryptedData
-      );
-      console.log(saveMetadataResponse.data.success);
-      if (!saveMetadataResponse.data.success) {
-        setError("Failed to save metadata.");
-        return;
-      }
-      console.log("Form data has been saved to metadata.json");
+      const certDocRef = doc(collecRef, id); // Create a document reference within the "credential" collection
+
+      // Save encrypted data to Firestore
+      await setDoc(certDocRef, {
+        ciphertext: encryptedData.ciphertext,
+        datatoEncryptHash: encryptedData.dataToEncryptHash,
+        accessControlConditions: encryptedData.accessControlConditions,
+      });
+      console.log("Data saved to Firebase");
 
       // Issue credential
       const issueCredentialResponse = await issueCredential(formData);
@@ -137,14 +142,16 @@ const IssueCertificateForm = () => {
       console.log("Credential issued successfully");
 
       // Insert metadata
-      const insertMetadataResponse = await axios.post(
-        "http://localhost:5000/run-insert-metadata"
-      );
-      if (!insertMetadataResponse.data.success) {
-        setError("Failed to insert metadata.");
-        return;
-      }
-      console.log("Metadata insertion triggered.");
+      // const insertMetadataResponse = await axios.post(
+      //   "http://localhost:5000/run-insert-metadata"
+      // );
+      // if (!insertMetadataResponse.data.success) {
+      //   setError("Failed to insert metadata.");
+      //   return;
+      // }
+      // console.log("Metadata insertion triggered.");
+      // await insertMetadata();
+      console.log("Metadata inserted");
 
       setIsSubmitted(true);
       setFormData({

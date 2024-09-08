@@ -1,75 +1,32 @@
-import { Database } from '@tableland/sdk';
-import { Wallet, ethers } from 'ethers';
-import fs from 'fs';
+import { Database } from "@tableland/sdk";
+import { Wallet, ethers } from "ethers";
 
 export async function connectToTableland() {
-    try {
-        // Load wallet from file
-        const walletData = JSON.parse(fs.readFileSync('wallet.json'));
-        const providerUrl = "https://eth-sepolia.g.alchemy.com/v2/1i43szEwrnGCazSgHZSn3A3LHEeYUI8P";
-        const provider = new ethers.JsonRpcProvider(providerUrl);
-        const wallet = new Wallet(walletData.privateKey).connect(provider);
+  try {
+    // Load wallet from file
+    const walletData = {
+      address: import.meta.env.VITE_WALLET_ADDRESS,
+      privateKey: import.meta.env.VITE_WALLET_PRIVATE_KEY,
+    };
+    const providerUrl = import.meta.env.VITE_RPC_URL;
+    const provider = new ethers.JsonRpcProvider(providerUrl);
+    const wallet = new Wallet(walletData.privateKey).connect(provider);
 
-        console.log("Using wallet address:", wallet.address);
-        const balance = await provider.getBalance(wallet.address);
-        console.log(`Wallet balance: ${ethers.formatEther(balance)} MATIC`);
+    console.log("Using wallet address:", wallet.address);
+    const balance = await provider.getBalance(wallet.address);
+    console.log(`Wallet balance: ${ethers.formatEther(balance)} MATIC`);
 
-        // Test the connection
-        const network = await provider.getNetwork();
-        console.log("Connected to network:", network.name);
+    // Test the connection
+    const network = await provider.getNetwork();
+    console.log("Connected to network:", network.name);
 
-        // Connect to the database using the signer
-        const db = new Database({ signer: wallet });
+    // Connect to the database using the signer
+    const db = new Database({ signer: wallet });
 
-        console.log("Connected to Tableland");
-        return db;
-    } catch (error) {
-        console.error("Failed to connect to Tableland:", error);
-        throw error;
-    }
-}
-
-export async function createTable(db) {
-    try {
-        const prefix = "degrees";
-        const { meta: create } = await db
-            .prepare(
-                `CREATE TABLE ${prefix} (
-
-                    Studentname TEXT NOT NULL,
-                    course TEXT NOT NULL,
-                    date INTEGER PRIMARY KEY,
-                    walletaddress TEXT NOT NULL
-                );`
-            )
-            .run();
-
-        await create.txn?.wait();
-        console.log("Table created:", create.txn?.transactionHash);
-        return create.txn?.names[0]; // Return the table name
-    } catch (error) {
-        console.error("Failed to create table:", error);
-        if (error.message.includes("insufficient funds")) {
-            console.error("The wallet doesn't have enough MATIC to create a table.");
-        }
-        throw error;
-    }
-}
-
-export async function insertMetadata(db, tableName, Studentname, course, date, walletaddress) {
-    try {
-        const { meta: insert } = await db
-            .prepare(
-                `INSERT INTO ${tableName} (Studentname, course, date, walletaddress) VALUES (?, ?,?,?);`
-            )
-            .bind(Studentname, course, date, walletaddress)
-            .run();
-
-        await insert.txn?.wait();
-        console.log("Metadata inserted:", insert.txn?.transactionHash);
-        return insert.txn?.transactionHash;
-    } catch (error) {
-        console.error("Failed to insert metadata:", error);
-        throw error;
-    }
+    console.log("Connected to Tableland");
+    return db;
+  } catch (error) {
+    console.error("Failed to connect to Tableland:", error);
+    throw error;
+  }
 }

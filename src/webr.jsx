@@ -1,11 +1,11 @@
 // webr.jsx
 import { ethers } from "./ethers-5.6.esm.min.js";
 import { abi, contractAddress } from "./constants.js";
-import { loadData } from "./parse.jsx";
+import { loadData, loadEncryptedData } from "./parse.jsx"; 
 import { web3auth } from "./components/web3auth/Web3modal.tsx";
-import { loadEncryptedData } from "./parse.jsx";
+import { doc, getDoc, collection } from "firebase/firestore"; 
+import { database } from "./firebaseConfig.js";
 
-// Function to issue a credential using Web3Auth
 export async function issueCredential(formData) {
   console.log(`Issuing credential...`);
 
@@ -22,18 +22,20 @@ export async function issueCredential(formData) {
     const [WALLET_ADDRESS, COURSE, DATE, CONTACT, ADD] =
       await loadData(formData);
 
-    // Fetch encrypted metadata from the backend
-    const response = await fetch("http://localhost:5000/api/metadata");
-    const encryptedData = await response.json();
+    // Reference to the specific document in Firestore
+    const collecRef = collection(database, "credential");
+    const docRef = doc(collecRef, "1"); // Assuming "1" is the constant ID you're using for overwriting
+    const encryptedDataraw = await getDoc(docRef);
 
     // Load encrypted data details
     const [CIPHERTEXT, DATA_TO_ENCRYPT_HASH] =
-      await loadEncryptedData(encryptedData);
+      await loadEncryptedData( encryptedDataraw.data());
 
     // Check if the Ethereum address is valid
     if (!ethers.utils.isAddress(WALLET_ADDRESS)) {
       throw new Error(`Invalid Ethereum address: ${WALLET_ADDRESS}`);
     }
+    console.log(CIPHERTEXT, DATA_TO_ENCRYPT_HASH);
 
     // Issue credential by calling the contract method
     const transactionResponse = await contract.issueCredential(
@@ -41,8 +43,11 @@ export async function issueCredential(formData) {
       CIPHERTEXT,
       DATA_TO_ENCRYPT_HASH
     );
+
     // Wait for the transaction to be mined
     await listenForTransactionMine(transactionResponse, ethersProvider);
+
+    console.log("Credential issued successfully.");
     return { success: true, message: "Credential issued successfully" };
   } catch (error) {
     console.error("Error issuing credential:", error);

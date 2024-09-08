@@ -12,9 +12,9 @@ async function createTable() {
       .prepare(
         `CREATE TABLE ${prefix} (
                     
-                    ciphertext TEXT NOT NULL,
-                    dataToEncryptHash TEXT NOT NULL,
-                    accessControlConditions TEXT NOT NULL
+                    CIPHERTEXT TEXT NOT NULL,
+                    DATA_TO_ENCRYPT_HASH TEXT NOT NULL,
+                    ACCESS_CONTROL_CONDITIONS TEXT NOT NULL
 
                 );`
       )
