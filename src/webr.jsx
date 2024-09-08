@@ -1,9 +1,8 @@
-// webr.jsx
 import { ethers } from "./ethers-5.6.esm.min.js";
 import { abi, contractAddress } from "./constants.js";
-import { loadData, loadEncryptedData } from "./parse.jsx"; 
+import { loadData, loadEncryptedData } from "./parse.jsx";
 import { web3auth } from "./components/web3auth/Web3modal.tsx";
-import { doc, getDoc, collection } from "firebase/firestore"; 
+import { doc, getDoc, collection } from "firebase/firestore";
 import { database } from "./firebaseConfig.js";
 
 export async function issueCredential(formData) {
@@ -24,12 +23,13 @@ export async function issueCredential(formData) {
 
     // Reference to the specific document in Firestore
     const collecRef = collection(database, "credential");
-    const docRef = doc(collecRef, "1"); // Assuming "1" is the constant ID you're using for overwriting
+    const docRef = doc(collecRef, "1");
     const encryptedDataraw = await getDoc(docRef);
 
     // Load encrypted data details
-    const [CIPHERTEXT, DATA_TO_ENCRYPT_HASH] =
-      await loadEncryptedData( encryptedDataraw.data());
+    const [CIPHERTEXT, DATA_TO_ENCRYPT_HASH] = await loadEncryptedData(
+      encryptedDataraw.data()
+    );
 
     // Check if the Ethereum address is valid
     if (!ethers.utils.isAddress(WALLET_ADDRESS)) {

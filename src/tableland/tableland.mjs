@@ -3,7 +3,6 @@ import { Wallet, ethers } from "ethers";
 
 export async function connectToTableland() {
   try {
-    // Load wallet from file
     const walletData = {
       address: import.meta.env.VITE_WALLET_ADDRESS,
       privateKey: import.meta.env.VITE_WALLET_PRIVATE_KEY,

@@ -18,7 +18,6 @@ const IssueCertificateForm = () => {
   const [isCsvMode, setIsCsvMode] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Handle CSV file upload
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file && file.type === "text/csv") {
@@ -74,7 +73,7 @@ const IssueCertificateForm = () => {
         );
 
         // Save metadata
-        const certDocRef = doc(collecRef, id); // Create a document reference within the "credential" collection
+        const certDocRef = doc(collecRef, id);
 
         // Save encrypted data to Firestore
         await setDoc(certDocRef, {
@@ -92,17 +91,7 @@ const IssueCertificateForm = () => {
         }
         console.log(`Credential issued successfully for ${studentName}`);
         await insertMetadata();
-        console.log(`Metadata inserted for ${studentName}`);  
-
-        // Insert metadata to tableland
-        // const insertMetadataResponse = await axios.post(
-        //   "http://localhost:5000/run-insert-metadata"
-        // );
-        // if (!insertMetadataResponse.data.success) {
-        //   setError(`Failed to insert metadata for ${studentName}.`);
-        //   continue;
-        // }
-        // console.log(`Metadata insertion triggered for ${studentName}.`);
+        console.log(`Metadata inserted for ${studentName}`);
       }
 
       setIsSubmitted(true);
@@ -123,7 +112,7 @@ const IssueCertificateForm = () => {
       const encryptedData = await lit.encrypt(formData, formData.walletAddress);
 
       // Save metadata
-      const certDocRef = doc(collecRef, id); // Create a document reference within the "credential" collection
+      const certDocRef = doc(collecRef, id);
 
       // Save encrypted data to Firestore
       await setDoc(certDocRef, {
@@ -140,17 +129,6 @@ const IssueCertificateForm = () => {
         return;
       }
       console.log("Credential issued successfully");
-
-      // Insert metadata
-      // const insertMetadataResponse = await axios.post(
-      //   "http://localhost:5000/run-insert-metadata"
-      // );
-      // if (!insertMetadataResponse.data.success) {
-      //   setError("Failed to insert metadata.");
-      //   return;
-      // }
-      // console.log("Metadata insertion triggered.");
-      // await insertMetadata();
       console.log("Metadata inserted");
 
       setIsSubmitted(true);
@@ -170,13 +148,11 @@ const IssueCertificateForm = () => {
     }
   };
 
-  // Handle form submission for manual data
   const handleManualSubmit = (e) => {
     e.preventDefault();
     issueSingleCertificate();
   };
 
-  // Handle form submission for CSV data
   const handleCsvSubmit = (e) => {
     e.preventDefault();
     if (csvData.length > 0) {

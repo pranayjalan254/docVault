@@ -10,7 +10,6 @@
   margin-bottom: 50px;
 }
 
-/* Grid layout for features */
 .features-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -44,7 +43,6 @@
   color: #94a3b8;
 }
 
-/* Responsive Styles */
 @media (max-width: 1200px) {
   .features-section {
     padding: 60px 40px;

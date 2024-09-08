@@ -1,17 +1,12 @@
 import { connectToTableland } from "./tableland.mjs";
 import { database } from "../firebaseConfig";
 import { doc, getDoc, collection } from "firebase/firestore";
-import { insertintotable } from "../parse"; 
+import { insertintotable } from "../parse";
 export async function insertMetadata() {
   try {
-    // Load the table name from file
     const tableName = "certificates_11155111_1801";
-
-    // Load metadata from JSON file
-    // const metadataPath = path.join('./tableland/metadata.json');
-    // const metadata = JSON.parse(fs.readFileSync(metadataPath, 'utf8'));
     const collecRef = collection(database, "credential");
-    const docRef = doc(collecRef, "1"); // Assuming "1" is the constant ID you're using for overwriting
+    const docRef = doc(collecRef, "1");
     const encryptedDataraw = await getDoc(docRef);
 
     if (encryptedDataraw.exists()) {
@@ -21,7 +16,6 @@ export async function insertMetadata() {
       throw new Error("No such document in Firestore.");
     }
 
-    // Validate required fields
     const [ciphertext, dataToEncryptHash, accessControlConditions] =
       await insertintotable(encryptedDataraw.data());
     console.log(ciphertext, dataToEncryptHash, accessControlConditions);

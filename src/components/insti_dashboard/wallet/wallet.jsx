@@ -12,8 +12,8 @@ const GetWalletAddress = () => {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [privateKey, setPrivateKey] = useState(""); // New state for private key
-  const [showPrivateKey, setShowPrivateKey] = useState(false); // State to toggle visibility
+  const [privateKey, setPrivateKey] = useState("");
+  const [showPrivateKey, setShowPrivateKey] = useState(false);
 
   useEffect(() => {
     const fetchWalletDetails = async () => {
@@ -33,7 +33,6 @@ const GetWalletAddress = () => {
         setAddress(walletAddress);
         setBalance(ethers.utils.formatEther(walletBalance));
 
-        // Fetch the private key
         if (web3authProvider) {
           const fetchedPrivateKey = await web3authProvider.request({
             method: "private_key",
@@ -52,7 +51,7 @@ const GetWalletAddress = () => {
   }, []);
 
   const togglePrivateKeyVisibility = () => {
-    setShowPrivateKey((prevState) => !prevState); // Toggle private key visibility
+    setShowPrivateKey((prevState) => !prevState);
   };
 
   if (loading) {

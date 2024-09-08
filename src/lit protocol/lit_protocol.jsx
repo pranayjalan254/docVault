@@ -32,8 +32,6 @@ export class Lit {
       await litNodeClient.connect();
       this.litNodeClient = litNodeClient;
       console.log("Successfully connected to Lit Protocol");
-
-      //   await window.ethereum.request({ method: "eth_requestAccounts" });
       this.provider = new ethers.providers.Web3Provider(web3auth.provider);
       this.signer = this.provider.getSigner();
       this.currentAccount = await this.signer.getAddress();
